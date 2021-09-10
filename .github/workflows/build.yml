@@ -1,8 +1,8 @@
 name: build_push
 on:
   push:
-    branches: Fix--Error-loading-namespace-i18n
-      - 
+    branches:
+      - stc-master
 # Environment variables available to all jobs and steps in this workflow
 env:
   REGISTRY_NAME: k8scc01covidacr

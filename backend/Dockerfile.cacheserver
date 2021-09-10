@@ -1,8 +1,8 @@
 # Dockerfile for building the source code of cache_server
-FROM golang:1.13.15-alpine3.12 as builder
+FROM golang:1.13.15-alpine3.14.1 as builder
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache bash git openssh gcc musl-dev
+    apk add --no-cache bash git openssh gcc musl-dev libcrypto1.1>1.1.1l-r0 libssl1.1>1.1.1l-r0
 
 WORKDIR /go/src/github.com/kubeflow/pipelines
 COPY . .
@@ -10,7 +10,7 @@ COPY . .
 RUN GO111MODULE=on go build -o /bin/cache_server backend/src/cache/*.go
 RUN git clone https://github.com/hashicorp/golang-lru.git /kfp/cache/golang-lru/
 
-FROM alpine:3.8
+FROM alpine:3.14.1
 WORKDIR /bin
 
 COPY --from=builder /bin/cache_server /bin/cache_server
