@@ -1,4 +1,5 @@
-FROM gcr.io/cloud-marketplace/google/rbe-ubuntu16-04@sha256:69c9f1652941d64a46f6f7358a44c1718f25caa5cb1ced4a58ccc5281cd183b5
+FROM gcr.io/marketplace.gcr.io/google/rbe-ubuntu18-04:latest@sha256:48b67b41118dbcdfc265e7335f454fbefa62681ab8d47200971fc7a52fb32054
+
 
 RUN apt-get update && \
-  apt-get install -y cmake clang musl-dev openssl
+    apt-get install -y cmake clang musl-dev openssl

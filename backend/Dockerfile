@@ -1,8 +1,15 @@
 # 1. Build api server application
 # Use golang:1.13.1-stretch to keep GLIBC at 2.24 https://github.com/gotify/server/issues/225
 FROM golang:1.13.1-stretch as builder
-RUN apt-get update && apt-get install -y cmake clang musl-dev openssl
+RUN apt-get update && apt-get install -y cmake clang musl-dev 
+
+
+RUN apt-get update
+RUN apt-get install -y build-essential openssl zlib1g-dev libcppunit-dev git subversion wget && rm -rf /var/lib/apt/lists/*
+
+RUN var = openssl ARGO_VERSIONRUN echo ${var}
 WORKDIR /go/src/github.com/kubeflow/pipelines
+
 COPY . .
 RUN go mod vendor
 RUN GO111MODULE=on go build -o /bin/apiserver backend/src/apiserver/*.go
@@ -32,10 +39,10 @@ COPY backend/src/apiserver/config/sample_config.json /samples/
 # The default image is replaced with the GCR-hosted python image.
 RUN set -e; \
     < /samples/sample_config.json jq .[].file --raw-output | while read pipeline_yaml; do \
-        pipeline_py="${pipeline_yaml%.yaml}"; \
-        mv "$pipeline_py" "${pipeline_py}.tmp"; \
-        echo 'import kfp; kfp.components.default_base_image_or_builder="gcr.io/google-appengine/python:2020-03-31-141326"' | cat - "${pipeline_py}.tmp" > "$pipeline_py"; \
-        python3 "$pipeline_py"; \
+    pipeline_py="${pipeline_yaml%.yaml}"; \
+    mv "$pipeline_py" "${pipeline_py}.tmp"; \
+    echo 'import kfp; kfp.components.default_base_image_or_builder="gcr.io/google-appengine/python:2020-03-31-141326"' | cat - "${pipeline_py}.tmp" > "$pipeline_py"; \
+    python3 "$pipeline_py"; \
     done
 
 # 3. Start api web server
