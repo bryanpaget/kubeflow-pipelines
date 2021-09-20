@@ -193,7 +193,7 @@ spec:
       command:
       - python
       - -c
-      image: python:alpine
+      image: python:alpine3.6
       name: ""
       resources: {}
     inputs: {}
@@ -308,7 +308,7 @@ spec:
       command:
       - python
       - -c
-      image: python:alpine
+      image: python:alpine3.6
       name: ""
       resources: {}
     inputs: {}
