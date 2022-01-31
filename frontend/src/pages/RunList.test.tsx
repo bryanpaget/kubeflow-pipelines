@@ -33,6 +33,7 @@ import { MetricMetadata } from '../lib/RunUtils';
 import { NodePhase } from '../lib/StatusUtils';
 import { ReactWrapper, ShallowWrapper, shallow } from 'enzyme';
 import { range } from 'lodash';
+import MetricUtils from '../lib/MetricUtils';
 import { TFunction } from 'i18next';
 
 jest.mock('react-i18next', () => ({
@@ -127,7 +128,7 @@ describe('RunList', () => {
   afterEach(async () => {
     // unmount() should be called before resetAllMocks() in case any part of the unmount life cycle
     // depends on mocks/spies
-    if (tree) {
+    if (tree && tree.exists()) {
       await tree.unmount();
     }
     jest.resetAllMocks();
@@ -288,7 +289,7 @@ describe('RunList', () => {
     tree = shallow(<RunList {...props} />);
     await (tree.instance() as RunListTest)._loadRuns({});
     expect(props.onError).toHaveBeenLastCalledWith(
-      "pipelines:errorFetchRuns",
+      'pipelines:errorFetchRuns',
       new Error('bad stuff happened'),
     );
   });
@@ -407,6 +408,25 @@ describe('RunList', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('adds metrics column in the same order metrics were defined', async () => {
+    const z_metric = { name: 'z_metric', number_value: 2 } as ApiRunMetric;
+    const y_metric = { name: 'y_metric', number_value: 1 } as ApiRunMetric;
+
+    let actualValues = [
+      MetricUtils.getMetricDisplayString(z_metric),
+      MetricUtils.getMetricDisplayString(y_metric),
+    ];
+
+    mockNRuns(1, { run: { metrics: [z_metric, y_metric] } });
+    const props = generateProps();
+    tree = TestUtils.mountWithRouter(<RunList {...props} />);
+    await TestUtils.flushPromises();
+    tree.update();
+
+    const metricValues = tree.find("[data-testid='metric']");
+    expect(metricValues.map(v => v.text())).toEqual(actualValues);
+  });
+
   it('shows pipeline name', async () => {
     mockNRuns(1, {
       run: { pipeline_spec: { pipeline_id: 'test-pipeline-id', pipeline_name: 'pipeline name' } },
@@ -435,7 +455,11 @@ describe('RunList', () => {
       run: {
         resource_references: [
           {
-            key: { id: 'test-recurring-run-id', type: ApiResourceType.JOB },
+            key: {
+              id: 'test-recurring-run-id',
+              type: ApiResourceType.JOB,
+            },
+            name: 'recurring run name',
           },
         ],
       },
@@ -444,7 +468,76 @@ describe('RunList', () => {
     tree = shallow(<RunList {...props} />);
     await (tree.instance() as RunListTest)._loadRuns({});
     expect(props.onError).not.toHaveBeenCalled();
-    expect(tree).toMatchSnapshot();
+    expect(tree).toMatchInlineSnapshot(`
+      <div>
+        <CustomTable
+          columns={
+            Array [
+              Object {
+                "customRenderer": [Function],
+                "flex": 1.5,
+                "label": "experiments:runName",
+                "sortKey": "name",
+              },
+              Object {
+                "customRenderer": [Function],
+                "flex": 0.5,
+                "label": "common:status",
+              },
+              Object {
+                "flex": 0.5,
+                "label": "common:duration",
+              },
+              Object {
+                "customRenderer": [Function],
+                "flex": 1,
+                "label": "common:experiment",
+              },
+              Object {
+                "customRenderer": [Function],
+                "flex": 1,
+                "label": "common:pipelineVersion",
+              },
+              Object {
+                "customRenderer": [Function],
+                "flex": 0.5,
+                "label": "common:RecurringRuns",
+              },
+              Object {
+                "flex": 1,
+                "label": "common:startTime",
+                "sortKey": "created_at",
+              },
+            ]
+          }
+          emptyMessage="common:nocommon:available common:runFound."
+          filterLabel="experiments:filterRuns"
+          initialSortColumn="created_at"
+          reload={[Function]}
+          rows={
+            Array [
+              Object {
+                "error": undefined,
+                "id": "testrun1",
+                "otherFields": Array [
+                  "run with id: testrun1",
+                  "-",
+                  "-",
+                  undefined,
+                  undefined,
+                  Object {
+                    "displayName": "recurring run name",
+                    "id": "test-recurring-run-id",
+                  },
+                  "-",
+                ],
+              },
+            ]
+          }
+          t={[Function]}
+        />
+      </div>
+    `);
   });
 
   it('shows experiment name', async () => {

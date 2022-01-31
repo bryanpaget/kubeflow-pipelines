@@ -2,8 +2,8 @@
   "archiveRun": "sera déplacé vers la section archive, où vous pouvez toujours consulter",
   "archiveRun_plural": "seront déplacées vers la section archive, où vous pouvez toujours consulter",
   "artifactEmptyId": "Artefact a un identifiant vide",
-  "declaredInputs": "Entrées déclarées ",
-  "declaredOutputs": "Sorties déclarées ",
+  "declaredInputs": "Entrées déclarées",
+  "declaredOutputs": "Sorties déclarées",
   "executionNum": "Exécution # ",
   "fetchArtifactTypesFailed": "Impossible d’extraire des types d’artefacts ",
   "getExecutionsFailed": "Échec de l’obtention des exécutions ",
@@ -20,7 +20,7 @@
   "restore": "Voulez-vous restaurer ",
   "runArchiveText": "détails. Veuillez noter que l'exécution ne sera pas",
   "runArchiveTextSuite": " arrêtée s'elle est en cours d'exécution lorsqu'elle est archivée. Utilisez l'action de restauration pour restaurer",
-  "runWorkspacePipeline": "Exécuter Espace de travail de Pipeline ",
+  "runWorkspacePipeline": "Exécuter l'espace de travail de pipeline ",
   "thisRunToIts_plural": "ces exécutions à leurs",
   "thisRunToIts": "cette exécution à son"
 }

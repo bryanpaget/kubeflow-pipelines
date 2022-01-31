@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExperimentsAndArchive renders archive page 1`] = `
+<div
+  className="page"
+>
+  <MD2Tabs
+    onSwitch={[Function]}
+    selectedTab={1}
+    tabs={
+      Array [
+        "common:active",
+        "common:archived",
+      ]
+    }
+  />
+  <EnhancedArchivedExperiments
+    history={Object {}}
+    location=""
+    match=""
+    t={[Function]}
+    toolbarProps={Object {}}
+    updateBanner={[Function]}
+    updateDialog={[MockFunction]}
+    updateSnackbar={[MockFunction]}
+    updateToolbar={[Function]}
+    view={1}
+  />
+</div>
+`;
+
+exports[`ExperimentsAndArchive renders experiments page 1`] = `
+<div
+  className="page"
+>
+  <MD2Tabs
+    onSwitch={[Function]}
+    selectedTab={0}
+    tabs={
+      Array [
+        "common:active",
+        "common:archived",
+      ]
+    }
+  />
+  <EnhancedExperimentList
+    history={Object {}}
+    location=""
+    match=""
+    t={[Function]}
+    toolbarProps={Object {}}
+    updateBanner={[Function]}
+    updateDialog={[MockFunction]}
+    updateSnackbar={[MockFunction]}
+    updateToolbar={[Function]}
+    view={0}
+  />
+</div>
+`;

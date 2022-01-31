@@ -22,12 +22,19 @@ The API server image can be built from the root folder of the repo using:
 export API_SERVER_IMAGE=api_server
 docker build -f backend/Dockerfile . --tag $API_SERVER_IMAGE
 ```
+## Deploy APIServer with the image you own build
 
-## Building Go client library and swagger files
+Run
+```
+kubectl edit deployment.v1.apps/ml-pipeline -n kubeflow
+```
+You'll see the field reference the api server docker image.
+Change it to point to your own build, after saving and closing the file, apiserver will restart with your change.
 
-After making changes to proto files, the Go client libraries and swagger files
-need to be regenerated and checked-in. The `backend/api/generate_api.sh` script
-takes care of this. It should be noted that this requires [Bazel](https://bazel.build/), version 0.24.0` 
+## Building client library and swagger files
+
+After making changes to proto files, the Go client libraries, Python client libraries and swagger files
+need to be regenerated and checked-in. Refer to [backend/api](./api/README.md) for details.
 
 # Visualization Server Instructions
 

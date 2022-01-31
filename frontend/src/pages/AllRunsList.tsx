@@ -47,7 +47,6 @@ export class AllRunsList extends Page<{ namespace?: string; t: TFunction }, AllR
     return {
       actions: buttons
         .newRun()
-        .newExperiment()
         .compareRuns(() => this.state.selectedIds)
         .cloneRun(() => this.state.selectedIds, false)
         .archive(
@@ -59,7 +58,7 @@ export class AllRunsList extends Page<{ namespace?: string; t: TFunction }, AllR
         .refresh(this.refresh.bind(this))
         .getToolbarActionMap(),
       breadcrumbs: [],
-      pageTitle: t('common:experiments'),
+      pageTitle: t('common:runs'),
       t,
     };
   }

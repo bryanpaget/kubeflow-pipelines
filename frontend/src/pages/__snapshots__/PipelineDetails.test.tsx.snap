@@ -140,6 +140,11 @@ exports[`PipelineDetails closes side panel when close button is clicked 1`] = `
             selectedNodeId=""
             t={[Function]}
           />
+          <ReduceGraphSwitch
+            checked={false}
+            disabled={true}
+            onChange={[Function]}
+          />
           <SidePanel
             isOpen={false}
             onClose={[Function]}
@@ -232,6 +237,11 @@ exports[`PipelineDetails collapses summary card when summary shown state is fals
             onError={[Function]}
             selectedNodeId=""
             t={[Function]}
+          />
+          <ReduceGraphSwitch
+            checked={false}
+            disabled={true}
+            onChange={[Function]}
           />
           <SidePanel
             isOpen={false}
@@ -331,6 +341,11 @@ exports[`PipelineDetails collapses summary card when summary shown state is fals
             onError={[Function]}
             selectedNodeId=""
             t={[Function]}
+          />
+          <ReduceGraphSwitch
+            checked={false}
+            disabled={true}
+            onChange={[Function]}
           />
           <SidePanel
             isOpen={false}
@@ -515,6 +530,11 @@ exports[`PipelineDetails opens side panel on clicked node, shows message when no
             onError={[Function]}
             selectedNodeId="some-node-id"
             t={[Function]}
+          />
+          <ReduceGraphSwitch
+            checked={false}
+            disabled={true}
+            onChange={[Function]}
           />
           <SidePanel
             isOpen={true}
@@ -746,6 +766,11 @@ exports[`PipelineDetails shows clicked node info in the side panel if it is in t
             selectedNodeId="node1"
             t={[Function]}
           />
+          <ReduceGraphSwitch
+            checked={false}
+            disabled={true}
+            onChange={[Function]}
+          />
           <SidePanel
             isOpen={true}
             onClose={[Function]}
@@ -967,6 +992,11 @@ exports[`PipelineDetails shows correct versions in version selector 1`] = `
             selectedNodeId=""
             t={[Function]}
           />
+          <ReduceGraphSwitch
+            checked={false}
+            disabled={true}
+            onChange={[Function]}
+          />
           <SidePanel
             isOpen={false}
             onClose={[Function]}
@@ -1144,6 +1174,11 @@ exports[`PipelineDetails shows empty pipeline details with empty graph 1`] = `
             onError={[Function]}
             selectedNodeId=""
             t={[Function]}
+          />
+          <ReduceGraphSwitch
+            checked={false}
+            disabled={true}
+            onChange={[Function]}
           />
           <SidePanel
             isOpen={false}

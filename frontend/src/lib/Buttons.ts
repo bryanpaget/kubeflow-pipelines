@@ -251,6 +251,7 @@ export default class Buttons {
       icon: AddIcon,
       id: 'newExperimentBtn',
       outlined: true,
+      primary: true,
       style: { minWidth: 185 },
       title: this._props.t('common:createExperiment'),
       tooltip: this._props.t('common:createNewExperiment'),
@@ -597,6 +598,7 @@ export default class Buttons {
         },
         {
           onClick: async () => await dialogClosedHandler(true),
+          //TODO: Translate
           text: actionName,
         },
       ],

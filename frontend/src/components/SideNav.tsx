@@ -20,13 +20,13 @@
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import ArchiveIcon from '@material-ui/icons/Archive';
 import ArtifactsIcon from '@material-ui/icons/BubbleChart';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import JupyterhubIcon from '@material-ui/icons/Code';
 import DescriptionIcon from '@material-ui/icons/Description';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import ExecutionsIcon from '@material-ui/icons/PlayArrow';
+import DirectionsRun from '@material-ui/icons/DirectionsRun';
 import * as React from 'react';
 import { RouterProps } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -41,6 +41,7 @@ import { Deployments, KFP_FLAGS } from '../lib/Flags';
 import { LocalStorage, LocalStorageKey } from '../lib/LocalStorage';
 import { logger } from '../lib/Utils';
 import { GkeMetadataContext, GkeMetadata } from 'src/lib/GkeMetadata';
+import { Alarm } from '@material-ui/icons';
 import { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
 
@@ -253,7 +254,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
     this._isMounted = false;
   }
 
-  public render(): JSX.Element {
+  public render(): JSX.Element | null {
     const page = this.props.page;
     const { t } = this.props;
     const { collapsed, displayBuildInfo } = this.state;
@@ -262,6 +263,10 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
       active: sideNavColors.fgActive,
       inactive: sideNavColors.fgDefault,
     };
+
+    if (KFP_FLAGS.HIDE_SIDENAV) {
+      return null;
+    }
 
     return (
       <div
@@ -376,6 +381,66 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
           <div
             className={classes(
               css.indicator,
+              !this._highlightRunsButton(page) && css.indicatorHidden,
+            )}
+          />
+          <Tooltip
+            title={t('common:runsList')}
+            enterDelay={300}
+            placement={'right-start'}
+            disableFocusListener={!collapsed}
+            disableHoverListener={!collapsed}
+            disableTouchListener={!collapsed}
+          >
+            <Link id='runsBtn' to={RoutePage.RUNS} className={commonCss.unstyled}>
+              <Button
+                className={classes(
+                  css.button,
+                  this._highlightRunsButton(page) && css.active,
+                  collapsed && css.collapsedButton,
+                )}
+              >
+                <DirectionsRun />
+                <span className={classes(collapsed && css.collapsedLabel, css.label)}>{t('common:runs')}</span>
+              </Button>
+            </Link>
+          </Tooltip>
+          <div
+            className={classes(
+              css.indicator,
+              !this._highlightRecurringRunsButton(page) && css.indicatorHidden,
+            )}
+          />
+          <Tooltip
+            title={t('common:RecurringRunsList')}
+            enterDelay={300}
+            placement={'right-start'}
+            disableFocusListener={!collapsed}
+            disableHoverListener={!collapsed}
+            disableTouchListener={!collapsed}
+          >
+            <Link
+              id='recurringRunsBtn'
+              to={RoutePage.RECURRING_RUNS}
+              className={commonCss.unstyled}
+            >
+              <Button
+                className={classes(
+                  css.button,
+                  this._highlightRecurringRunsButton(page) && css.active,
+                  collapsed && css.collapsedButton,
+                )}
+              >
+                <Alarm />
+                <span className={classes(collapsed && css.collapsedLabel, css.label)}>
+                  {t('common:RecurringRuns')}
+                </span>
+              </Button>
+            </Link>
+          </Tooltip>
+          <div
+            className={classes(
+              css.indicator,
               !this._highlightArtifactsButton(page) && css.indicatorHidden,
             )}
           />
@@ -457,38 +522,6 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
               </a>
             </Tooltip>
           )}
-          <hr className={classes(css.separator, collapsed && css.collapsedSeparator)} />
-          <div
-            className={classes(
-              css.indicator,
-              ![RoutePage.ARCHIVED_RUNS, RoutePage.ARCHIVED_EXPERIMENTS].includes(page) &&
-                css.indicatorHidden,
-            )}
-          />
-          <Tooltip
-            title={t('common:archive')}
-            enterDelay={300}
-            placement={'right-start'}
-            disableFocusListener={!collapsed}
-            disableHoverListener={!collapsed}
-            disableTouchListener={!collapsed}
-          >
-            <Link id='archiveBtn' to={RoutePage.ARCHIVED_RUNS} className={commonCss.unstyled}>
-              <Button
-                className={classes(
-                  css.button,
-                  (page === RoutePage.ARCHIVED_RUNS || page === RoutePage.ARCHIVED_EXPERIMENTS) &&
-                    css.active,
-                  collapsed && css.collapsedButton,
-                )}
-              >
-                <ArchiveIcon style={{ height: 20, width: 20 }} />
-                <span className={classes(collapsed && css.collapsedLabel, css.label)}>
-                  {t('common:archive')}
-                </span>
-              </Button>
-            </Link>
-          </Tooltip>
           <hr className={classes(css.separator, collapsed && css.collapsedSeparator)} />
           <ExternalUri
             title={t('common:documentation')}
@@ -577,12 +610,19 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
   }
 
   private _highlightExperimentsButton(page: string): boolean {
+    return page.startsWith(RoutePage.EXPERIMENTS) || page === RoutePage.ARCHIVED_EXPERIMENTS;
+  }
+
+  private _highlightRunsButton(page: string): boolean {
     return (
-      page.startsWith(RoutePage.EXPERIMENTS) ||
       page.startsWith(RoutePage.RUNS) ||
-      page.startsWith(RoutePrefix.RECURRING_RUN) ||
-      page.startsWith(RoutePage.COMPARE)
+      page.startsWith(RoutePage.COMPARE) ||
+      page === RoutePage.ARCHIVED_RUNS
     );
+  }
+
+  private _highlightRecurringRunsButton(page: string): boolean {
+    return page.startsWith(RoutePage.RECURRING_RUNS) || page.startsWith(RoutePrefix.RECURRING_RUN);
   }
 
   private _highlightArtifactsButton(page: string): boolean {

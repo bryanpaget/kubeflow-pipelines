@@ -13,10 +13,6 @@ COPY . .
 
 RUN cd  /frontend
 RUN npm update & npm cache clean --force
-## Force installs for json-schema and jsprim to avoid CVE-2021-3918
-## This is the same change in the postinstall command in package.json
-RUN npm install --save json-schema
-RUN npm install --save jsprim
 RUN npm ci && npm run postinstall
 RUN npm run build
 

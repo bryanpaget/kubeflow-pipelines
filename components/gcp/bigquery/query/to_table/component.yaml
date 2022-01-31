@@ -49,14 +49,12 @@ inputs:
       for details.
     default: ''
     type: Dict
-  - name: table
-    type: String
 outputs:
   - name: MLPipeline UI metadata
     type: UI metadata
 implementation:
   container:
-    image: gcr.io/ml-pipeline/ml-pipeline-gcp:1.2.0
+    image: gcr.io/ml-pipeline/ml-pipeline-gcp:1.5.1
     args: [
       --ui_metadata_path, {outputPath: MLPipeline UI metadata},
       kfp_component.google.bigquery, query,

@@ -28,7 +28,7 @@ import Buttons from '../lib/Buttons';
 import { Page } from './Page';
 import { withTranslation } from 'react-i18next';
 
-const DEMO_PIPELINES: string[] = SAMPLE_CONFIG.slice(0, 4);
+const DEMO_PIPELINES: string[] = SAMPLE_CONFIG;
 
 const OPTIONS = {
   overrides: { a: { component: AutoLink } },
@@ -77,9 +77,8 @@ class GettingStarted extends Page<{}, { links: string[] }> {
   public render(): JSX.Element {
     const { t } = this.props;
     const DEMO_PIPELINES_ID_MAP = {
-      control: 4,
-      data: 3,
-      tfxKeras: 2,
+      control: 3,
+      data: 2,
       tfx: 1,
       xgboost: 0,
     };
@@ -87,13 +86,11 @@ class GettingStarted extends Page<{}, { links: string[] }> {
     const PAGE_CONTENT_MD = ({
       control,
       data,
-      tfxKeras,
       tfx,
       xgboost,
     }: {
       control: string;
       data: string;
-      tfxKeras: string;
       tfx: string;
       xgboost: string;
     }) => t('home:text');
@@ -127,7 +124,6 @@ class GettingStarted extends Page<{}, { links: string[] }> {
           {PAGE_CONTENT_MD({
             control: this.state.links[DEMO_PIPELINES_ID_MAP.control],
             data: this.state.links[DEMO_PIPELINES_ID_MAP.data],
-            tfxKeras: this.state.links[DEMO_PIPELINES_ID_MAP.tfxKeras],
             tfx: this.state.links[DEMO_PIPELINES_ID_MAP.tfx],
             xgboost: this.state.links[DEMO_PIPELINES_ID_MAP.xgboost],
           })}

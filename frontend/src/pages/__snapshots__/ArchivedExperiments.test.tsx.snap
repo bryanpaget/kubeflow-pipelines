@@ -26,7 +26,7 @@ exports[`ArchivedExperiemnts renders archived experiments 1`] = `
           },
         },
         "breadcrumbs": Array [],
-        "pageTitle": "common:archive",
+        "pageTitle": "common:experiments",
         "t": [Function],
       }
     }

@@ -152,7 +152,7 @@ func formulateRetryWorkflow(wf *util.Workflow) (*util.Workflow, []string, error)
 				newWF.Status.Nodes[node.ID] = node
 				continue
 			}
-		case wfv1.NodeError, wfv1.NodeFailed:
+		case wfv1.NodeError, wfv1.NodeFailed, wfv1.NodeOmitted:
 			if !strings.HasPrefix(node.Name, onExitNodeName) && node.Type == wfv1.NodeTypeDAG {
 				newNode := node.DeepCopy()
 				newNode.Phase = wfv1.NodeRunning
@@ -208,22 +208,22 @@ func OverrideParameterWithSystemDefault(workflow util.Workflow, apiRun *api.Run)
 		patchedSlice := make([]wfv1.Parameter, 0)
 		for _, currentParam := range workflow.Spec.Arguments.Parameters {
 			if currentParam.Value != nil {
-				desiredValue, err := PatchPipelineDefaultParameter(*currentParam.Value)
+				desiredValue, err := PatchPipelineDefaultParameter(currentParam.Value.String())
 				if err != nil {
 					return fmt.Errorf("failed to patch default value to pipeline. Error: %v", err)
 				}
 				patchedSlice = append(patchedSlice, wfv1.Parameter{
 					Name:  currentParam.Name,
-					Value: util.StringPointer(desiredValue),
+					Value: wfv1.AnyStringPtr(desiredValue),
 				})
 			} else if currentParam.Default != nil {
-				desiredValue, err := PatchPipelineDefaultParameter(*currentParam.Default)
+				desiredValue, err := PatchPipelineDefaultParameter(currentParam.Default.String())
 				if err != nil {
 					return fmt.Errorf("failed to patch default value to pipeline. Error: %v", err)
 				}
 				patchedSlice = append(patchedSlice, wfv1.Parameter{
 					Name:  currentParam.Name,
-					Value: util.StringPointer(desiredValue),
+					Value: wfv1.AnyStringPtr(desiredValue),
 				})
 			}
 		}
@@ -244,8 +244,8 @@ func OverrideParameterWithSystemDefault(workflow util.Workflow, apiRun *api.Run)
 // Convert PipelineId in PipelineSpec to the pipeline's default pipeline version.
 // This is for legacy usage of pipeline id to create run. The standard way to
 // create run is by specifying the pipeline version.
-func ConvertPipelineIdToDefaultPipelineVersion(pipelineSpec *api.PipelineSpec, resourceReferences *[]*api.ResourceReference, r *ResourceManager) error {
-	if pipelineSpec.GetPipelineId() == "" {
+func convertPipelineIdToDefaultPipelineVersion(pipelineSpec *api.PipelineSpec, resourceReferences *[]*api.ResourceReference, r *ResourceManager) error {
+	if pipelineSpec == nil || pipelineSpec.GetPipelineId() == "" {
 		return nil
 	}
 	// If there is already a pipeline version in resource references, don't convert pipeline id.

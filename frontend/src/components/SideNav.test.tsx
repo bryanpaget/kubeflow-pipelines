@@ -135,7 +135,7 @@ describe('SideNav', () => {
 
   it('renders experiments as active page when on RecurringRunDetails page', () => {
     tree = shallow(
-      <SideNav t={(key: any) => key} page={RoutePage.RECURRING_RUN} {...defaultProps} />,
+      <SideNav t={(key: any) => key} page={RoutePage.RECURRING_RUN_DETAILS} {...defaultProps} />,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -143,6 +143,496 @@ describe('SideNav', () => {
   it('renders experiments as active page when on NewRun page', () => {
     tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.NEW_RUN} {...defaultProps} />);
     expect(tree).toMatchSnapshot();
+  });
+
+  it('renders recurring runs as active page', () => {
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.RECURRING_RUNS} {...defaultProps} />,
+    );
+    expect(tree).toMatchInlineSnapshot(`
+      <div
+        className="root flexColumn noShrink"
+        id="sideNav"
+      >
+        <div
+          style={
+            Object {
+              "flexGrow": 1,
+            }
+          }
+        >
+          <div
+            className="indicator indicatorHidden"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:pipelineList"
+          >
+            <Link
+              className="unstyled"
+              id="pipelinesBtn"
+              replace={false}
+              to="/pipelines"
+            >
+              <WithStyles(Button)
+                className="button"
+              >
+                <PipelinesIcon
+                  color="#9aa0a6"
+                />
+                <span
+                  className="label"
+                >
+                  common:pipelines
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <div
+            className="indicator indicatorHidden"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:experimentList"
+          >
+            <Link
+              className="unstyled"
+              id="experimentsBtn"
+              replace={false}
+              to="/experiments"
+            >
+              <WithStyles(Button)
+                className="button"
+              >
+                <ExperimentsIcon
+                  color="#9aa0a6"
+                />
+                <span
+                  className="label"
+                >
+                  common:experiments
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <div
+            className="indicator indicatorHidden"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:runsList"
+          >
+            <Link
+              className="unstyled"
+              id="runsBtn"
+              replace={false}
+              to="/runs"
+            >
+              <WithStyles(Button)
+                className="button"
+              >
+                <pure(DirectionsRunIcon) />
+                <span
+                  className="label"
+                >
+                  common:runs
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <div
+            className="indicator"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:RecurringRunsList"
+          >
+            <Link
+              className="unstyled"
+              id="recurringRunsBtn"
+              replace={false}
+              to="/recurringruns"
+            >
+              <WithStyles(Button)
+                className="button active"
+              >
+                <pure(AlarmIcon) />
+                <span
+                  className="label"
+                >
+                  common:RecurringRuns
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <div
+            className="indicator indicatorHidden"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:artifactsList"
+          >
+            <Link
+              className="unstyled"
+              id="artifactsBtn"
+              replace={false}
+              to="/artifacts"
+            >
+              <WithStyles(Button)
+                className="button"
+              >
+                <pure(BubbleChartIcon) />
+                <span
+                  className="label"
+                >
+                  common:artifacts
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <div
+            className="indicator indicatorHidden"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:executionsList"
+          >
+            <Link
+              className="unstyled"
+              id="executionsBtn"
+              replace={false}
+              to="/executions"
+            >
+              <WithStyles(Button)
+                className="button"
+              >
+                <pure(PlayArrowIcon) />
+                <span
+                  className="label"
+                >
+                  common:executions
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <hr
+            className="separator"
+          />
+          <ExternalUri
+            collapsed={false}
+            icon={[Function]}
+            title="common:documentation"
+            to="https://www.kubeflow.org/docs/pipelines/"
+          />
+          <ExternalUri
+            collapsed={false}
+            icon={[Function]}
+            title="common:githubRepo"
+            to="https://github.com/kubeflow/pipelines"
+          />
+          <hr
+            className="separator"
+          />
+          <WithStyles(IconButton)
+            className="chevron"
+            onClick={[Function]}
+          >
+            <pure(ChevronLeftIcon) />
+          </WithStyles(IconButton)>
+        </div>
+        <div
+          className="infoVisible"
+        >
+          <WithStyles(Tooltip)
+            enterDelay={300}
+            placement="top-start"
+            title="common:reportIssue"
+          >
+            <div
+              className="envMetadata"
+            >
+              <a
+                className="link unstyled"
+                href="https://github.com/kubeflow/pipelines/issues/new/choose"
+                rel="noopener"
+                target="_blank"
+              >
+                common:reportIssue
+              </a>
+            </div>
+          </WithStyles(Tooltip)>
+        </div>
+      </div>
+    `);
+  });
+
+  it('renders jobs as active page when on JobDetails page', () => {
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.RECURRING_RUN_DETAILS} {...defaultProps} />,
+    );
+    expect(tree).toMatchInlineSnapshot(`
+      <div
+        className="root flexColumn noShrink"
+        id="sideNav"
+      >
+        <div
+          style={
+            Object {
+              "flexGrow": 1,
+            }
+          }
+        >
+          <div
+            className="indicator indicatorHidden"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:pipelineList"
+          >
+            <Link
+              className="unstyled"
+              id="pipelinesBtn"
+              replace={false}
+              to="/pipelines"
+            >
+              <WithStyles(Button)
+                className="button"
+              >
+                <PipelinesIcon
+                  color="#9aa0a6"
+                />
+                <span
+                  className="label"
+                >
+                  common:pipelines
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <div
+            className="indicator indicatorHidden"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:experimentList"
+          >
+            <Link
+              className="unstyled"
+              id="experimentsBtn"
+              replace={false}
+              to="/experiments"
+            >
+              <WithStyles(Button)
+                className="button"
+              >
+                <ExperimentsIcon
+                  color="#9aa0a6"
+                />
+                <span
+                  className="label"
+                >
+                  common:experiments
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <div
+            className="indicator indicatorHidden"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:runsList"
+          >
+            <Link
+              className="unstyled"
+              id="runsBtn"
+              replace={false}
+              to="/runs"
+            >
+              <WithStyles(Button)
+                className="button"
+              >
+                <pure(DirectionsRunIcon) />
+                <span
+                  className="label"
+                >
+                  common:runs
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <div
+            className="indicator"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:RecurringRunsList"
+          >
+            <Link
+              className="unstyled"
+              id="recurringRunsBtn"
+              replace={false}
+              to="/recurringruns"
+            >
+              <WithStyles(Button)
+                className="button active"
+              >
+                <pure(AlarmIcon) />
+                <span
+                  className="label"
+                >
+                  common:RecurringRuns
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <div
+            className="indicator indicatorHidden"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:artifactsList"
+          >
+            <Link
+              className="unstyled"
+              id="artifactsBtn"
+              replace={false}
+              to="/artifacts"
+            >
+              <WithStyles(Button)
+                className="button"
+              >
+                <pure(BubbleChartIcon) />
+                <span
+                  className="label"
+                >
+                  common:artifacts
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <div
+            className="indicator indicatorHidden"
+          />
+          <WithStyles(Tooltip)
+            disableFocusListener={true}
+            disableHoverListener={true}
+            disableTouchListener={true}
+            enterDelay={300}
+            placement="right-start"
+            title="common:executionsList"
+          >
+            <Link
+              className="unstyled"
+              id="executionsBtn"
+              replace={false}
+              to="/executions"
+            >
+              <WithStyles(Button)
+                className="button"
+              >
+                <pure(PlayArrowIcon) />
+                <span
+                  className="label"
+                >
+                  common:executions
+                </span>
+              </WithStyles(Button)>
+            </Link>
+          </WithStyles(Tooltip)>
+          <hr
+            className="separator"
+          />
+          <ExternalUri
+            collapsed={false}
+            icon={[Function]}
+            title="common:documentation"
+            to="https://www.kubeflow.org/docs/pipelines/"
+          />
+          <ExternalUri
+            collapsed={false}
+            icon={[Function]}
+            title="common:githubRepo"
+            to="https://github.com/kubeflow/pipelines"
+          />
+          <hr
+            className="separator"
+          />
+          <WithStyles(IconButton)
+            className="chevron"
+            onClick={[Function]}
+          >
+            <pure(ChevronLeftIcon) />
+          </WithStyles(IconButton)>
+        </div>
+        <div
+          className="infoVisible"
+        >
+          <WithStyles(Tooltip)
+            enterDelay={300}
+            placement="top-start"
+            title="common:reportIssue"
+          >
+            <div
+              className="envMetadata"
+            >
+              <a
+                className="link unstyled"
+                href="https://github.com/kubeflow/pipelines/issues/new/choose"
+                rel="noopener"
+                target="_blank"
+              >
+                common:reportIssue
+              </a>
+            </div>
+          </WithStyles(Tooltip)>
+        </div>
+      </div>
+    `);
   });
 
   it('show jupyterhub link if accessible', () => {

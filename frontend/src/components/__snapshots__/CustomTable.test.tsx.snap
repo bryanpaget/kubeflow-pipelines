@@ -72,7 +72,7 @@ exports[`CustomTable renders a collapsed row 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -95,7 +95,7 @@ exports[`CustomTable renders a collapsed row 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -301,7 +301,7 @@ exports[`CustomTable renders a collapsed row when selection is disabled 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -324,7 +324,7 @@ exports[`CustomTable renders a collapsed row when selection is disabled 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -773,7 +773,7 @@ exports[`CustomTable renders an expanded row 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -796,7 +796,7 @@ exports[`CustomTable renders an expanded row 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -1001,7 +1001,7 @@ exports[`CustomTable renders an expanded row with expanded component below it 1`
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -1024,7 +1024,7 @@ exports[`CustomTable renders an expanded row with expanded component below it 1`
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -1237,7 +1237,7 @@ exports[`CustomTable renders columns with specified widths 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -1260,7 +1260,7 @@ exports[`CustomTable renders columns with specified widths 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -1553,7 +1553,7 @@ exports[`CustomTable renders new rows after clicking next page, and enables prev
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -1576,7 +1576,7 @@ exports[`CustomTable renders new rows after clicking next page, and enables prev
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -1776,7 +1776,7 @@ exports[`CustomTable renders new rows after clicking previous page, and enables 
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -1799,7 +1799,7 @@ exports[`CustomTable renders new rows after clicking previous page, and enables 
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -2043,7 +2043,7 @@ exports[`CustomTable renders some columns with descending sort order on first co
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Sort"
+        title="common:sort"
       >
         <WithStyles(TableSortLabel)
           active={true}
@@ -2067,7 +2067,7 @@ exports[`CustomTable renders some columns with descending sort order on first co
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -2222,7 +2222,7 @@ exports[`CustomTable renders some columns with equal widths without rows 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -2245,7 +2245,7 @@ exports[`CustomTable renders some columns with equal widths without rows 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -2400,7 +2400,7 @@ exports[`CustomTable renders some rows 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -2423,7 +2423,7 @@ exports[`CustomTable renders some rows 1`] = `
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -3146,7 +3146,7 @@ exports[`CustomTable renders without the checkboxes if disableSelection is true 
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -3169,7 +3169,7 @@ exports[`CustomTable renders without the checkboxes if disableSelection is true 
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -3397,7 +3397,7 @@ exports[`CustomTable updates the filter string in state when the filter box inpu
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}
@@ -3420,7 +3420,7 @@ exports[`CustomTable updates the filter string in state when the filter box inpu
     >
       <WithStyles(Tooltip)
         enterDelay={300}
-        title="Cannot sort by this column"
+        title="common:sortImpossible"
       >
         <WithStyles(TableSortLabel)
           active={false}

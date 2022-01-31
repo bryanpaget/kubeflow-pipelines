@@ -142,7 +142,7 @@ exports[`ExperimentDetails fetches this experiment's recurring runs 1`] = `
       t={[Function]}
       topLevelToolbar={false}
     />
-    <RunList
+    <RunListsRouter
       experimentIdMask="some-mock-experiment-id"
       hideExperimentColumn={true}
       history={
@@ -160,6 +160,8 @@ exports[`ExperimentDetails fetches this experiment's recurring runs 1`] = `
       }
       onError={[Function]}
       onSelectionChange={[Function]}
+      onTabSwitch={[Function]}
+      refreshCount={1}
       selectedIds={Array []}
       storageState="STORAGESTATE_AVAILABLE"
       t={[Function]}
@@ -409,7 +411,7 @@ exports[`ExperimentDetails removes all description text after second newline and
       t={[Function]}
       topLevelToolbar={false}
     />
-    <RunList
+    <RunListsRouter
       experimentIdMask="some-mock-experiment-id"
       hideExperimentColumn={true}
       history={
@@ -427,6 +429,8 @@ exports[`ExperimentDetails removes all description text after second newline and
       }
       onError={[Function]}
       onSelectionChange={[Function]}
+      onTabSwitch={[Function]}
+      refreshCount={1}
       selectedIds={Array []}
       storageState="STORAGESTATE_AVAILABLE"
       t={[Function]}
@@ -663,7 +667,7 @@ exports[`ExperimentDetails renders a page with no runs or recurring runs 1`] = `
       t={[Function]}
       topLevelToolbar={false}
     />
-    <RunList
+    <RunListsRouter
       experimentIdMask="some-mock-experiment-id"
       hideExperimentColumn={true}
       history={
@@ -681,6 +685,8 @@ exports[`ExperimentDetails renders a page with no runs or recurring runs 1`] = `
       }
       onError={[Function]}
       onSelectionChange={[Function]}
+      onTabSwitch={[Function]}
+      refreshCount={1}
       selectedIds={Array []}
       storageState="STORAGESTATE_AVAILABLE"
       t={[Function]}
@@ -915,7 +921,7 @@ exports[`ExperimentDetails uses an empty string if the experiment has no descrip
       t={[Function]}
       topLevelToolbar={false}
     />
-    <RunList
+    <RunListsRouter
       experimentIdMask="some-mock-experiment-id"
       hideExperimentColumn={true}
       history={
@@ -933,6 +939,8 @@ exports[`ExperimentDetails uses an empty string if the experiment has no descrip
       }
       onError={[Function]}
       onSelectionChange={[Function]}
+      onTabSwitch={[Function]}
+      refreshCount={1}
       selectedIds={Array []}
       storageState="STORAGESTATE_AVAILABLE"
       t={[Function]}

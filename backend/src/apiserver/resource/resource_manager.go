@@ -15,6 +15,7 @@
 package resource
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -26,6 +27,7 @@ import (
 	"github.com/golang/glog"
 	api "github.com/kubeflow/pipelines/backend/api/go_client"
 	"github.com/kubeflow/pipelines/backend/src/apiserver/archive"
+	kfpauth "github.com/kubeflow/pipelines/backend/src/apiserver/auth"
 	"github.com/kubeflow/pipelines/backend/src/apiserver/client"
 	"github.com/kubeflow/pipelines/backend/src/apiserver/common"
 	"github.com/kubeflow/pipelines/backend/src/apiserver/list"
@@ -42,6 +44,7 @@ import (
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
+	utilerrors "k8s.io/apimachinery/pkg/util/errors"
 )
 
 const (
@@ -73,9 +76,11 @@ type ClientManagerInterface interface {
 	SwfClient() client.SwfClientInterface
 	KubernetesCoreClient() client.KubernetesCoreInterface
 	SubjectAccessReviewClient() client.SubjectAccessReviewInterface
+	TokenReviewClient() client.TokenReviewInterface
 	LogArchive() archive.LogArchiveInterface
 	Time() util.TimeInterface
 	UUID() util.UUIDGeneratorInterface
+	Authenticators() []kfpauth.Authenticator
 }
 
 type ResourceManager struct {
@@ -91,9 +96,11 @@ type ResourceManager struct {
 	swfClient                 client.SwfClientInterface
 	k8sCoreClient             client.KubernetesCoreInterface
 	subjectAccessReviewClient client.SubjectAccessReviewInterface
+	tokenReviewClient         client.TokenReviewInterface
 	logArchive                archive.LogArchiveInterface
 	time                      util.TimeInterface
 	uuid                      util.UUIDGeneratorInterface
+	authenticators            []kfpauth.Authenticator
 }
 
 func NewResourceManager(clientManager ClientManagerInterface) *ResourceManager {
@@ -110,9 +117,11 @@ func NewResourceManager(clientManager ClientManagerInterface) *ResourceManager {
 		swfClient:                 clientManager.SwfClient(),
 		k8sCoreClient:             clientManager.KubernetesCoreClient(),
 		subjectAccessReviewClient: clientManager.SubjectAccessReviewClient(),
+		tokenReviewClient:         clientManager.TokenReviewClient(),
 		logArchive:                clientManager.LogArchive(),
 		time:                      clientManager.Time(),
 		uuid:                      clientManager.UUID(),
+		authenticators:            clientManager.Authenticators(),
 	}
 }
 
@@ -199,9 +208,9 @@ func (r *ResourceManager) UnarchiveExperiment(experimentId string) error {
 	return r.experimentStore.UnarchiveExperiment(experimentId)
 }
 
-func (r *ResourceManager) ListPipelines(opts *list.Options) (
+func (r *ResourceManager) ListPipelines(filterContext *common.FilterContext, opts *list.Options) (
 	pipelines []*model.Pipeline, total_size int, nextPageToken string, err error) {
-	return r.pipelineStore.ListPipelines(opts)
+	return r.pipelineStore.ListPipelines(filterContext, opts)
 }
 
 func (r *ResourceManager) GetPipeline(pipelineId string) (*model.Pipeline, error) {
@@ -245,7 +254,7 @@ func (r *ResourceManager) UpdatePipelineDefaultVersion(pipelineId string, versio
 	return r.pipelineStore.UpdatePipelineDefaultVersion(pipelineId, versionId)
 }
 
-func (r *ResourceManager) CreatePipeline(name string, description string, pipelineFile []byte) (*model.Pipeline, error) {
+func (r *ResourceManager) CreatePipeline(name string, description string, namespace string, pipelineFile []byte) (*model.Pipeline, error) {
 	// Extract the parameter from the pipeline
 	params, err := util.GetParameters(pipelineFile)
 	if err != nil {
@@ -258,6 +267,7 @@ func (r *ResourceManager) CreatePipeline(name string, description string, pipeli
 		Description: description,
 		Parameters:  params,
 		Status:      model.PipelineCreating,
+		Namespace:   namespace,
 		DefaultVersion: &model.PipelineVersion{
 			Name:       name,
 			Parameters: params,
@@ -318,24 +328,19 @@ func (r *ResourceManager) CreateRun(apiRun *api.Run) (*model.RunDetail, error) {
 	// Get workflow from either of the two places:
 	// (1) raw pipeline manifest in pipeline_spec
 	// (2) pipeline version in resource_references
-	// And the latter takes priority over the former
-	var workflowSpecManifestBytes []byte
-	err := ConvertPipelineIdToDefaultPipelineVersion(apiRun.PipelineSpec, &apiRun.ResourceReferences, r)
+	// And the latter takes priority over the former when the pipeline manifest is from pipeline_spec.pipeline_id
+	// workflow manifest and pipeline id/version will not exist at the same time, guaranteed by the validation phase
+	workflowSpecManifestBytes, err := getWorkflowSpecManifestBytes(apiRun.PipelineSpec, &apiRun.ResourceReferences, r)
 	if err != nil {
-		return nil, util.Wrap(err, "Failed to find default version to create run with pipeline id.")
-	}
-	workflowSpecManifestBytes, err = r.getWorkflowSpecBytesFromPipelineVersion(apiRun.GetResourceReferences())
-	if err != nil {
-		workflowSpecManifestBytes, err = r.getWorkflowSpecBytesFromPipelineSpec(apiRun.GetPipelineSpec())
-		if err != nil {
-			return nil, util.Wrap(err, "Failed to fetch workflow spec.")
-		}
+		return nil, err
 	}
 	uuid, err := r.uuid.NewRandom()
 	if err != nil {
 		return nil, util.NewInternalServerError(err, "Failed to generate run ID.")
 	}
 	runId := uuid.String()
+
+	runAt := r.time.Now().Unix()
 
 	var workflow util.Workflow
 	if err = json.Unmarshal(workflowSpecManifestBytes, &workflow); err != nil {
@@ -353,6 +358,13 @@ func (r *ResourceManager) CreateRun(apiRun *api.Run) (*model.RunDetail, error) {
 	if err = workflow.VerifyParameters(parameters); err != nil {
 		return nil, util.Wrap(err, "Failed to verify parameters.")
 	}
+	// Append provided parameter
+	workflow.OverrideParameters(parameters)
+
+	// Replace macros
+	formatter := util.NewRunParameterFormatter(uuid.String(), runAt)
+	formattedParams := formatter.FormatWorkflowParameters(workflow.GetWorkflowParametersAsMap())
+	workflow.OverrideParameters(formattedParams)
 
 	r.setDefaultServiceAccount(&workflow, apiRun.GetServiceAccount())
 
@@ -363,8 +375,6 @@ func (r *ResourceManager) CreateRun(apiRun *api.Run) (*model.RunDetail, error) {
 	// on every single step/pod so the cache server can understand.
 	// TODO: Add run_level flag with similar logic by reading flag value from create_run api.
 	workflow.SetLabelsToAllTemplates(util.LabelKeyCacheEnabled, common.IsCacheEnabled())
-	// Append provided parameter
-	workflow.OverrideParameters(parameters)
 
 	err = OverrideParameterWithSystemDefault(workflow, apiRun)
 	if err != nil {
@@ -418,7 +428,7 @@ func (r *ResourceManager) CreateRun(apiRun *api.Run) (*model.RunDetail, error) {
 	}
 
 	// Assign the create at time.
-	runDetail.CreatedAtInSec = r.time.Now().Unix()
+	runDetail.CreatedAtInSec = runAt
 	return r.runStore.CreateRun(runDetail)
 }
 
@@ -646,18 +656,11 @@ func (r *ResourceManager) CreateJob(apiJob *api.Job) (*model.Job, error) {
 	// Get workflow from either of the two places:
 	// (1) raw pipeline manifest in pipeline_spec
 	// (2) pipeline version in resource_references
-	// And the latter takes priority over the former
-	var workflowSpecManifestBytes []byte
-	err := ConvertPipelineIdToDefaultPipelineVersion(apiJob.PipelineSpec, &apiJob.ResourceReferences, r)
+	// 	And the latter takes priority over the former when the pipeline manifest is from pipeline_spec.pipeline_id
+	// workflow manifest and pipeline id/version will not exist at the same time, guaranteed by the validation phase
+	workflowSpecManifestBytes, err := getWorkflowSpecManifestBytes(apiJob.PipelineSpec, &apiJob.ResourceReferences, r)
 	if err != nil {
-		return nil, util.Wrap(err, "Failed to find default version to create job with pipeline id.")
-	}
-	workflowSpecManifestBytes, err = r.getWorkflowSpecBytesFromPipelineVersion(apiJob.GetResourceReferences())
-	if err != nil {
-		workflowSpecManifestBytes, err = r.getWorkflowSpecBytesFromPipelineSpec(apiJob.GetPipelineSpec())
-		if err != nil {
-			return nil, util.Wrap(err, "Failed to fetch workflow spec.")
-		}
+		return nil, err
 	}
 
 	var workflow util.Workflow
@@ -827,12 +830,18 @@ func (r *ResourceManager) ReportWorkflowResource(workflow *util.Workflow) error 
 		// TODO(jingzhang36): find a proper way to pass collectMetricsFlag here.
 		workflowGCCounter.Inc()
 	}
-
+	// If the run was Running and got terminated (activeDeadlineSeconds set to 0),
+	// ignore its condition and mark it as such
+	condition := workflow.Condition()
+	if workflow.Spec.ActiveDeadlineSeconds != nil &&
+		*workflow.Spec.ActiveDeadlineSeconds == 0 &&
+		!workflow.IsInFinalState() {
+		condition = model.RunTerminatingConditions
+	}
 	if jobId == "" {
 		// If a run doesn't have job ID, it's a one-time run created by Pipeline API server.
 		// In this case the DB entry should already been created when argo workflow CR is created.
-
-		err := r.runStore.UpdateRun(runId, workflow.Condition(), workflow.FinishedAt(), workflow.ToStringForStore())
+		err := r.runStore.UpdateRun(runId, condition, workflow.FinishedAt(), workflow.ToStringForStore())
 		if err != nil {
 			return util.Wrap(err, "Failed to update the run.")
 		}
@@ -857,7 +866,7 @@ func (r *ResourceManager) ReportWorkflowResource(workflow *util.Workflow) error 
 				CreatedAtInSec:   workflow.CreationTimestamp.Unix(),
 				ScheduledAtInSec: workflow.ScheduledAtInSecOr0(),
 				FinishedAtInSec:  workflow.FinishedAt(),
-				Conditions:       workflow.Condition(),
+				Conditions:       condition,
 				PipelineSpec: model.PipelineSpec{
 					WorkflowSpecManifest: workflow.GetWorkflowSpec().ToStringForStore(),
 				},
@@ -990,6 +999,23 @@ func (r *ResourceManager) getWorkflowSpecBytesFromPipelineVersion(references []*
 	}
 
 	return []byte(workflow.ToStringForStore()), nil
+}
+
+func getWorkflowSpecManifestBytes(pipelineSpec *api.PipelineSpec, resourceReferences *[]*api.ResourceReference, r *ResourceManager) ([]byte, error) {
+	var workflowSpecManifestBytes []byte
+	if pipelineSpec.GetWorkflowManifest() != "" {
+		workflowSpecManifestBytes = []byte(pipelineSpec.GetWorkflowManifest())
+	} else {
+		err := convertPipelineIdToDefaultPipelineVersion(pipelineSpec, resourceReferences, r)
+		if err != nil {
+			return nil, util.Wrap(err, "Failed to find default version to create run with pipeline id.")
+		}
+		workflowSpecManifestBytes, err = r.getWorkflowSpecBytesFromPipelineVersion(*resourceReferences)
+		if err != nil {
+			return nil, util.Wrap(err, "Failed to fetch workflow spec.")
+		}
+	}
+	return workflowSpecManifestBytes, nil
 }
 
 // Used to initialize the Experiment database with a default to be used for runs
@@ -1208,6 +1234,24 @@ func (r *ResourceManager) GetPipelineVersionTemplate(versionId string) ([]byte, 
 	return template, nil
 }
 
+func (r *ResourceManager) AuthenticateRequest(ctx context.Context) (string, error) {
+	if ctx == nil {
+		return "", util.NewUnauthenticatedError(errors.New("Request error: context is nil"), "Request error: context is nil.")
+	}
+
+	// If the request header contains the user identity, requests are authorized
+	// based on the namespace field in the request.
+	var errlist []error
+	for _, auth := range r.authenticators {
+		userIdentity, err := auth.GetUserIdentity(ctx)
+		if err == nil {
+			return userIdentity, nil
+		}
+		errlist = append(errlist, err)
+	}
+	return "", utilerrors.NewAggregate(errlist)
+}
+
 func (r *ResourceManager) IsRequestAuthorized(userIdentity string, resourceAttributes *authorizationv1.ResourceAttributes) error {
 	result, err := r.subjectAccessReviewClient.Create(
 		&authorizationv1.SubjectAccessReview{
@@ -1259,6 +1303,22 @@ func (r *ResourceManager) GetNamespaceFromJobID(jobId string) (string, error) {
 		return "", util.Wrap(err, "Failed to get namespace from Job ID.")
 	}
 	return job.Namespace, nil
+}
+
+func (r *ResourceManager) GetNamespaceFromPipelineID(pipelineId string) (string, error) {
+	pipeline, err := r.GetPipeline(pipelineId)
+	if err != nil {
+		return "", util.Wrap(err, "Failed to get namespace from Pipeline ID")
+	}
+	return pipeline.Namespace, nil
+}
+
+func (r *ResourceManager) GetNamespaceFromPipelineVersion(versionId string) (string, error) {
+	pipelineVersion, err := r.GetPipelineVersion(versionId)
+	if err != nil {
+		return "", util.Wrap(err, "Failed to get namespace from versionId ID")
+	}
+	return r.GetNamespaceFromPipelineID(pipelineVersion.PipelineId)
 }
 
 func (r *ResourceManager) setDefaultServiceAccount(workflow *util.Workflow, serviceAccount string) {

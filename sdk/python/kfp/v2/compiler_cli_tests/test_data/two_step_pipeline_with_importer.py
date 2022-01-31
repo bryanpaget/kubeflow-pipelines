@@ -14,7 +14,7 @@
 
 import pathlib
 
-from kfp.v2 import components
+from kfp import components
 from kfp.v2 import dsl
 import kfp.v2.compiler as compiler
 
@@ -28,7 +28,7 @@ serving_op = components.load_component_from_file(
 @dsl.pipeline(
     name='two-step-pipeline-with-importer',
     description='A linear two-step pipeline.')
-def my_pipeline(input_gcs='gs://test-bucket/pipeline_root',
+def my_pipeline(input_gcs = 'gs://test-bucket/pipeline_root',
                 optimizer: str = 'sgd',
                 epochs: int = 200):
   trainer = trainer_op(
@@ -42,4 +42,4 @@ if __name__ == '__main__':
   compiler.Compiler().compile(
       pipeline_func=my_pipeline,
       pipeline_root='dummy_root',
-      output_path=__file__ + '.json')
+      package_path=__file__.replace('.py', '.json'))

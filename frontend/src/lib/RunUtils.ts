@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { orderBy } from 'lodash';
 import { ApiParameter, ApiPipelineVersion } from '../apis/pipeline';
 import { Workflow } from '../../third_party/argo-ui/argo_template';
 import { ApiJob } from '../apis/job';
@@ -166,8 +165,7 @@ function runsToMetricMetadataMap(runs: ApiRun[]): Map<string, MetricMetadata> {
 }
 
 function extractMetricMetadata(runs: ApiRun[]): MetricMetadata[] {
-  const metrics = Array.from(runsToMetricMetadataMap(runs).values());
-  return orderBy(metrics, ['count', 'name'], ['desc', 'asc']);
+  return Array.from(runsToMetricMetadataMap(runs).values());
 }
 
 function getRecurringRunId(run?: ApiRun): string {
@@ -178,6 +176,19 @@ function getRecurringRunId(run?: ApiRun): string {
   for (const ref of run.resource_references || []) {
     if (ref.key && ref.key.type === ApiResourceType.JOB) {
       return ref.key.id || '';
+    }
+  }
+  return '';
+}
+
+function getRecurringRunName(run?: ApiRun): string {
+  if (!run) {
+    return '';
+  }
+
+  for (const ref of run.resource_references || []) {
+    if (ref.key && ref.key.type === ApiResourceType.JOB) {
+      return ref.name || '';
     }
   }
   return '';
@@ -198,6 +209,7 @@ export default {
   getPipelineName,
   getPipelineVersionId,
   getRecurringRunId,
+  getRecurringRunName,
   getWorkflowManifest,
   runsToMetricMetadataMap,
 };
