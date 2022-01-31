@@ -73,4 +73,4 @@ class AllRunsAndArchive extends Page<AllRunsAndArchiveProps, AllRunsAndArchiveSt
   }
 }
 
-export default withTranslation(['experiments'])(AllRunsAndArchive);
+export default withTranslation(['common'])(AllRunsAndArchive);

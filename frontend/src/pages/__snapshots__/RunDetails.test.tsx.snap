@@ -1068,7 +1068,7 @@ exports[`RunDetails opens side panel when graph node is clicked 1`] = `
                     "inputOutput",
                     "visualizations",
                     "mlMetadata",
-                    "details"
+                    "details",
                     "volumes",
                     "logs",
                     "pod",
@@ -1260,11 +1260,11 @@ exports[`RunDetails shows run config fields - handles no description 1`] = `
           fields={
             Array [
               Array [
-                "Run ID",
+                "common:runId",
                 "test-run-id",
               ],
               Array [
-                "Workflow name",
+                "common:workflowName",
                 "-",
               ],
               Array [
@@ -1329,11 +1329,11 @@ exports[`RunDetails shows run config fields - handles no metadata 1`] = `
           fields={
             Array [
               Array [
-                "Run ID",
+                "common:runId",
                 "test-run-id",
               ],
               Array [
-                "Workflow name",
+                "common:workflowName",
                 "-",
               ],
               Array [
@@ -1398,11 +1398,11 @@ exports[`RunDetails shows run config fields 1`] = `
           fields={
             Array [
               Array [
-                "Run ID",
+                "common:runId",
                 "test-run-id",
               ],
               Array [
-                "Workflow name",
+                "common:workflowName",
                 "-",
               ],
               Array [
@@ -1611,7 +1611,7 @@ exports[`RunDetails switches to inputs/outputs tab in side pane 1`] = `
                     "inputOutput",
                     "visualizations",
                     "mlMetadata",
-                    "details"
+                    "details",
                     "volumes",
                     "logs",
                     "pod",
@@ -1775,7 +1775,7 @@ exports[`RunDetails switches to manifest tab in side pane 1`] = `
                     "inputOutput",
                     "visualizations",
                     "mlMetadata",
-                    "details"
+                    "details",
                     "volumes",
                     "logs",
                     "pod",
@@ -1933,7 +1933,7 @@ exports[`RunDetails switches to volumes tab in side pane 1`] = `
                     "inputOutput",
                     "visualizations",
                     "mlMetadata",
-                    "details"
+                    "details",
                     "volumes",
                     "logs",
                     "pod",

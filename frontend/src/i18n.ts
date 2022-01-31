@@ -51,7 +51,6 @@ i18n
     fallbackLng: ["en", "fr"],
     nonExplicitSupportedLngs: true,
     debug: true,
-    keySeparator: false,
     interpolation: {
       escapeValue: false,
     },

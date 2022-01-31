@@ -339,7 +339,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                                   t('inputOutput'),
                                   t('visualizations'),
                                   t('mlMetadata'),
-                                  'Details',
+                                  t('details'),
                                   t('volumes'),
                                   t('logs'),
                                   t('pod'),
@@ -420,7 +420,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                                 {sidepanelSelectedTab === SidePaneTab.TASK_DETAILS && (
                                   <div className={padding(20)}>
                                     <DetailsTable
-                                      title='Task Details'
+                                      title={t('taskDetail')}
                                       fields={this._getTaskDetailsFields(workflow, selectedNodeId)}
                                     />
                                   </div>
@@ -887,8 +887,8 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
     return !workflow.status
       ? []
       : [
-          ['Run ID', runMetadata?.id || '-'],
-          ['Workflow name', workflow.metadata?.name || '-'],
+          [t('common:runId'), runMetadata?.id || '-'],
+          [t('common:workflowName'), workflow.metadata?.name || '-'],
           [t('common:status'), workflow.status.phase],
           [t('common:description'), runMetadata ? runMetadata!.description! : ''],
           [
@@ -902,14 +902,15 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
   }
 
   private _getTaskDetailsFields(workflow: Workflow, nodeId: string): Array<KeyValue<string>> {
+    const { t } = this.props;
     return workflow?.status?.nodes?.[nodeId]
       ? [
-          ['Task ID', workflow.status.nodes[nodeId].id || '-'],
-          ['Task name', workflow.status.nodes[nodeId].displayName || '-'],
-          ['Status', workflow.status.nodes[nodeId].phase || '-'],
-          ['Started at', formatDateString(workflow.status.nodes[nodeId].startedAt) || '-'],
-          ['Finished at', formatDateString(workflow.status.nodes[nodeId].finishedAt) || '-'],
-          ['Duration', getRunDurationFromNode(workflow, nodeId) || '-'],
+          [t('common:taskId'), workflow.status.nodes[nodeId].id || '-'],
+          [t('common:taskName'), workflow.status.nodes[nodeId].displayName || '-'],
+          [t('common:status'), workflow.status.nodes[nodeId].phase || '-'],
+          [t('startedAt'), formatDateString(workflow.status.nodes[nodeId].startedAt) || '-'],
+          [t('finishedAt'), formatDateString(workflow.status.nodes[nodeId].finishedAt) || '-'],
+          [t('duration'), getRunDurationFromNode(workflow, nodeId) || '-'],
         ]
       : [];
   }

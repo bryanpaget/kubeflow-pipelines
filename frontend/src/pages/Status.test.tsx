@@ -61,7 +61,7 @@ describe('Status', () => {
     // });
 
     it('handles ERROR phase', () => {
-      const tree = shallow(statusToIcon(NodePhase.ERROR));
+      const tree = shallow(statusToIcon(t, NodePhase.ERROR));
       expect(tree.find('span')).toMatchInlineSnapshot(`
         <span
           style={
@@ -85,7 +85,7 @@ describe('Status', () => {
     });
 
     it('handles FAILED phase', () => {
-      const tree = shallow(statusToIcon(NodePhase.FAILED));
+      const tree = shallow(statusToIcon(t, NodePhase.FAILED));
       expect(tree.find('span')).toMatchInlineSnapshot(`
         <span
           style={
@@ -109,7 +109,7 @@ describe('Status', () => {
     });
 
     it('handles PENDING phase', () => {
-      const tree = shallow(statusToIcon(NodePhase.PENDING));
+      const tree = shallow(statusToIcon(t, NodePhase.PENDING));
       expect(tree.find('span')).toMatchInlineSnapshot(`
         <span
           style={
@@ -133,7 +133,7 @@ describe('Status', () => {
     });
 
     it('handles RUNNING phase', () => {
-      const tree = shallow(statusToIcon(NodePhase.RUNNING));
+      const tree = shallow(statusToIcon(t, NodePhase.RUNNING));
       expect(tree.find('span')).toMatchInlineSnapshot(`
         <span
           style={
@@ -157,7 +157,7 @@ describe('Status', () => {
     });
 
     it('handles TERMINATING phase', () => {
-      const tree = shallow(statusToIcon(NodePhase.TERMINATING));
+      const tree = shallow(statusToIcon(t, NodePhase.TERMINATING));
       expect(tree.find('span')).toMatchInlineSnapshot(`
         <span
           style={
@@ -181,7 +181,7 @@ describe('Status', () => {
     });
 
     it('handles SKIPPED phase', () => {
-      const tree = shallow(statusToIcon(NodePhase.SKIPPED));
+      const tree = shallow(statusToIcon(t, NodePhase.SKIPPED));
       expect(tree.find('span')).toMatchInlineSnapshot(`
         <span
           style={
@@ -205,7 +205,7 @@ describe('Status', () => {
     });
 
     it('handles SUCCEEDED phase', () => {
-      const tree = shallow(statusToIcon(NodePhase.SUCCEEDED));
+      const tree = shallow(statusToIcon(t, NodePhase.SUCCEEDED));
       expect(tree.find('span')).toMatchInlineSnapshot(`
         <span
           style={
@@ -229,7 +229,7 @@ describe('Status', () => {
     });
 
     it('handles CACHED phase', () => {
-      const tree = shallow(statusToIcon(NodePhase.CACHED));
+      const tree = shallow(statusToIcon(t, NodePhase.CACHED));
       expect(tree.find('span')).toMatchInlineSnapshot(`
         <span
           style={
@@ -253,7 +253,7 @@ describe('Status', () => {
     });
 
     it('handles TERMINATED phase', () => {
-      const tree = shallow(statusToIcon(NodePhase.TERMINATED));
+      const tree = shallow(statusToIcon(t, NodePhase.TERMINATED));
       expect(tree.find('span')).toMatchInlineSnapshot(`
         <span
           style={
@@ -277,7 +277,7 @@ describe('Status', () => {
     });
 
     it('handles OMITTED phase', () => {
-      const tree = shallow(statusToIcon(NodePhase.OMITTED));
+      const tree = shallow(statusToIcon(t, NodePhase.OMITTED));
       expect(tree.find('span')).toMatchInlineSnapshot(`
         <span
           style={

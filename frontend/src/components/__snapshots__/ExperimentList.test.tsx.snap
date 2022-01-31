@@ -1216,7 +1216,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Sort"
+              title="common:sort"
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -1603,7 +1603,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                     },
                   }
                 }
-                title="Sort"
+                title="common:sort"
               >
                 <RootRef
                   rootRef={[Function]}
@@ -1620,7 +1620,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Sort"
+                    title="common:sort"
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -1645,7 +1645,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Sort"
+                      title="common:sort"
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -1659,7 +1659,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Sort"
+                        title="common:sort"
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -1684,7 +1684,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Sort"
+                          title="common:sort"
                           type="button"
                         >
                           <span
@@ -1705,7 +1705,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Sort"
+                            title="common:sort"
                           >
                             experiments:experimentName
                             <pure(ArrowDownward)
@@ -1764,7 +1764,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                       class="MuiButtonBase-root-81 MuiTableSortLabel-root-76 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Sort"
+                      title="common:sort"
                     >
                       experiments:experimentName
                       <svg
@@ -1802,7 +1802,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Cannot sort by this column"
+              title="common:sortImpossible"
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -2189,7 +2189,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                     },
                   }
                 }
-                title="Cannot sort by this column"
+                title="common:sortImpossible"
               >
                 <RootRef
                   rootRef={[Function]}
@@ -2205,7 +2205,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Cannot sort by this column"
+                    title="common:sortImpossible"
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -2230,7 +2230,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -2244,7 +2244,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Cannot sort by this column"
+                        title="common:sortImpossible"
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -2269,7 +2269,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Cannot sort by this column"
+                          title="common:sortImpossible"
                           type="button"
                         >
                           <span
@@ -2290,7 +2290,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Cannot sort by this column"
+                            title="common:sortImpossible"
                           >
                             experiments:description
                             <pure(ArrowDownward)
@@ -2349,7 +2349,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                       class="MuiButtonBase-root-81 MuiTableSortLabel-root-76 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       experiments:description
                       <svg

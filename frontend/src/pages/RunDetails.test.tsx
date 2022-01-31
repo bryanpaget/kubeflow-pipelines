@@ -1443,32 +1443,32 @@ describe('RunDetails', () => {
               fields={
                 Array [
                   Array [
-                    "Task ID",
+                    "common:taskId",
                     "node1",
                   ],
                   Array [
-                    "Task name",
+                    "common:taskName",
                     "Task",
                   ],
                   Array [
-                    "Status",
+                    "common:status",
                     "Succeeded",
                   ],
                   Array [
-                    "Started at",
+                    "startedAt",
                     "1/2/2019, 12:34:56 PM",
                   ],
                   Array [
-                    "Finished at",
+                    "finishedAt",
                     "1/2/2019, 12:34:56 PM",
                   ],
                   Array [
-                    "Duration",
+                    "duration",
                     "0:00:02",
                   ],
                 ]
               }
-              title="Task Details"
+              title="taskDetail"
             />
           </div>
         </div>

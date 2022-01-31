@@ -598,6 +598,7 @@ export default class Buttons {
         },
         {
           onClick: async () => await dialogClosedHandler(true),
+          //TODO: Translate
           text: actionName,
         },
       ],

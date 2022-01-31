@@ -4144,7 +4144,7 @@ exports[`Status statusToIcon renders an icon with tooltip for phase: OMITTED 1`]
   title={
     <div>
       <div>
-        Run was omitted because the previous step failed.
+        ommitedStatus
       </div>
     </div>
   }

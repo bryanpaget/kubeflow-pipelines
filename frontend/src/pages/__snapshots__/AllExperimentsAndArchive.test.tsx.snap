@@ -9,8 +9,8 @@ exports[`ExperimentsAndArchive renders archive page 1`] = `
     selectedTab={1}
     tabs={
       Array [
-        "",
-        "",
+        "common:active",
+        "common:archived",
       ]
     }
   />
@@ -38,8 +38,8 @@ exports[`ExperimentsAndArchive renders experiments page 1`] = `
     selectedTab={0}
     tabs={
       Array [
-        "",
-        "",
+        "common:active",
+        "common:archived",
       ]
     }
   />

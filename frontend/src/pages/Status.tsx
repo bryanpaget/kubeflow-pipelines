@@ -89,7 +89,7 @@ export function statusToIcon(
       break;
     case NodePhase.OMITTED:
       IconComponent = BlockIcon;
-      title = 'Run was omitted because the previous step failed.';
+      title = t('ommitedStatus');
       break;
     case NodePhase.UNKNOWN:
       break;

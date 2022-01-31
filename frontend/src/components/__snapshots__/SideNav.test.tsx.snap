@@ -83,7 +83,7 @@ exports[`SideNav populates the display build information using the response from
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -112,7 +112,7 @@ exports[`SideNav populates the display build information using the response from
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -127,7 +127,7 @@ exports[`SideNav populates the display build information using the response from
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -141,7 +141,7 @@ exports[`SideNav populates the display build information using the response from
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -156,7 +156,7 @@ exports[`SideNav populates the display build information using the response from
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -170,7 +170,7 @@ exports[`SideNav populates the display build information using the response from
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -185,7 +185,7 @@ exports[`SideNav populates the display build information using the response from
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -345,7 +345,7 @@ exports[`SideNav renders Pipelines as active page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -360,7 +360,7 @@ exports[`SideNav renders Pipelines as active page 1`] = `
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -374,7 +374,7 @@ exports[`SideNav renders Pipelines as active page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -389,7 +389,7 @@ exports[`SideNav renders Pipelines as active page 1`] = `
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -403,7 +403,7 @@ exports[`SideNav renders Pipelines as active page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -418,7 +418,7 @@ exports[`SideNav renders Pipelines as active page 1`] = `
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -432,7 +432,7 @@ exports[`SideNav renders Pipelines as active page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -447,7 +447,7 @@ exports[`SideNav renders Pipelines as active page 1`] = `
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -585,7 +585,7 @@ exports[`SideNav renders Pipelines as active when on PipelineDetails page 1`] = 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -600,7 +600,7 @@ exports[`SideNav renders Pipelines as active when on PipelineDetails page 1`] = 
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -614,7 +614,7 @@ exports[`SideNav renders Pipelines as active when on PipelineDetails page 1`] = 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -629,7 +629,7 @@ exports[`SideNav renders Pipelines as active when on PipelineDetails page 1`] = 
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -643,7 +643,7 @@ exports[`SideNav renders Pipelines as active when on PipelineDetails page 1`] = 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -658,7 +658,7 @@ exports[`SideNav renders Pipelines as active when on PipelineDetails page 1`] = 
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -672,7 +672,7 @@ exports[`SideNav renders Pipelines as active when on PipelineDetails page 1`] = 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -687,7 +687,7 @@ exports[`SideNav renders Pipelines as active when on PipelineDetails page 1`] = 
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -825,7 +825,7 @@ exports[`SideNav renders collapsed state 1`] = `
       disableTouchListener={false}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -840,7 +840,7 @@ exports[`SideNav renders collapsed state 1`] = `
           <span
             className="collapsedLabel label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -854,7 +854,7 @@ exports[`SideNav renders collapsed state 1`] = `
       disableTouchListener={false}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -869,7 +869,7 @@ exports[`SideNav renders collapsed state 1`] = `
           <span
             className="collapsedLabel label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -883,7 +883,7 @@ exports[`SideNav renders collapsed state 1`] = `
       disableTouchListener={false}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -898,7 +898,7 @@ exports[`SideNav renders collapsed state 1`] = `
           <span
             className="collapsedLabel label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -912,7 +912,7 @@ exports[`SideNav renders collapsed state 1`] = `
       disableTouchListener={false}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -927,7 +927,7 @@ exports[`SideNav renders collapsed state 1`] = `
           <span
             className="collapsedLabel label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1065,7 +1065,7 @@ exports[`SideNav renders expanded state 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -1080,7 +1080,7 @@ exports[`SideNav renders expanded state 1`] = `
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1094,7 +1094,7 @@ exports[`SideNav renders expanded state 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -1109,7 +1109,7 @@ exports[`SideNav renders expanded state 1`] = `
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1123,7 +1123,7 @@ exports[`SideNav renders expanded state 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -1138,7 +1138,7 @@ exports[`SideNav renders expanded state 1`] = `
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1152,7 +1152,7 @@ exports[`SideNav renders expanded state 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -1167,7 +1167,7 @@ exports[`SideNav renders expanded state 1`] = `
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1178,13 +1178,13 @@ exports[`SideNav renders expanded state 1`] = `
     <ExternalUri
       collapsed={false}
       icon={[Function]}
-      title="Documentation"
+      title="common:documentation"
       to="https://www.kubeflow.org/docs/pipelines/"
     />
     <ExternalUri
       collapsed={false}
       icon={[Function]}
-      title="Github Repo"
+      title="common:githubRepo"
       to="https://github.com/kubeflow/pipelines"
     />
     <hr
@@ -1305,7 +1305,7 @@ exports[`SideNav renders experiments as active page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -1320,7 +1320,7 @@ exports[`SideNav renders experiments as active page 1`] = `
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1334,7 +1334,7 @@ exports[`SideNav renders experiments as active page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -1349,7 +1349,7 @@ exports[`SideNav renders experiments as active page 1`] = `
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1363,7 +1363,7 @@ exports[`SideNav renders experiments as active page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -1378,7 +1378,7 @@ exports[`SideNav renders experiments as active page 1`] = `
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1392,7 +1392,7 @@ exports[`SideNav renders experiments as active page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -1407,7 +1407,7 @@ exports[`SideNav renders experiments as active page 1`] = `
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1545,7 +1545,7 @@ exports[`SideNav renders experiments as active page when on AllRuns page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -1560,7 +1560,7 @@ exports[`SideNav renders experiments as active page when on AllRuns page 1`] = `
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1574,7 +1574,7 @@ exports[`SideNav renders experiments as active page when on AllRuns page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -1589,7 +1589,7 @@ exports[`SideNav renders experiments as active page when on AllRuns page 1`] = `
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1603,7 +1603,7 @@ exports[`SideNav renders experiments as active page when on AllRuns page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -1618,7 +1618,7 @@ exports[`SideNav renders experiments as active page when on AllRuns page 1`] = `
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1632,7 +1632,7 @@ exports[`SideNav renders experiments as active page when on AllRuns page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -1647,7 +1647,7 @@ exports[`SideNav renders experiments as active page when on AllRuns page 1`] = `
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1785,7 +1785,7 @@ exports[`SideNav renders experiments as active page when on Compare page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -1800,7 +1800,7 @@ exports[`SideNav renders experiments as active page when on Compare page 1`] = `
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1814,7 +1814,7 @@ exports[`SideNav renders experiments as active page when on Compare page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -1829,7 +1829,7 @@ exports[`SideNav renders experiments as active page when on Compare page 1`] = `
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1843,7 +1843,7 @@ exports[`SideNav renders experiments as active page when on Compare page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -1858,7 +1858,7 @@ exports[`SideNav renders experiments as active page when on Compare page 1`] = `
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -1872,7 +1872,7 @@ exports[`SideNav renders experiments as active page when on Compare page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -1887,7 +1887,7 @@ exports[`SideNav renders experiments as active page when on Compare page 1`] = `
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2025,7 +2025,7 @@ exports[`SideNav renders experiments as active page when on NewExperiment page 1
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -2040,7 +2040,7 @@ exports[`SideNav renders experiments as active page when on NewExperiment page 1
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2054,7 +2054,7 @@ exports[`SideNav renders experiments as active page when on NewExperiment page 1
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -2069,7 +2069,7 @@ exports[`SideNav renders experiments as active page when on NewExperiment page 1
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2083,7 +2083,7 @@ exports[`SideNav renders experiments as active page when on NewExperiment page 1
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -2098,7 +2098,7 @@ exports[`SideNav renders experiments as active page when on NewExperiment page 1
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2112,7 +2112,7 @@ exports[`SideNav renders experiments as active page when on NewExperiment page 1
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -2127,7 +2127,7 @@ exports[`SideNav renders experiments as active page when on NewExperiment page 1
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2138,7 +2138,7 @@ exports[`SideNav renders experiments as active page when on NewExperiment page 1
     <ExternalUri
       collapsed={false}
       icon={[Function]}
-      title="Documentation"
+      title="common:documentation"
       to="https://www.kubeflow.org/docs/pipelines/"
     />
     <ExternalUri
@@ -2265,7 +2265,7 @@ exports[`SideNav renders experiments as active page when on NewRun page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -2280,7 +2280,7 @@ exports[`SideNav renders experiments as active page when on NewRun page 1`] = `
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2294,7 +2294,7 @@ exports[`SideNav renders experiments as active page when on NewRun page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -2309,7 +2309,7 @@ exports[`SideNav renders experiments as active page when on NewRun page 1`] = `
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2323,7 +2323,7 @@ exports[`SideNav renders experiments as active page when on NewRun page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -2338,7 +2338,7 @@ exports[`SideNav renders experiments as active page when on NewRun page 1`] = `
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2352,7 +2352,7 @@ exports[`SideNav renders experiments as active page when on NewRun page 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -2367,7 +2367,7 @@ exports[`SideNav renders experiments as active page when on NewRun page 1`] = `
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2505,7 +2505,7 @@ exports[`SideNav renders experiments as active page when on RecurringRunDetails 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -2520,7 +2520,7 @@ exports[`SideNav renders experiments as active page when on RecurringRunDetails 
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2534,7 +2534,7 @@ exports[`SideNav renders experiments as active page when on RecurringRunDetails 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -2549,7 +2549,7 @@ exports[`SideNav renders experiments as active page when on RecurringRunDetails 
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2563,7 +2563,7 @@ exports[`SideNav renders experiments as active page when on RecurringRunDetails 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -2578,7 +2578,7 @@ exports[`SideNav renders experiments as active page when on RecurringRunDetails 
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2592,7 +2592,7 @@ exports[`SideNav renders experiments as active page when on RecurringRunDetails 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -2607,7 +2607,7 @@ exports[`SideNav renders experiments as active page when on RecurringRunDetails 
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2745,7 +2745,7 @@ exports[`SideNav renders experiments as active page when on RunDetails page 1`] 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -2760,7 +2760,7 @@ exports[`SideNav renders experiments as active page when on RunDetails page 1`] 
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2774,7 +2774,7 @@ exports[`SideNav renders experiments as active page when on RunDetails page 1`] 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -2789,7 +2789,7 @@ exports[`SideNav renders experiments as active page when on RunDetails page 1`] 
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2803,7 +2803,7 @@ exports[`SideNav renders experiments as active page when on RunDetails page 1`] 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -2818,7 +2818,7 @@ exports[`SideNav renders experiments as active page when on RunDetails page 1`] 
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2832,7 +2832,7 @@ exports[`SideNav renders experiments as active page when on RunDetails page 1`] 
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -2847,7 +2847,7 @@ exports[`SideNav renders experiments as active page when on RunDetails page 1`] 
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -2985,7 +2985,7 @@ exports[`SideNav renders experiments as active when on ExperimentDetails page 1`
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -3000,7 +3000,7 @@ exports[`SideNav renders experiments as active when on ExperimentDetails page 1`
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -3014,7 +3014,7 @@ exports[`SideNav renders experiments as active when on ExperimentDetails page 1`
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -3029,7 +3029,7 @@ exports[`SideNav renders experiments as active when on ExperimentDetails page 1`
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>
@@ -3043,7 +3043,7 @@ exports[`SideNav renders experiments as active when on ExperimentDetails page 1`
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Artifacts List"
+      title="common:artifactsList"
     >
       <Link
         className="unstyled"
@@ -3058,7 +3058,7 @@ exports[`SideNav renders experiments as active when on ExperimentDetails page 1`
           <span
             className="label"
           >
-            Artifacts
+            common:artifacts
           </span>
         </WithStyles(Button)>
       </Link>
@@ -3072,7 +3072,7 @@ exports[`SideNav renders experiments as active when on ExperimentDetails page 1`
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Executions List"
+      title="common:executionsList"
     >
       <Link
         className="unstyled"
@@ -3087,7 +3087,7 @@ exports[`SideNav renders experiments as active when on ExperimentDetails page 1`
           <span
             className="label"
           >
-            Executions
+            common:executions
           </span>
         </WithStyles(Button)>
       </Link>
@@ -3225,7 +3225,7 @@ exports[`SideNav show jupyterhub link if accessible 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Runs List"
+      title="common:runsList"
     >
       <Link
         className="unstyled"
@@ -3240,7 +3240,7 @@ exports[`SideNav show jupyterhub link if accessible 1`] = `
           <span
             className="label"
           >
-            Runs
+            common:runs
           </span>
         </WithStyles(Button)>
       </Link>
@@ -3254,7 +3254,7 @@ exports[`SideNav show jupyterhub link if accessible 1`] = `
       disableTouchListener={true}
       enterDelay={300}
       placement="right-start"
-      title="Recurring Runs List"
+      title="common:RecurringRunsList"
     >
       <Link
         className="unstyled"
@@ -3269,7 +3269,7 @@ exports[`SideNav show jupyterhub link if accessible 1`] = `
           <span
             className="label"
           >
-            Recurring Runs
+            common:RecurringRuns
           </span>
         </WithStyles(Button)>
       </Link>

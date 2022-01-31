@@ -385,7 +385,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
             )}
           />
           <Tooltip
-            title={'Runs List'}
+            title={t('common:runsList')}
             enterDelay={300}
             placement={'right-start'}
             disableFocusListener={!collapsed}
@@ -401,7 +401,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
                 )}
               >
                 <DirectionsRun />
-                <span className={classes(collapsed && css.collapsedLabel, css.label)}>Runs</span>
+                <span className={classes(collapsed && css.collapsedLabel, css.label)}>{t('common:runs')}</span>
               </Button>
             </Link>
           </Tooltip>
@@ -412,7 +412,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
             )}
           />
           <Tooltip
-            title={'Recurring Runs List'}
+            title={t('common:RecurringRunsList')}
             enterDelay={300}
             placement={'right-start'}
             disableFocusListener={!collapsed}
@@ -433,7 +433,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
               >
                 <Alarm />
                 <span className={classes(collapsed && css.collapsedLabel, css.label)}>
-                  Recurring Runs
+                  {t('common:RecurringRuns')}
                 </span>
               </Button>
             </Link>

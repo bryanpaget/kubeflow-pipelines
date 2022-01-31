@@ -33,7 +33,7 @@ exports[`RunList adds metrics columns 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -179,7 +179,7 @@ exports[`RunList displays error in run row if experiment could not be fetched 1`
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -247,7 +247,7 @@ exports[`RunList displays error in run row if it failed to parse (run list mask)
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -328,7 +328,7 @@ exports[`RunList displays error in run row if pipeline could not be fetched 1`] 
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -408,7 +408,7 @@ exports[`RunList hides experiment name if instructed 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -475,7 +475,7 @@ exports[`RunList in archived state renders the empty experience 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -527,7 +527,7 @@ exports[`RunList loads multiple runs 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -647,7 +647,7 @@ exports[`RunList loads one run 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -739,7 +739,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
           Object {
             "customRenderer": [Function],
             "flex": 0.5,
-            "label": "common:recurringRun",
+            "label": "common:RecurringRuns",
           },
           Object {
             "flex": 1,
@@ -2038,7 +2038,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Sort"
+              title="common:sort"
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -2425,7 +2425,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     },
                   }
                 }
-                title="Sort"
+                title="common:sort"
               >
                 <RootRef
                   rootRef={[Function]}
@@ -2442,7 +2442,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Sort"
+                    title="common:sort"
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -2467,7 +2467,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Sort"
+                      title="common:sort"
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -2481,7 +2481,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Sort"
+                        title="common:sort"
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -2506,7 +2506,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Sort"
+                          title="common:sort"
                           type="button"
                         >
                           <span
@@ -2527,7 +2527,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Sort"
+                            title="common:sort"
                           >
                             experiments:runName
                             <pure(ArrowDownward)
@@ -2586,7 +2586,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       class="MuiButtonBase-root-84 MuiTableSortLabel-root-95 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Sort"
+                      title="common:sort"
                     >
                       experiments:runName
                       <svg
@@ -2624,7 +2624,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Cannot sort by this column"
+              title="common:sortImpossible"
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -3011,7 +3011,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     },
                   }
                 }
-                title="Cannot sort by this column"
+                title="common:sortImpossible"
               >
                 <RootRef
                   rootRef={[Function]}
@@ -3027,7 +3027,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Cannot sort by this column"
+                    title="common:sortImpossible"
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -3052,7 +3052,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -3066,7 +3066,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Cannot sort by this column"
+                        title="common:sortImpossible"
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -3091,7 +3091,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Cannot sort by this column"
+                          title="common:sortImpossible"
                           type="button"
                         >
                           <span
@@ -3112,7 +3112,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Cannot sort by this column"
+                            title="common:sortImpossible"
                           >
                             common:status
                             <pure(ArrowDownward)
@@ -3171,7 +3171,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       class="MuiButtonBase-root-84 MuiTableSortLabel-root-95 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       common:status
                       <svg
@@ -3209,7 +3209,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Cannot sort by this column"
+              title="common:sortImpossible"
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -3596,7 +3596,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     },
                   }
                 }
-                title="Cannot sort by this column"
+                title="common:sortImpossible"
               >
                 <RootRef
                   rootRef={[Function]}
@@ -3612,7 +3612,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Cannot sort by this column"
+                    title="common:sortImpossible"
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -3637,7 +3637,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -3651,7 +3651,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Cannot sort by this column"
+                        title="common:sortImpossible"
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -3676,7 +3676,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Cannot sort by this column"
+                          title="common:sortImpossible"
                           type="button"
                         >
                           <span
@@ -3697,7 +3697,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Cannot sort by this column"
+                            title="common:sortImpossible"
                           >
                             common:duration
                             <pure(ArrowDownward)
@@ -3756,7 +3756,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       class="MuiButtonBase-root-84 MuiTableSortLabel-root-95 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       common:duration
                       <svg
@@ -3794,7 +3794,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Cannot sort by this column"
+              title="common:sortImpossible"
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -4181,7 +4181,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     },
                   }
                 }
-                title="Cannot sort by this column"
+                title="common:sortImpossible"
               >
                 <RootRef
                   rootRef={[Function]}
@@ -4197,7 +4197,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Cannot sort by this column"
+                    title="common:sortImpossible"
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -4222,7 +4222,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -4236,7 +4236,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Cannot sort by this column"
+                        title="common:sortImpossible"
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -4261,7 +4261,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Cannot sort by this column"
+                          title="common:sortImpossible"
                           type="button"
                         >
                           <span
@@ -4282,7 +4282,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Cannot sort by this column"
+                            title="common:sortImpossible"
                           >
                             common:experiment
                             <pure(ArrowDownward)
@@ -4341,7 +4341,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       class="MuiButtonBase-root-84 MuiTableSortLabel-root-95 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       common:experiment
                       <svg
@@ -4379,7 +4379,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Cannot sort by this column"
+              title="common:sortImpossible"
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -4766,7 +4766,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     },
                   }
                 }
-                title="Cannot sort by this column"
+                title="common:sortImpossible"
               >
                 <RootRef
                   rootRef={[Function]}
@@ -4782,7 +4782,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Cannot sort by this column"
+                    title="common:sortImpossible"
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -4807,7 +4807,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -4821,7 +4821,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Cannot sort by this column"
+                        title="common:sortImpossible"
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -4846,7 +4846,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Cannot sort by this column"
+                          title="common:sortImpossible"
                           type="button"
                         >
                           <span
@@ -4867,7 +4867,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Cannot sort by this column"
+                            title="common:sortImpossible"
                           >
                             common:pipelineVersion
                             <pure(ArrowDownward)
@@ -4926,7 +4926,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       class="MuiButtonBase-root-84 MuiTableSortLabel-root-95 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       common:pipelineVersion
                       <svg
@@ -4960,11 +4960,11 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                 "width": "8.333333333333332%",
               }
             }
-            title="common:recurringRun"
+            title="common:RecurringRuns"
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Cannot sort by this column"
+              title="common:sortImpossible"
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -5351,7 +5351,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     },
                   }
                 }
-                title="Cannot sort by this column"
+                title="common:sortImpossible"
               >
                 <RootRef
                   rootRef={[Function]}
@@ -5367,7 +5367,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Cannot sort by this column"
+                    title="common:sortImpossible"
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -5392,7 +5392,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -5406,7 +5406,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Cannot sort by this column"
+                        title="common:sortImpossible"
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -5431,7 +5431,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Cannot sort by this column"
+                          title="common:sortImpossible"
                           type="button"
                         >
                           <span
@@ -5452,9 +5452,9 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Cannot sort by this column"
+                            title="common:sortImpossible"
                           >
-                            common:recurringRun
+                            common:RecurringRuns
                             <pure(ArrowDownward)
                               className="MuiTableSortLabel-icon-97 MuiTableSortLabel-iconDirectionDesc-98"
                             >
@@ -5511,9 +5511,9 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       class="MuiButtonBase-root-84 MuiTableSortLabel-root-95 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
-                      common:recurringRun
+                      common:RecurringRuns
                       <svg
                         aria-hidden="true"
                         class="MuiSvgIcon-root-59 MuiTableSortLabel-icon-97 MuiTableSortLabel-iconDirectionDesc-98"
@@ -5549,7 +5549,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Sort"
+              title="common:sort"
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -5936,7 +5936,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     },
                   }
                 }
-                title="Sort"
+                title="common:sort"
               >
                 <RootRef
                   rootRef={[Function]}
@@ -5953,7 +5953,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Sort"
+                    title="common:sort"
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -5978,7 +5978,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Sort"
+                      title="common:sort"
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -5992,7 +5992,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Sort"
+                        title="common:sort"
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -6017,7 +6017,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Sort"
+                          title="common:sort"
                           type="button"
                         >
                           <span
@@ -6038,7 +6038,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Sort"
+                            title="common:sort"
                           >
                             common:startTime
                             <pure(ArrowDownward)
@@ -6097,7 +6097,7 @@ exports[`RunList reloads the run when refresh is called 1`] = `
                       class="MuiButtonBase-root-84 MuiTableSortLabel-root-95 MuiTableSortLabel-active-96 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Sort"
+                      title="common:sort"
                     >
                       common:startTime
                       <svg
@@ -7735,7 +7735,7 @@ exports[`RunList renders the empty experience 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -7787,7 +7787,7 @@ exports[`RunList retrieves pipeline from backend to display name if not in spec 
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -7871,7 +7871,7 @@ exports[`RunList shows experiment name 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -7899,77 +7899,6 @@ exports[`RunList shows experiment name 1`] = `
             },
             undefined,
             undefined,
-            "-",
-          ],
-        },
-      ]
-    }
-    t={[Function]}
-  />
-</div>
-`;
-
-exports[`RunList shows link to recurring run config 1`] = `
-<div>
-  <CustomTable
-    columns={
-      Array [
-        Object {
-          "customRenderer": [Function],
-          "flex": 1.5,
-          "label": "experiments:runName",
-          "sortKey": "name",
-        },
-        Object {
-          "customRenderer": [Function],
-          "flex": 0.5,
-          "label": "common:status",
-        },
-        Object {
-          "flex": 0.5,
-          "label": "common:duration",
-        },
-        Object {
-          "customRenderer": [Function],
-          "flex": 1,
-          "label": "common:experiment",
-        },
-        Object {
-          "customRenderer": [Function],
-          "flex": 1,
-          "label": "common:pipelineVersion",
-        },
-        Object {
-          "customRenderer": [Function],
-          "flex": 0.5,
-          "label": "common:recurringRun",
-        },
-        Object {
-          "flex": 1,
-          "label": "common:startTime",
-          "sortKey": "created_at",
-        },
-      ]
-    }
-    emptyMessage="common:nocommon:available common:runFound."
-    filterLabel="experiments:filterRuns"
-    initialSortColumn="created_at"
-    reload={[Function]}
-    rows={
-      Array [
-        Object {
-          "error": undefined,
-          "id": "testrun1",
-          "otherFields": Array [
-            "run with id: testrun1",
-            "-",
-            "-",
-            undefined,
-            undefined,
-            Object {
-              "displayName": "test-recurring-run-id",
-              "id": "test-recurring-run-id",
-            },
             "-",
           ],
         },
@@ -8013,7 +7942,7 @@ exports[`RunList shows pipeline name 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,
@@ -8086,7 +8015,7 @@ exports[`RunList shows run time for each run 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 0.5,
-          "label": "common:recurringRun",
+          "label": "common:RecurringRuns",
         },
         Object {
           "flex": 1,

@@ -342,6 +342,11 @@ exports[`PipelineDetails collapses summary card when summary shown state is fals
             selectedNodeId=""
             t={[Function]}
           />
+          <ReduceGraphSwitch
+            checked={false}
+            disabled={true}
+            onChange={[Function]}
+          />
           <SidePanel
             isOpen={false}
             onClose={[Function]}

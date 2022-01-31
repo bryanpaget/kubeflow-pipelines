@@ -289,7 +289,7 @@ describe('RunList', () => {
     tree = shallow(<RunList {...props} />);
     await (tree.instance() as RunListTest)._loadRuns({});
     expect(props.onError).toHaveBeenLastCalledWith(
-      "pipelines:errorFetchRuns",
+      'pipelines:errorFetchRuns',
       new Error('bad stuff happened'),
     );
   });
@@ -476,42 +476,42 @@ describe('RunList', () => {
               Object {
                 "customRenderer": [Function],
                 "flex": 1.5,
-                "label": "Run name",
+                "label": "experiments:runName",
                 "sortKey": "name",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Status",
+                "label": "common:status",
               },
               Object {
                 "flex": 0.5,
-                "label": "Duration",
+                "label": "common:duration",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Experiment",
+                "label": "common:experiment",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Pipeline Version",
+                "label": "common:pipelineVersion",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Recurring Run",
+                "label": "common:RecurringRuns",
               },
               Object {
                 "flex": 1,
-                "label": "Start time",
+                "label": "common:startTime",
                 "sortKey": "created_at",
               },
             ]
           }
-          emptyMessage="No available runs found."
-          filterLabel="Filter runs"
+          emptyMessage="common:nocommon:available common:runFound."
+          filterLabel="experiments:filterRuns"
           initialSortColumn="created_at"
           reload={[Function]}
           rows={
@@ -534,6 +534,7 @@ describe('RunList', () => {
               },
             ]
           }
+          t={[Function]}
         />
       </div>
     `);

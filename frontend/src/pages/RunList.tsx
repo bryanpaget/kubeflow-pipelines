@@ -118,7 +118,7 @@ class RunList extends React.PureComponent<RunListProps, RunListState> {
       },
       {
         customRenderer: this._recurringRunCustomRenderer,
-        label: this.props.t('common:recurringRun'),
+        label: this.props.t('common:RecurringRuns'),
         flex: 0.5,
       },
       { label: this.props.t('common:startTime'), flex: 1, sortKey: RunSortKeys.CREATED_AT },

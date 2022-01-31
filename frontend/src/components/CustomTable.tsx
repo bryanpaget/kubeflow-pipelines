@@ -348,7 +348,7 @@ export default class CustomTable extends React.Component<CustomTableProps, Custo
                 {this.props.disableSorting === true && col.label}
                 {!this.props.disableSorting && (
                   <Tooltip
-                    title={isColumnSortable ? 'Sort' : 'Cannot sort by this column'}
+                    title={isColumnSortable ? t('common:sort') : t('common:sortImpossible')}
                     enterDelay={300}
                   >
                     <TableSortLabel

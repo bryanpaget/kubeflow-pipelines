@@ -54,7 +54,7 @@ class AllExperimentsAndArchive extends Page<
     return (
       <div className={classes(commonCss.page, padding(20, 't'))}>
         <MD2Tabs
-          tabs={[t('activeCap'), t('archived')]}
+          tabs={[t('common:active'), t('common:archived')]}
           selectedTab={this.props.view}
           onSwitch={this._tabSwitched.bind(this)}
         />

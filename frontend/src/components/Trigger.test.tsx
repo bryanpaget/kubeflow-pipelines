@@ -231,7 +231,7 @@ describe('Trigger', () => {
 
     it('Show invalid start date/time format message if date has wrong format.', () => {
       const spy = jest.fn();
-      const tree = shallow(<Trigger onChange={spy} />);
+      const tree = shallow(<Trigger t={(key: any) => key} onChange={spy} />);
       (tree.instance() as Trigger).handleChange('type')({
         target: { value: TriggerType.INTERVALED },
       });
@@ -256,7 +256,7 @@ describe('Trigger', () => {
 
     it('Hide invalid start date/time format message if start time checkbox is not selected.', () => {
       const spy = jest.fn();
-      const tree = shallow(<Trigger onChange={spy} />);
+      const tree = shallow(<Trigger t={(key: any) => key} onChange={spy} />);
       (tree.instance() as Trigger).handleChange('type')({
         target: { value: TriggerType.INTERVALED },
       });
@@ -281,7 +281,7 @@ describe('Trigger', () => {
 
     it('Show invalid end date/time format message if date has wrong format.', () => {
       const spy = jest.fn();
-      const tree = shallow(<Trigger onChange={spy} />);
+      const tree = shallow(<Trigger t={(key: any) => key} onChange={spy} />);
       (tree.instance() as Trigger).handleChange('type')({
         target: { value: TriggerType.INTERVALED },
       });
@@ -306,7 +306,7 @@ describe('Trigger', () => {
 
     it('Hide invalid end date/time format message if start time checkbox is not selected.', () => {
       const spy = jest.fn();
-      const tree = shallow(<Trigger onChange={spy} />);
+      const tree = shallow(<Trigger t={(key: any) => key} onChange={spy} />);
       (tree.instance() as Trigger).handleChange('type')({
         target: { value: TriggerType.INTERVALED },
       });

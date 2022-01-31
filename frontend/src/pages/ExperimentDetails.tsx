@@ -115,7 +115,6 @@ export class ExperimentDetails extends Page<{ t: TFunction }, ExperimentDetailsS
   constructor(props: any) {
     super(props);
 
-    const buttons = new Buttons(this.props, this.refresh.bind(this));
     const { t } = this.props;
     this.state = {
       activeRecurringRunsCount: 0,

@@ -146,7 +146,9 @@ describe('SideNav', () => {
   });
 
   it('renders recurring runs as active page', () => {
-    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.RECURRING_RUNS} {...defaultProps} />);
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.RECURRING_RUNS} {...defaultProps} />,
+    );
     expect(tree).toMatchInlineSnapshot(`
       <div
         className="root flexColumn noShrink"
@@ -168,7 +170,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Pipeline List"
+            title="common:pipelineList"
           >
             <Link
               className="unstyled"
@@ -185,7 +187,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Pipelines
+                  common:pipelines
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -199,7 +201,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Experiment List"
+            title="common:experimentList"
           >
             <Link
               className="unstyled"
@@ -216,7 +218,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Experiments
+                  common:experiments
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -230,7 +232,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Runs List"
+            title="common:runsList"
           >
             <Link
               className="unstyled"
@@ -245,7 +247,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Runs
+                  common:runs
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -259,7 +261,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Recurring Runs List"
+            title="common:RecurringRunsList"
           >
             <Link
               className="unstyled"
@@ -274,7 +276,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Recurring Runs
+                  common:RecurringRuns
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -288,7 +290,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Artifacts List"
+            title="common:artifactsList"
           >
             <Link
               className="unstyled"
@@ -303,7 +305,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Artifacts
+                  common:artifacts
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -317,7 +319,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Executions List"
+            title="common:executionsList"
           >
             <Link
               className="unstyled"
@@ -332,7 +334,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Executions
+                  common:executions
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -343,13 +345,13 @@ describe('SideNav', () => {
           <ExternalUri
             collapsed={false}
             icon={[Function]}
-            title="Documentation"
+            title="common:documentation"
             to="https://www.kubeflow.org/docs/pipelines/"
           />
           <ExternalUri
             collapsed={false}
             icon={[Function]}
-            title="Github Repo"
+            title="common:githubRepo"
             to="https://github.com/kubeflow/pipelines"
           />
           <hr
@@ -368,7 +370,7 @@ describe('SideNav', () => {
           <WithStyles(Tooltip)
             enterDelay={300}
             placement="top-start"
-            title="Report an Issue"
+            title="common:reportIssue"
           >
             <div
               className="envMetadata"
@@ -379,7 +381,7 @@ describe('SideNav', () => {
                 rel="noopener"
                 target="_blank"
               >
-                Report an Issue
+                common:reportIssue
               </a>
             </div>
           </WithStyles(Tooltip)>
@@ -389,7 +391,9 @@ describe('SideNav', () => {
   });
 
   it('renders jobs as active page when on JobDetails page', () => {
-    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.RECURRING_RUN_DETAILS} {...defaultProps} />);
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.RECURRING_RUN_DETAILS} {...defaultProps} />,
+    );
     expect(tree).toMatchInlineSnapshot(`
       <div
         className="root flexColumn noShrink"
@@ -411,7 +415,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Pipeline List"
+            title="common:pipelineList"
           >
             <Link
               className="unstyled"
@@ -428,7 +432,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Pipelines
+                  common:pipelines
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -442,7 +446,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Experiment List"
+            title="common:experimentList"
           >
             <Link
               className="unstyled"
@@ -459,7 +463,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Experiments
+                  common:experiments
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -473,7 +477,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Runs List"
+            title="common:runsList"
           >
             <Link
               className="unstyled"
@@ -488,7 +492,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Runs
+                  common:runs
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -502,7 +506,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Recurring Runs List"
+            title="common:RecurringRunsList"
           >
             <Link
               className="unstyled"
@@ -517,7 +521,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Recurring Runs
+                  common:RecurringRuns
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -531,7 +535,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Artifacts List"
+            title="common:artifactsList"
           >
             <Link
               className="unstyled"
@@ -546,7 +550,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Artifacts
+                  common:artifacts
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -560,7 +564,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Executions List"
+            title="common:executionsList"
           >
             <Link
               className="unstyled"
@@ -575,7 +579,7 @@ describe('SideNav', () => {
                 <span
                   className="label"
                 >
-                  Executions
+                  common:executions
                 </span>
               </WithStyles(Button)>
             </Link>
@@ -586,13 +590,13 @@ describe('SideNav', () => {
           <ExternalUri
             collapsed={false}
             icon={[Function]}
-            title="Documentation"
+            title="common:documentation"
             to="https://www.kubeflow.org/docs/pipelines/"
           />
           <ExternalUri
             collapsed={false}
             icon={[Function]}
-            title="Github Repo"
+            title="common:githubRepo"
             to="https://github.com/kubeflow/pipelines"
           />
           <hr
@@ -611,7 +615,7 @@ describe('SideNav', () => {
           <WithStyles(Tooltip)
             enterDelay={300}
             placement="top-start"
-            title="Report an Issue"
+            title="common:reportIssue"
           >
             <div
               className="envMetadata"
@@ -622,7 +626,7 @@ describe('SideNav', () => {
                 rel="noopener"
                 target="_blank"
               >
-                Report an Issue
+                common:reportIssue
               </a>
             </div>
           </WithStyles(Tooltip)>

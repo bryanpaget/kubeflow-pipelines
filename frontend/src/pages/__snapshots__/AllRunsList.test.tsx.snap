@@ -51,17 +51,6 @@ exports[`AllRunsList renders all runs 1`] = `
             "title": "common:compareRuns",
             "tooltip": "common:compareUpToTenRuns",
           },
-          "newExperiment": Object {
-            "action": [Function],
-            "icon": [Function],
-            "id": "newExperimentBtn",
-            "outlined": true,
-            "style": Object {
-              "minWidth": 185,
-            },
-            "title": "common:createExperiment",
-            "tooltip": "common:createNewExperiment",
-          },
           "newRun": Object {
             "action": [Function],
             "icon": [Function],

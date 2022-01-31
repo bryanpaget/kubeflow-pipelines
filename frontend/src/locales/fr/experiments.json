@@ -4,8 +4,6 @@
   "WillbeMovedTo": "sera déplacé vers",
   "aRecurringRun": "une exécution récurrente ",
   "aRun": "une exécution",
-  "active": " actif",
-  "activeCap": "Actif",
   "addVisInstruc1": "Ajoutez des visualisations à vos propres composants en suivant les instructions ",
   "addVisInstruc2": "Visualiser les résultats dans l’interface utilisateur pipelines ",
   "aggregatedView": "Vue agrégée ",
@@ -25,6 +23,7 @@
   "compareRuns": "Comparer les exécutions ",
   "cronExpression": "expression cron ",
   "description": "Description ",
+  "details": "Détails",
   "editingCronExpression": "Autoriser l’édition de l’expression cron. ( le format est spécifié) ",
   "endDateBeforeStartDate": "La date/heure de fin ne peut pas être antérieure à la date/heure de début ",
   "errorChangeStateRecurRun": "Modification des erreurs de l’état activé de l’exécution périodique  ",
@@ -121,9 +120,9 @@
   "periodicIntervalEnum": {
     "minute": "Minutes",
     "hour": "Heures",
-    "day": "jours",
-    "week": "semaines",
-    "month": "mois"
+    "day": "Jours",
+    "week": "Semaines",
+    "month": "Mois"
   },
   "pipelineVersionSelected": "Une version de pipeline doit être sélectionnée ",
   "pod": "Pod ",
@@ -166,6 +165,7 @@
   "stepStateMessage1": "Cette étape est en",
   "stepStateMessage2": "l’état avec ce message",
   "its_plural": "leurs",
+  "taskDetail":"Détails de la tâche",
   "thisexperiment_plural": "ces expériences",
   "thisExperimentToIts": "cette expérience à son",
   "thisExperimentTots_plural": "cette expérience à ses",
@@ -176,7 +176,7 @@
   "triggerType": "Type de déclencheur",
   "triggerTypeEnum": {
     "periodic": "Périodique ",
-    "cron": "Cron "
+    "cron": "Cron"
   },
   "useExperiment": "Utilisez cette expérience",
   "usePipelineClonedRun": "Utilisation du pipeline à partir d’une exécution clonée",

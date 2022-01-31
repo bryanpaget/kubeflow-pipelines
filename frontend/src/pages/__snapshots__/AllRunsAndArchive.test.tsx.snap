@@ -9,8 +9,8 @@ exports[`RunsAndArchive renders archive page 1`] = `
     selectedTab={1}
     tabs={
       Array [
-        "active",
-        "archived",
+        "",
+        "",
       ]
     }
   />
@@ -38,8 +38,8 @@ exports[`RunsAndArchive renders runs page 1`] = `
     selectedTab={0}
     tabs={
       Array [
-        "active",
-        "archived",
+        "",
+        "",
       ]
     }
   />
