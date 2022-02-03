@@ -22,13 +22,12 @@ jobs:
         docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/kubeflow-pipeline/kubeflow-pipeline:$SHORT_SHA \
           -t ${{ env.REGISTRY_NAME }}.azurecr.io/kubeflow-pipeline/kubeflow-pipeline:${GITHUB_REF#refs/*/}
         docker image prune
-    # Temporary comment out until https://github.com/Azure/container-scan/issues/122 resolves
     # Scan image for vulnerabilities
-    #- uses: Azure/container-scan@v0
-    #  with:
-    #    image-name: ${{ env.REGISTRY_NAME }}.azurecr.io/kubeflow-pipeline/kubeflow-pipeline:${{ env.SHORT_SHA }}
-    #    severity-threshold: CRITICAL
-    #    run-quality-checks: false
+    - uses: Azure/container-scan@v0
+      with:
+        image-name: ${{ env.REGISTRY_NAME }}.azurecr.io/kubeflow-pipeline/kubeflow-pipeline:${{ env.SHORT_SHA }}
+        severity-threshold: CRITICAL
+        run-quality-checks: false
 
     - uses: azure/docker-login@v1
       with:
