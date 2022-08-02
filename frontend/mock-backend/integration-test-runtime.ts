@@ -117,7 +117,7 @@ export default {
         metadata: {},
         container: {
           name: '',
-          image: 'alpine:3.7',
+          image: 'alpine:3.14.1',
           command: ['echo', '{{inputs.parameters.message}}'],
           resources: {},
         },

@@ -142,7 +142,7 @@ const PipelineDetailsV1: React.FC<PipelineDetailsV1Props> = ({
       <MD2Tabs
         selectedTab={selectedTab}
         onSwitch={(tab: number) => setSelectedTab(tab)}
-        tabs={['Graph', 'YAML']}
+        tabs={[t('common:graph'), t('common:yaml')]}
       />
       <div className={commonCss.page}>
         {selectedTab === 0 && (
@@ -158,18 +158,18 @@ const PipelineDetailsV1: React.FC<PipelineDetailsV1Props> = ({
                         justifyContent: 'space-between',
                       }}
                     >
-                      <div className={commonCss.header}>Summary</div>
+                      <div className={commonCss.header}>t('common:summary')</div>
                       <Button onClick={() => setSummaryShown(false)} color='secondary'>
-                        Hide
+                      t('common:hide')
                       </Button>
                     </div>
-                    <div className={css.summaryKey}>ID</div>
-                    <div>{pipeline.id || 'Unable to obtain Pipeline ID'}</div>
+                    <div className={css.summaryKey}>t('common:id')</div>
+                    <div>{pipeline.id || t('obtainPipelineIDFailed')}</div>
                     {versions.length && (
                       <React.Fragment>
                         <form autoComplete='off'>
                           <FormControl>
-                            <InputLabel>Version</InputLabel>
+                            <InputLabel>t('common:version')</InputLabel>
                             <Select
                               data-testid='version_selector'
                               value={
@@ -188,14 +188,14 @@ const PipelineDetailsV1: React.FC<PipelineDetailsV1Props> = ({
                         </form>
                         <div className={css.summaryKey}>
                           <a href={createVersionUrl()} target='_blank' rel='noopener noreferrer'>
-                            Version source
+                          t('versionSource')
                           </a>
                         </div>
                       </React.Fragment>
                     )}
-                    <div className={css.summaryKey}>Uploaded on</div>
+                    <div className={css.summaryKey}>t('common:uploadedOn')</div>
                     <div>{formatDateString(pipeline.created_at)}</div>
-                    <div className={css.summaryKey}>Description</div>
+                    <div className={css.summaryKey}>t('common:description')</div>
                     <Description description={pipeline.description || ''} />
                   </Paper>
                 )}
@@ -205,8 +205,9 @@ const PipelineDetailsV1: React.FC<PipelineDetailsV1Props> = ({
                   selectedNodeId={selectedNodeId}
                   onClick={id => setSelectedNodeId(id)}
                   onError={(message, additionalInfo) => {
-                    updateBanner({ message, additionalInfo, mode: 'error' });
+                    updateBanner({ message, additionalInfo, mode: 'error', t });
                   }}
+                  t={t}
                 />
 
                 <ReduceGraphSwitch
@@ -224,7 +225,7 @@ const PipelineDetailsV1: React.FC<PipelineDetailsV1Props> = ({
                 >
                   <div className={commonCss.page}>
                     {!selectedNodeInfo && (
-                      <div className={commonCss.absoluteCenter}>Unable to retrieve node info</div>
+                      <div className={commonCss.absoluteCenter}>t('retrieveNodeInfoFailed')</div>
                     )}
                     {!!selectedNodeInfo && (
                       <div className={padding(20, 'lr')}>
@@ -236,7 +237,7 @@ const PipelineDetailsV1: React.FC<PipelineDetailsV1Props> = ({
                 <div className={css.footer}>
                   {!summaryShown && (
                     <Button onClick={() => setSummaryShown(!summaryShown)} color='secondary'>
-                      Show summary
+                      t('common:showSummary')
                     </Button>
                   )}
                   <div
@@ -246,12 +247,12 @@ const PipelineDetailsV1: React.FC<PipelineDetailsV1Props> = ({
                     )}
                   >
                     <InfoIcon className={commonCss.infoIcon} />
-                    <span className={css.infoSpan}>Static pipeline graph</span>
+                    <span className={css.infoSpan}>t('staticPipelineGraph')</span>
                   </div>
                 </div>
               </div>
             )}
-            {!graphToShow && <span style={{ margin: '40px auto' }}>No graph to show</span>}
+            {!graphToShow && <span style={{ margin: '40px auto' }}>t('noGraph')</span>}
           </div>
         )}
         {selectedTab === 1 && !!templateString && (

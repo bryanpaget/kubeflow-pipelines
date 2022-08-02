@@ -54,9 +54,7 @@ import { ToolbarProps } from '../components/Toolbar';
 import { HTMLViewerConfig } from '../components/viewers/HTMLViewer';
 import { PlotType, ViewerConfig } from '../components/viewers/Viewer';
 import { componentMap } from '../components/viewers/ViewerContainer';
-import VisualizationCreator, {
-  VisualizationCreatorConfig,
-} from '../components/viewers/VisualizationCreator';
+import { VisualizationCreatorConfig } from '../components/viewers/VisualizationCreator';
 import { color, commonCss, fonts, fontsize, padding } from '../Css';
 import { Apis } from '../lib/Apis';
 import Buttons, { ButtonKeys } from '../lib/Buttons';
@@ -78,6 +76,10 @@ import WorkflowParser from '../lib/WorkflowParser';
 import { ExecutionDetailsContent } from './ExecutionDetails';
 import { Page, PageProps } from './Page';
 import { statusToIcon } from './Status';
+import { ExternalLink } from 'src/atoms/ExternalLink';
+import ReduceGraphSwitch from '../components/ReduceGraphSwitch';
+import { TFunction } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 export enum SidePanelTab {
   INPUT_OUTPUT,
@@ -102,6 +104,7 @@ interface SelectedNodeDetails {
 export interface RunDetailsInternalProps {
   runId?: string;
   gkeMetadata: GkeMetadata;
+  t: TFunction;
 }
 
 export type RunDetailsProps = PageProps & Exclude<RunDetailsInternalProps, 'gkeMetadata'>;
@@ -198,6 +201,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
   public getInitialToolbarState(): ToolbarProps {
     const buttons = new Buttons(this.props, this.refresh.bind(this));
     const runIdFromParams = this.props.match.params[RouteParams.runId];
+    const { t } = this.props;
     return {
       actions: buttons
         .retryRun(
@@ -230,8 +234,9 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
           () => this.refresh(),
         )
         .getToolbarActionMap(),
-      breadcrumbs: [{ displayName: 'Experiments', href: RoutePage.EXPERIMENTS }],
+      breadcrumbs: [{ displayName: t('common:experiments'), href: RoutePage.EXPERIMENTS }],
       pageTitle: this.props.runId!,
+      t,
     };
   }
 
@@ -250,6 +255,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
       mlmdExecutions,
       showReducedGraph,
     } = this.state;
+    const { t } = this.props;
     const { projectId, clusterName } = this.props.gkeMetadata;
     const selectedNodeId = selectedNodeDetails?.id || '';
     const namespace = workflow?.metadata?.namespace;
@@ -270,6 +276,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
     const selectedExecution = mlmdExecutions?.find(
       execution => ExecutionHelpers.getKfpPod(execution) === selectedNodeId,
     );
+    //const selectedExecution = mlmdExecutions && mlmdExecutions.find(execution => execution.getPropertiesMap())
     const hasMetrics = runMetadata && runMetadata.metrics && runMetadata.metrics.length > 0;
     const visualizationCreatorConfig: VisualizationCreatorConfig = {
       allowCustomVisualizations,
@@ -291,7 +298,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
           <div className={commonCss.page}>
             <MD2Tabs
               selectedTab={selectedTab}
-              tabs={['Graph', 'Run output', 'Config']}
+              tabs={[t('common:graph'), t('runOutput'), t('common:config')]}
               onSwitch={(tab: number) => this.setStateSafe({ selectedTab: tab })}
             />
             <div className={commonCss.page}>
@@ -305,8 +312,9 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                         selectedNodeId={selectedNodeId}
                         onClick={id => this._selectNode(id)}
                         onError={(message, additionalInfo) =>
-                          this.props.updateBanner({ message, additionalInfo, mode: 'error' })
+                          this.props.updateBanner({ message, additionalInfo, mode: 'error', t })
                         }
+                        t={t}
                       />
 
                       <ReduceGraphSwitch
@@ -424,7 +432,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                                 {sidepanelSelectedTab === SidePanelTab.TASK_DETAILS && (
                                   <div className={padding(20)}>
                                     <DetailsTable
-                                      title='Task Details'
+                                      title={t('taskDetail')}
                                       fields={this._getTaskDetailsFields(workflow, selectedNodeId)}
                                     />
                                   </div>
@@ -436,7 +444,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                                       {selectedExecution && (
                                         <>
                                           <div>
-                                            This step corresponds to execution{' '}
+                                          {t('stepCorrespondsExec')}{' '}
                                             <Link
                                               className={commonCss.link}
                                               to={RoutePageFactory.executionDetails(
@@ -461,7 +469,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                                         </>
                                       )}
                                       {!selectedExecution && (
-                                        <div>Corresponding ML Metadata not found.</div>
+                                        <div>t('mlMetadataNotFound')</div>
                                       )}
                                     </div>
                                   )}
@@ -469,7 +477,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                                 {sidepanelSelectedTab === SidePanelTab.VOLUMES && (
                                   <div className={padding(20)}>
                                     <DetailsTable
-                                      title='Volume Mounts'
+                                      title={t('volumeMounts')}
                                       fields={WorkflowParser.getNodeVolumeMounts(
                                         workflow,
                                         selectedNodeId,
@@ -481,7 +489,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                                 {sidepanelSelectedTab === SidePanelTab.MANIFEST && (
                                   <div className={padding(20)}>
                                     <DetailsTable
-                                      title='Resource Manifest'
+                                      title={t('resourceManifest')}
                                       fields={WorkflowParser.getNodeManifest(
                                         workflow,
                                         selectedNodeId,
@@ -494,7 +502,11 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                                   selectedNodeDetails.phase !== NodePhase.SKIPPED && (
                                     <div className={commonCss.page}>
                                       {selectedNodeId && namespace && (
-                                        <PodInfo name={selectedNodeId} namespace={namespace} />
+                                        <PodInfo
+                                          name={selectedNodeId}
+                                          namespace={namespace}
+                                          t={t}
+                                        />
                                       )}
                                     </div>
                                   )}
@@ -503,7 +515,11 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                                   selectedNodeDetails.phase !== NodePhase.SKIPPED && (
                                     <div className={commonCss.page}>
                                       {selectedNodeId && namespace && (
-                                        <PodEvents name={selectedNodeId} namespace={namespace} />
+                                        <PodEvents
+                                          name={selectedNodeId}
+                                          namespace={namespace}
+                                          t={t}
+                                        />
                                       )}
                                     </div>
                                   )}
@@ -524,14 +540,14 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                                       )}
                                       {stackdriverK8sLogsUrl && (
                                         <div className={padding(12)}>
-                                          Logs can also be viewed in{' '}
+                                          {t('logsCanBeViewed')}{' '}
                                           <a
                                             href={stackdriverK8sLogsUrl}
                                             target='_blank'
                                             rel='noopener noreferrer'
                                             className={classes(css.link, commonCss.unstyled)}
                                           >
-                                            Stackdriver Kubernetes Monitoring
+                                            {t('stackdriverKubernetesMonitoring')}
                                           </a>
                                           .
                                         </div>
@@ -559,17 +575,14 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                       <div className={css.footer}>
                         <div className={commonCss.flex}>
                           <InfoIcon className={commonCss.infoIcon} />
-                          <span className={css.infoSpan}>
-                            Runtime execution graph. Only steps that are currently running or have
-                            already completed are shown.
-                          </span>
+                          <span className={css.infoSpan}>{t('runtimeExecGraph')}</span>
                         </div>
                       </div>
                     </div>
                   )}
                   {!graphToShow && (
                     <div>
-                      {runFinished && <span style={{ margin: '40px auto' }}>No graph to show</span>}
+                      {runFinished && <span style={{ margin: '40px auto' }}>{t('noGraph')}</span>}
                       {!runFinished && (
                         <CircularProgress size={30} className={commonCss.absoluteCenter} />
                       )}
@@ -583,7 +596,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                 <div className={padding()}>
                   {hasMetrics && (
                     <div>
-                      <div className={css.outputTitle}>Metrics</div>
+                      <div className={css.outputTitle}>{t('metrics')}</div>
                       <div className={padding(20, 'lt')}>
                         <CompareTable
                           {...CompareUtils.singleRunToMetricsCompareProps(runMetadata, workflow)}
@@ -591,7 +604,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                       </div>
                     </div>
                   )}
-                  {!hasMetrics && <span>No metrics found for this run.</span>}
+                  {!hasMetrics && <span>{t('noMetricsFound')}</span>}
 
                   <Separator orientation='vertical' />
                   <Hr />
@@ -608,9 +621,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
                       <Hr />
                     </div>
                   ))}
-                  {!allArtifactConfigs.length && (
-                    <span>No output artifacts found for this run.</span>
-                  )}
+                  {!allArtifactConfigs.length && <span>{t('noOutputArtifactsFound')}</span>}
                 </div>
               )}
 
@@ -618,14 +629,14 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
               {selectedTab === 2 && (
                 <div className={padding()}>
                   <DetailsTable
-                    title='Run details'
+                    title={t('runDetails')}
                     fields={this._getDetailsFields(workflow, runMetadata)}
                   />
 
                   {workflowParameters && !!workflowParameters.length && (
                     <div>
                       <DetailsTable
-                        title='Run parameters'
+                        title={t('runParams')}
                         fields={workflowParameters.map(p => [p.name, p.value || ''])}
                       />
                     </div>
@@ -650,45 +661,45 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
       // plus symbol changes enum to number.
       switch (+tab) {
         case SidePanelTab.INPUT_OUTPUT: {
-          tabNameList.push('Input/Output');
+          tabNameList.push(t('inputOutput'));
           break;
         }
         case SidePanelTab.VISUALIZATIONS: {
-          tabNameList.push('Visualizations');
+          tabNameList.push(t('visualizations'));
           break;
         }
         case SidePanelTab.ML_METADATA: {
           if (isV2Pipeline(workflow)) {
             break;
           }
-          tabNameList.push('ML Metadata');
+          tabNameList.push(t('mlMetadata'));
           break;
         }
         case SidePanelTab.TASK_DETAILS: {
-          tabNameList.push('Details');
+          tabNameList.push(t('details'));
           break;
         }
         case SidePanelTab.VOLUMES: {
-          tabNameList.push('Volumes');
+          tabNameList.push(t('volumes'));
           break;
         }
         case SidePanelTab.LOGS: {
-          tabNameList.push('Logs');
+          tabNameList.push(t('logs'));
           break;
         }
         case SidePanelTab.POD: {
-          tabNameList.push('Pod');
+          tabNameList.push(t('pod'));
           break;
         }
         case SidePanelTab.EVENTS: {
-          tabNameList.push('Events');
+          tabNameList.push(t('events'));
           break;
         }
         case SidePanelTab.MANIFEST: {
           if (WorkflowParser.getNodeManifest(workflow, selectedNodeId).length === 0) {
             break;
           }
-          tabNameList.push('Manifest');
+          tabNameList.push(t('manifest'));
           break;
         }
         default: {
@@ -737,12 +748,12 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
   public async load(): Promise<void> {
     this.clearBanner();
     const runId = this.props.match.params[RouteParams.runId];
-
+    const { t } = this.props;
     try {
       const allowCustomVisualizations = await Apis.areCustomVisualizationsAllowed();
       this.setState({ allowCustomVisualizations });
     } catch (err) {
-      this.showPageError('Error: Unable to enable custom visualizations.', err);
+      this.showPageError(t('errorEnableCustomVis'), err);
     }
 
     try {
@@ -779,7 +790,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
           );
           delete jsonWorkflow.status.compressedNodes;
         } catch (err) {
-          console.error(`Failed to decode compressedNodes: ${err}`);
+          console.error(`Failed to decode compressed Nodes: ${err}`);
         }
       }
       const workflow = jsonWorkflow as Workflow;
@@ -789,16 +800,14 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
       if (workflowError) {
         if (workflowError === 'terminated') {
           this.props.updateBanner({
-            additionalInfo: `This run's workflow included the following message: ${workflowError}`,
-            message: 'This run was terminated',
+            additionalInfo: `${t('runWorkflowMessage')}: ${workflowError}`,
+            message: t('runTerminated'),
             mode: 'warning',
             refresh: undefined,
+            t,
           });
         } else {
-          this.showPageError(
-            `Error: found errors when executing run: ${runId}.`,
-            new Error(workflowError),
-          );
+          this.showPageError(`${t('errorErrorsFoundRun')}: ${runId}.`, new Error(workflowError));
         }
       }
 
@@ -817,7 +826,8 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
       // Build runtime graph
       const graph =
         workflow && workflow.status && workflow.status.nodes
-          ? WorkflowParser.createRuntimeGraph(workflow, mlmdExecutions)
+        // TODO: add a comment about the need for translation of Description.
+          ? WorkflowParser.createRuntimeGraph(t, workflow, mlmdExecutions)
           : undefined;
       let reducedGraph = graph
         ? // copy graph before removing edges
@@ -831,11 +841,11 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
       // If this is an archived run, only show Archive in breadcrumbs, otherwise show
       // the full path, including the experiment if any.
       if (runMetadata.storage_state === ApiRunStorageState.ARCHIVED) {
-        breadcrumbs.push({ displayName: 'Archive', href: RoutePage.ARCHIVED_RUNS });
+        breadcrumbs.push({ displayName: t('common:archive'), href: RoutePage.ARCHIVED_RUNS });
       } else {
         if (experiment) {
           breadcrumbs.push(
-            { displayName: 'Experiments', href: RoutePage.EXPERIMENTS },
+            { displayName: t('common:experiments'), href: RoutePage.EXPERIMENTS },
             {
               displayName: experiment.name!,
               href: RoutePage.EXPERIMENT_DETAILS.replace(
@@ -845,12 +855,12 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
             },
           );
         } else {
-          breadcrumbs.push({ displayName: 'All runs', href: RoutePage.RUNS });
+          breadcrumbs.push({ displayName: t('allRuns'), href: RoutePage.RUNS });
         }
       }
       const pageTitle = (
         <div className={commonCss.flex}>
-          {statusToIcon(runMetadata.status as NodePhase, runDetail.run!.created_at)}
+          {statusToIcon(t, runMetadata.status as NodePhase, runDetail.run!.created_at)}
           <span style={{ marginLeft: 10 }}>{runMetadata.name!}</span>
         </div>
       );
@@ -904,7 +914,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
         }
       }
     } catch (err) {
-      await this.showPageError(`Error: failed to retrieve run: ${runId}.`, err);
+      await this.showPageError(`${t('errorRetrieveRun')}: ${runId}.`, err);
       logger.error('Error loading run:', runId, err);
     }
 
@@ -966,32 +976,34 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
   }
 
   private _getDetailsFields(workflow: Workflow, runMetadata?: ApiRun): Array<KeyValue<string>> {
+    const { t } = this.props;
     return !workflow.status
       ? []
       : [
-          ['Run ID', runMetadata?.id || '-'],
-          ['Workflow name', workflow.metadata?.name || '-'],
-          ['Status', workflow.status.phase],
-          ['Description', runMetadata ? runMetadata!.description! : ''],
+          [t('common:runId'), runMetadata?.id || '-'],
+          [t('common:workflowName'), workflow.metadata?.name || '-'],
+          [t('common:status'), workflow.status.phase],
+          [t('common:description'), runMetadata ? runMetadata!.description! : ''],
           [
-            'Created at',
+            t('common:createdAt'),
             workflow.metadata ? formatDateString(workflow.metadata.creationTimestamp) : '-',
           ],
-          ['Started at', formatDateString(workflow.status.startedAt)],
-          ['Finished at', formatDateString(workflow.status.finishedAt)],
-          ['Duration', getRunDurationFromWorkflow(workflow)],
+          [t('common:startedAt'), formatDateString(workflow.status.startedAt)],
+          [t('common:finishedAt'), formatDateString(workflow.status.finishedAt)],
+          [t('common:duration'), getRunDurationFromWorkflow(workflow)],
         ];
   }
 
   private _getTaskDetailsFields(workflow: Workflow, nodeId: string): Array<KeyValue<string>> {
+    const { t } = this.props;
     return workflow?.status?.nodes?.[nodeId]
       ? [
-          ['Task ID', workflow.status.nodes[nodeId].id || '-'],
-          ['Task name', workflow.status.nodes[nodeId].displayName || '-'],
-          ['Status', workflow.status.nodes[nodeId].phase || '-'],
-          ['Started at', formatDateString(workflow.status.nodes[nodeId].startedAt) || '-'],
-          ['Finished at', formatDateString(workflow.status.nodes[nodeId].finishedAt) || '-'],
-          ['Duration', getRunDurationFromNode(workflow, nodeId) || '-'],
+          [t('common:taskId'), workflow.status.nodes[nodeId].id || '-'],
+          [t('common:taskName'), workflow.status.nodes[nodeId].displayName || '-'],
+          [t('common:status'), workflow.status.nodes[nodeId].phase || '-'],
+          [t('startedAt'), formatDateString(workflow.status.nodes[nodeId].startedAt) || '-'],
+          [t('finishedAt'), formatDateString(workflow.status.nodes[nodeId].finishedAt) || '-'],
+          [t('duration'), getRunDurationFromNode(workflow, nodeId) || '-'],
         ]
       : [];
   }
@@ -1006,6 +1018,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
   private async _loadSidePaneTab(tab: SidePanelTab): Promise<void> {
     const workflow = this.state.workflow;
     const selectedNodeDetails = this.state.selectedNodeDetails;
+    const { t } = this.props;
 
     let sidepanelBannerMode: Mode = 'warning';
 
@@ -1014,7 +1027,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
       if (node) {
         selectedNodeDetails.phaseMessage =
           node && node.message
-            ? `This step is in ${node.phase} state with this message: ` + node.message
+            ? `${t('stepStateMessage1')} ${node.phase} ${t('stepStateMessage2')}: ` + node.message
             : undefined;
 
         selectedNodeDetails.phase = node.phase;
@@ -1051,6 +1064,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
     if (!selectedNodeDetails || !runId || !namespace) {
       return;
     }
+    const { t } = this.props;
     this.setStateSafe({ sidepanelBusy: true });
 
     let logsBannerMessage = '';
@@ -1061,20 +1075,19 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
       selectedNodeDetails.logs = await Apis.getPodLogs(runId, selectedNodeDetails.id, namespace);
     } catch (err) {
       let errMsg = await errorToMessage(err);
-      logsBannerMessage = 'Failed to retrieve pod logs.';
+      logsBannerMessage = t('errorPodLogs');
 
       if (errMsg === 'pod not found') {
         logsBannerMessage += this.props.gkeMetadata.projectId
-          ? ' Use Stackdriver Kubernetes Monitoring to view them.'
+          ? ` ${t('stackdriverKubernetesMonitoringView')}`
           : '';
         logsBannerMode = 'info';
-        logsBannerAdditionalInfo =
-          'Possible reasons include pod garbage collection, cluster autoscaling and pod preemption. ';
+        logsBannerAdditionalInfo = `${t('errorPodLogsReasons')} `;
       } else {
         logsBannerMode = 'error';
       }
 
-      logsBannerAdditionalInfo += 'Error response: ' + errMsg;
+      logsBannerAdditionalInfo += `${t('common:errorResponse')}: ` + errMsg;
     }
 
     this.setStateSafe({
@@ -1093,8 +1106,9 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
     namespace: string,
   ): Promise<void> {
     const nodeId = this.state.selectedNodeDetails ? this.state.selectedNodeDetails.id : '';
+    const { t } = this.props;
     if (nodeId.length === 0) {
-      this.showPageError('Unable to generate visualization, no component selected.');
+      this.showPageError(t('genVisFailedComponent'));
       return;
     }
 
@@ -1103,7 +1117,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
         // Attempts to validate JSON, if attempt fails an error is displayed.
         JSON.parse(visualizationArguments);
       } catch (err) {
-        this.showPageError('Unable to generate visualization, invalid JSON provided.', err);
+        this.showPageError(t('genVisFailedJSON'), err);
         return;
       }
     }
@@ -1123,10 +1137,7 @@ class RunDetails extends Page<RunDetailsInternalProps, RunDetailsState> {
       generatedVisualizations.push(generatedVisualization);
       this.setState({ generatedVisualizations });
     } catch (err) {
-      this.showPageError(
-        'Unable to generate visualization, an unexpected error was encountered.',
-        err,
-      );
+      this.showPageError(t('genVisFailedError'), err);
     } finally {
       this.setState({ isGeneratingVisualization: false });
     }
@@ -1219,6 +1230,7 @@ const VisualizationsTabContent: React.FC<{
   const [progress, setProgress] = React.useState(0);
   const [viewerConfigs, setViewerConfigs] = React.useState<ViewerConfig[]>([]);
   const nodeCompleted: boolean = !!nodeStatus && COMPLETED_NODE_PHASES.includes(nodeStatus.phase);
+  const { t } = useTranslation(['experiments', 'common']);
 
   React.useEffect(() => {
     let aborted = false;
@@ -1293,13 +1305,13 @@ const VisualizationsTabContent: React.FC<{
       ) : (
         <>
           {viewerConfigs.length + generatedVisualizations.length === 0 && (
-            <Banner message='There are no visualizations in this step.' mode='info' />
+            <Banner message={t('noVisStep')} mode='info' />
           )}
           {[
             ...viewerConfigs,
             ...generatedVisualizations.map(visualization => visualization.config),
           ].map((config, i) => {
-            const title = componentMap[config.type].prototype.getDisplayName();
+            const title = t(componentMap[config.type].displayNameKey);
             return (
               <div key={i} className={padding(20, 'lrt')}>
                 <PlotCard configs={[config]} title={title} maxDimension={500} />
@@ -1310,16 +1322,16 @@ const VisualizationsTabContent: React.FC<{
           <div className={padding(20, 'lrt')}>
             <PlotCard
               configs={[visualizationCreatorConfig]}
-              title={VisualizationCreator.prototype.getDisplayName()}
+              title={t(componentMap['visualization-creator'].displayNameKey)}
               maxDimension={500}
             />
             <Hr />
           </div>
           <div className={padding(20)}>
             <p>
-              Add visualizations to your own components following instructions in{' '}
+              {t('addVisInstruc1')}{' '}
               <ExternalLink href='https://www.kubeflow.org/docs/pipelines/sdk/output-viewer/'>
-                Visualize Results in the Pipelines UI
+                {t('addVisInstruc2')}
               </ExternalLink>
               .
             </p>
@@ -1333,13 +1345,14 @@ const VisualizationsTabContent: React.FC<{
 const EnhancedRunDetails: React.FC<RunDetailsProps> = props => {
   const namespaceChanged = useNamespaceChangeEvent();
   const gkeMetadata = React.useContext(GkeMetadataContext);
+  const { t } = useTranslation(['experiments', 'common']);
   if (namespaceChanged) {
     // Run details page shows info about a run, when namespace changes, the run
     // doesn't exist in the new namespace, so we should redirect to experiment
     // list page.
     return <Redirect to={RoutePage.EXPERIMENTS} />;
   }
-  return <RunDetails {...props} gkeMetadata={gkeMetadata} />;
+  return <RunDetails {...props} gkeMetadata={gkeMetadata} t={t} />;
 };
 
 export default EnhancedRunDetails;

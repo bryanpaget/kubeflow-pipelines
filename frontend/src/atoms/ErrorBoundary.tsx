@@ -33,7 +33,7 @@ export class ErrorBoundary extends React.Component<Readonly<{}>, ErrorBoundarySt
       errorInfo: errorInfo,
     });
   }
-
+  // TODO: add translations for error message and investigate feasibility of adding translation to error details.
   render() {
     if (this.state.errorInfo) {
       // Error path

@@ -32,7 +32,10 @@ import {
   NamespaceContext,
   NamespaceContextProvider,
 } from './lib/KubeflowClient';
+
 // import { ReactQueryDevtools } from 'react-query/devtools';
+
+import './i18n';
 
 // TODO: license headers
 
@@ -75,3 +78,15 @@ ReactDOM.render(
   ),
   document.getElementById('root'),
 );
+
+  ReactDOM.render(
+    KFP_FLAGS.DEPLOYMENT === Deployments.KUBEFLOW ? (
+      <NamespaceContextProvider>{app}</NamespaceContextProvider>
+    ) : (
+      // Uncomment the following for namespace switch during development.
+      // <NamespaceContext.Provider value='your-namespace'>{app}</NamespaceContext.Provider>
+      <NamespaceContext.Provider value={undefined}>{app}</NamespaceContext.Provider>
+    ),
+    document.getElementById('root'),
+  );
+

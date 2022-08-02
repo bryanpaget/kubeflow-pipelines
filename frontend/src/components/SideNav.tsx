@@ -1,6 +1,9 @@
 /*
  * Copyright 2018 The Kubeflow Authors
  *
+ /*
+ * Copyright 2018 Google LLC
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -39,6 +42,8 @@ import { LocalStorage, LocalStorageKey } from '../lib/LocalStorage';
 import { logger } from '../lib/Utils';
 import { GkeMetadataContext, GkeMetadata } from 'src/lib/GkeMetadata';
 import { Alarm } from '@material-ui/icons';
+import { TFunction } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 export const tailwindcss = {
   sideNavItem: 'flex flex-row flex-shrink-0',
@@ -194,6 +199,7 @@ interface SideNavProps extends RouterProps {
 
 interface SideNavInternalProps extends SideNavProps {
   gkeMetadata: GkeMetadata;
+  t: TFunction;
 }
 
 interface SideNavState {
@@ -254,6 +260,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
 
   public render(): JSX.Element | null {
     const page = this.props.page;
+    const { t } = this.props;
     const { collapsed, displayBuildInfo } = this.state;
     const { gkeMetadata } = this.props;
     const iconColor = {
@@ -285,7 +292,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
                 )}
               />
               <Tooltip
-                title={'Getting Started'}
+                title={t('common:gettingStarted')}
                 enterDelay={300}
                 placement={'right-start'}
                 disableFocusListener={!collapsed}
@@ -303,7 +310,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
                     <div className={tailwindcss.sideNavItem}>
                       <DescriptionIcon style={{ width: 20, height: 20 }} />
                       <span className={classes(collapsed && css.collapsedLabel, css.label)}>
-                        Getting Started
+                        {t('common:gettingStarted')}
                       </span>
                     </div>
                   </Button>
@@ -318,7 +325,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
             )}
           />
           <Tooltip
-            title={'Pipeline List'}
+            title={t('common:pipelineList')}
             enterDelay={300}
             placement={'right-start'}
             disableFocusListener={!collapsed}
@@ -340,7 +347,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
                     }
                   />
                   <span className={classes(collapsed && css.collapsedLabel, css.label)}>
-                    Pipelines
+                    {t('common:pipelines')}
                   </span>
                 </div>
               </Button>
@@ -353,7 +360,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
             )}
           />
           <Tooltip
-            title={'Experiment List'}
+            title={t('common:experimentList')}
             enterDelay={300}
             placement={'right-start'}
             disableFocusListener={!collapsed}
@@ -375,7 +382,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
                     }
                   />
                   <span className={classes(collapsed && css.collapsedLabel, css.label)}>
-                    Experiments
+                    {t('common:experiments')}
                   </span>
                 </div>
               </Button>
@@ -388,7 +395,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
             )}
           />
           <Tooltip
-            title={'Runs List'}
+            title={t('common:runsList')}
             enterDelay={300}
             placement={'right-start'}
             disableFocusListener={!collapsed}
@@ -405,7 +412,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
               >
                 <div className={tailwindcss.sideNavItem}>
                   <DirectionsRun />
-                  <span className={classes(collapsed && css.collapsedLabel, css.label)}>Runs</span>
+                  <span className={classes(collapsed && css.collapsedLabel, css.label)}>{t('common:runs')}</span>
                 </div>
               </Button>
             </Link>
@@ -417,7 +424,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
             )}
           />
           <Tooltip
-            title={'Recurring Runs List'}
+            title={t('common:RecurringRunsList')}
             enterDelay={300}
             placement={'right-start'}
             disableFocusListener={!collapsed}
@@ -439,7 +446,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
                 <div className={tailwindcss.sideNavItem}>
                   <Alarm />
                   <span className={classes(collapsed && css.collapsedLabel, css.label)}>
-                    Recurring Runs
+                    {t('common:RecurringRuns')}
                   </span>
                 </div>
               </Button>
@@ -452,7 +459,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
             )}
           />
           <Tooltip
-            title={'Artifacts List'}
+            title={t('common:artifactsList')}
             enterDelay={300}
             placement={'right-start'}
             disableFocusListener={!collapsed}
@@ -470,7 +477,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
                 <div className={tailwindcss.sideNavItem}>
                   <ArtifactsIcon />
                   <span className={classes(collapsed && css.collapsedLabel, css.label)}>
-                    Artifacts
+                    {t('common:artifacts')}
                   </span>
                 </div>
               </Button>
@@ -483,7 +490,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
             )}
           />
           <Tooltip
-            title={'Executions List'}
+            title={t('common:executionsList')}
             enterDelay={300}
             placement={'right-start'}
             disableFocusListener={!collapsed}
@@ -501,7 +508,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
                 <div className={tailwindcss.sideNavItem}>
                   <ExecutionsIcon />
                   <span className={classes(collapsed && css.collapsedLabel, css.label)}>
-                    Executions
+                    {t('common:executions')}
                   </span>
                 </div>
               </Button>
@@ -509,7 +516,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
           </Tooltip>
           {this.state.jupyterHubAvailable && (
             <Tooltip
-              title={'Open Jupyter Notebook'}
+              title={t('common:openJupyterNotebook')}
               enterDelay={300}
               placement={'right-start'}
               disableFocusListener={!collapsed}
@@ -527,7 +534,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
                   <div className={tailwindcss.sideNavItem}>
                     <JupyterhubIcon style={{ height: 20, width: 20 }} />
                     <span className={classes(collapsed && css.collapsedLabel, css.label)}>
-                      Notebooks
+                      {t('common:notebooks')}
                     </span>
                     <OpenInNewIcon className={css.openInNewTabIcon} />
                   </div>
@@ -537,17 +544,21 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
           )}
           <hr className={classes(css.separator, collapsed && css.collapsedSeparator)} />
           <ExternalUri
-            title={'Documentation'}
+            title={t('common:documentation')}
             to={ExternalLinks.DOCUMENTATION}
             collapsed={collapsed}
             icon={className => <DescriptionIcon className={className} />}
           />
           <ExternalUri
-            title={'Github Repo'}
+            title={t('common:githubRepo')}
             to={ExternalLinks.GITHUB}
             collapsed={collapsed}
             icon={className => (
-              <img src={GitHubIcon} className={classes(className, css.iconImage)} alt='Github' />
+              <img
+                src={GitHubIcon}
+                className={classes(className, css.iconImage)}
+                alt={t('common:github')}
+              />
             )}
           />
           <hr className={classes(css.separator, collapsed && css.collapsedSeparator)} />
@@ -561,12 +572,14 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
         <div className={collapsed ? css.infoHidden : css.infoVisible}>
           {gkeMetadata.clusterName && gkeMetadata.projectId && (
             <Tooltip
-              title={`Cluster name: ${gkeMetadata.clusterName}, Project ID: ${gkeMetadata.projectId}`}
+              title={`${t('common:clusterName')}: ${gkeMetadata.clusterName}, ${t(
+                'common:projectId',
+              )}: ${gkeMetadata.projectId}`}
               enterDelay={300}
               placement='top-start'
             >
               <div className={css.envMetadata}>
-                <span>Cluster name: </span>
+                <span>{t('common:clusterName')}: </span>
                 <a
                   href={`https://console.cloud.google.com/kubernetes/list?project=${gkeMetadata.projectId}&filter=name:${gkeMetadata.clusterName}`}
                   className={classes(css.link, commonCss.unstyled)}
@@ -580,12 +593,14 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
           )}
           {displayBuildInfo && (
             <Tooltip
-              title={`Build date: ${displayBuildInfo.date}, Commit hash: ${displayBuildInfo.commitHash}`}
+              title={`${t('common:buildDate')}: ${displayBuildInfo.date}, ${t(
+                'common:commitHash',
+              )}: ${displayBuildInfo.commitHash}`}
               enterDelay={300}
               placement={'top-start'}
             >
               <div className={css.envMetadata}>
-                <span>Version: </span>
+                <span>{t('common:version')}: </span>
                 <a
                   href={displayBuildInfo.commitUrl}
                   className={classes(css.link, commonCss.unstyled)}
@@ -597,7 +612,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
               </div>
             </Tooltip>
           )}
-          <Tooltip title='Report an Issue' enterDelay={300} placement={'top-start'}>
+          <Tooltip title={t('common:reportIssue')} enterDelay={300} placement={'top-start'}>
             <div className={css.envMetadata}>
               <a
                 href={ExternalLinks.GITHUB_ISSUE}
@@ -605,7 +620,7 @@ export class SideNav extends React.Component<SideNavInternalProps, SideNavState>
                 rel='noopener'
                 target='_blank'
               >
-                Report an Issue
+                {t('common:reportIssue')}
               </a>
             </div>
           </Tooltip>
@@ -699,6 +714,7 @@ const ExternalUri: React.FC<ExternalUriProps> = ({ title, to, collapsed, icon })
 
 const EnhancedSideNav: React.FC<SideNavProps> = props => {
   const gkeMetadata = React.useContext(GkeMetadataContext);
-  return <SideNav {...props} gkeMetadata={gkeMetadata} />;
+  const { t } = useTranslation('common');
+  return <SideNav t={t} {...props} gkeMetadata={gkeMetadata} />;
 };
 export default EnhancedSideNav;

@@ -1,11 +1,14 @@
-FROM google/cloud-sdk:alpine
+FROM google/cloud-sdk:alpine3.14.1
 
-RUN apk add --update \
+RUN apk upgrade --update-cache --available && \
+    apk add --update \
     curl \
     which \
     jq \
     bash \
-    openssl
+    openssl \
+    libcrypto1.1>1.1.1l-r0 \
+    libssl1.1>1.1.1l-r0
 
 RUN gcloud components install kubectl
 

@@ -20,13 +20,24 @@ import { RoutePage } from '../components/Router';
 import { ButtonKeys } from '../lib/Buttons';
 import { AllRecurringRunsList } from './AllRecurringRunsList';
 import { PageProps } from './Page';
+import TestUtils from '../TestUtils';
+import { fireEvent, render } from '@testing-library/react';
+import { TFunction } from 'i18next';
+
+jest.mock('react-i18next', () => ({
+  // this mock makes sure any components using the translate HoC receive the t function as a prop
+  withTranslation: () => (Component: { defaultProps: any }) => {
+    Component.defaultProps = { ...Component.defaultProps, t: () => '' };
+    return Component;
+  },
+}));
 
 describe('AllRecurringRunsList', () => {
   const updateBannerSpy = jest.fn();
   let _toolbarProps: any = { actions: {}, breadcrumbs: [], pageTitle: '' };
   const updateToolbarSpy = jest.fn(toolbarProps => (_toolbarProps = toolbarProps));
   const historyPushSpy = jest.fn();
-
+  let t: TFunction = (key: string) => key;
   let tree: ShallowWrapper;
 
   function generateProps(): PageProps {
@@ -39,6 +50,7 @@ describe('AllRecurringRunsList', () => {
       updateDialog: jest.fn(),
       updateSnackbar: jest.fn(),
       updateToolbar: updateToolbarSpy,
+      t: t,
     };
     _toolbarProps = new AllRecurringRunsList(props).getInitialToolbarState();
     return Object.assign(props, {
@@ -82,6 +94,7 @@ describe('AllRecurringRunsList', () => {
           onSelectionChange={[Function]}
           refreshCount={0}
           selectedIds={Array []}
+          t={[Function]}
           toolbarProps={
             Object {
               "actions": Object {
@@ -94,18 +107,19 @@ describe('AllRecurringRunsList', () => {
                   "style": Object {
                     "minWidth": 130,
                   },
-                  "title": "Create run",
-                  "tooltip": "Create a new run",
+                  "title": "common:createRun",
+                  "tooltip": "common:createNewRun",
                 },
                 "refresh": Object {
                   "action": [Function],
                   "id": "refreshBtn",
-                  "title": "Refresh",
-                  "tooltip": "Refresh the list",
+                  "title": "common:refresh",
+                  "tooltip": "common:refreshList",
                 },
               },
               "breadcrumbs": Array [],
-              "pageTitle": "Recurring Runs",
+              "pageTitle": "RecurringRuns",
+              "t": [Function],
             }
           }
           updateBanner={[MockFunction]}
@@ -125,7 +139,7 @@ describe('AllRecurringRunsList', () => {
   it('removes error banner on unmount', () => {
     shallowMountComponent();
     tree.unmount();
-    expect(updateBannerSpy).toHaveBeenCalledWith({});
+    expect(updateBannerSpy).toHaveBeenCalledWith({t});
   });
 
   // TODO: We want to test that clicking the refresh button in AllRecurringRunsList calls the

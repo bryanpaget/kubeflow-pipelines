@@ -22,35 +22,39 @@ import { Workflow } from 'third_party/argo-ui/argo_template';
 import { Execution } from 'src/third_party/mlmd/generated/ml_metadata/proto/metadata_store_pb';
 import { KfpExecutionProperties } from 'src/mlmd/MlmdUtils';
 import { stringValue } from 'src/mlmd/TestUtils';
+import { TFunction } from 'i18next';
 
 describe('WorkflowParser', () => {
+  let t: TFunction = (key: string) => key;
   describe('createRuntimeGraph', () => {
     it('handles an undefined workflow', () => {
-      const g = WorkflowParser.createRuntimeGraph(undefined as any);
+      const g = WorkflowParser.createRuntimeGraph(t, undefined as any);
       expect(g.nodes()).toEqual([]);
       expect(g.edges()).toEqual([]);
     });
 
     it('handles an empty workflow', () => {
-      const g = WorkflowParser.createRuntimeGraph({} as any);
+      const g = WorkflowParser.createRuntimeGraph(t, {} as any);
       expect(g.nodes()).toEqual([]);
       expect(g.edges()).toEqual([]);
     });
 
     it('handles a workflow without nodes', () => {
-      const g = WorkflowParser.createRuntimeGraph({ status: {} } as any);
+      const g = WorkflowParser.createRuntimeGraph(t, { status: {} } as any);
       expect(g.nodes()).toEqual([]);
       expect(g.edges()).toEqual([]);
     });
 
     it('handles a workflow without a metadata', () => {
-      const g = WorkflowParser.createRuntimeGraph({ status: { nodes: [{ key: 'value' }] } } as any);
+      const g = WorkflowParser.createRuntimeGraph(t, {
+        status: { nodes: [{ key: 'value' }] },
+      } as any);
       expect(g.nodes()).toEqual([]);
       expect(g.edges()).toEqual([]);
     });
 
     it('handles a workflow without a name', () => {
-      const g = WorkflowParser.createRuntimeGraph({
+      const g = WorkflowParser.createRuntimeGraph(t, {
         metadata: {},
         status: { nodes: [{ key: 'value' }] },
       } as any);
@@ -81,7 +85,7 @@ describe('WorkflowParser', () => {
           },
         },
       };
-      const g = WorkflowParser.createRuntimeGraph(workflow as any);
+      const g = WorkflowParser.createRuntimeGraph(t, workflow as any);
       expect(g.nodes()).toEqual(['node1', 'node2']);
       expect(g.edges()).toEqual([]);
     });
@@ -116,7 +120,7 @@ describe('WorkflowParser', () => {
           },
         },
       };
-      const g = WorkflowParser.createRuntimeGraph(workflow as any);
+      const g = WorkflowParser.createRuntimeGraph(t, workflow as any);
       expect(g.nodes()).toEqual(['node1', 'node2']);
       expect(g.edges()).toEqual([{ v: 'node1', w: 'node2' }]);
     });
@@ -221,7 +225,7 @@ describe('WorkflowParser', () => {
           },
         },
       };
-      const g = WorkflowParser.createRuntimeGraph(workflow as any);
+      const g = WorkflowParser.createRuntimeGraph(t, workflow as any);
       expect(g.nodes()).toEqual([
         'finishedNode',
         'pendingNode',
@@ -264,7 +268,7 @@ describe('WorkflowParser', () => {
           },
         },
       };
-      const g = WorkflowParser.createRuntimeGraph(workflow as any);
+      const g = WorkflowParser.createRuntimeGraph(t, workflow as any);
 
       const runningNode = g.node('runningNode');
       expect(runningNode.height).toEqual(Constants.NODE_HEIGHT);
@@ -302,7 +306,7 @@ describe('WorkflowParser', () => {
           },
         },
       };
-      const g = WorkflowParser.createRuntimeGraph(workflow as any);
+      const g = WorkflowParser.createRuntimeGraph(t, workflow as any);
 
       g.edges()
         .map(edgeInfo => g.edge(edgeInfo))
@@ -344,7 +348,7 @@ describe('WorkflowParser', () => {
           },
         },
       };
-      const g = WorkflowParser.createRuntimeGraph(workflow as any);
+      const g = WorkflowParser.createRuntimeGraph(t, workflow as any);
       expect(g.nodes()).toEqual(['node1', 'node3']);
       expect(g.edges()).toEqual([{ v: 'node1', w: 'node3' }]);
     });
@@ -378,7 +382,7 @@ describe('WorkflowParser', () => {
           },
         },
       };
-      const g = WorkflowParser.createRuntimeGraph(workflow as any);
+      const g = WorkflowParser.createRuntimeGraph(t, workflow as any);
       expect(g.nodes()).toEqual(['node1', 'node3']);
       expect(g.edges()).toEqual([{ v: 'node1', w: 'node3' }]);
     });
@@ -405,7 +409,7 @@ describe('WorkflowParser', () => {
           },
         },
       };
-      const g = WorkflowParser.createRuntimeGraph(workflow as any);
+      const g = WorkflowParser.createRuntimeGraph(t, workflow as any);
       expect(g.nodes()).toEqual(['exitNode', 'node1']);
       expect(g.node('node1').label).toEqual('node1');
       expect(g.node('exitNode').label).toEqual('onExit - clean');
@@ -445,14 +449,14 @@ describe('WorkflowParser', () => {
       workflow1.spec.templates[0].metadata.annotations = {
         'pipelines.kubeflow.org/task_display_name': 'Customized name',
       };
-      const g = WorkflowParser.createRuntimeGraph(workflow1 as any);
+      const g = WorkflowParser.createRuntimeGraph(t, workflow1 as any);
       expect(g.node('node1').label).toEqual('Customized name');
 
       const workflow2 = singleNodeWorkflow();
       workflow2.spec.templates[0].metadata.annotations = {
         'pipelines.kubeflow.org/component_spec': '{"name":"Component Name"}',
       };
-      const g2 = WorkflowParser.createRuntimeGraph(workflow2 as any);
+      const g2 = WorkflowParser.createRuntimeGraph(t, workflow2 as any);
       expect(g2.node('node1').label).toEqual('Component Name');
     });
   });

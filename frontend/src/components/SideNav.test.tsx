@@ -22,7 +22,8 @@ import { Apis } from '../lib/Apis';
 import { LocalStorage } from '../lib/LocalStorage';
 import TestUtils, { diffHTML } from '../TestUtils';
 import { RoutePage } from './Router';
-import EnhancedSideNav, { css, SideNav } from './SideNav';
+import { css, SideNav } from './SideNav';
+import EnhancedSideNav from './SideNav';
 
 const wideWidth = 1000;
 const narrowWidth = 200;
@@ -33,7 +34,6 @@ const defaultProps = { ...routerProps, gkeMetadata: {} };
 
 describe('SideNav', () => {
   let tree: ReactWrapper | ShallowWrapper;
-
   const consoleErrorSpy = jest.spyOn(console, 'error');
   const buildInfoSpy = jest.spyOn(Apis, 'getBuildInfo');
   const checkHubSpy = jest.spyOn(Apis, 'isJupyterHubAvailable');
@@ -72,69 +72,83 @@ describe('SideNav', () => {
   it('renders expanded state', () => {
     localStorageHasKeySpy.mockImplementationOnce(() => false);
     (window as any).innerWidth = wideWidth;
-    tree = shallow(<SideNav page={RoutePage.PIPELINES} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.PIPELINES} {...defaultProps} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('renders collapsed state', () => {
     localStorageHasKeySpy.mockImplementationOnce(() => false);
     (window as any).innerWidth = narrowWidth;
-    tree = shallow(<SideNav page={RoutePage.PIPELINES} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.PIPELINES} {...defaultProps} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('renders Pipelines as active page', () => {
-    tree = shallow(<SideNav page={RoutePage.PIPELINES} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.PIPELINES} {...defaultProps} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('renders Pipelines as active when on PipelineDetails page', () => {
-    tree = shallow(<SideNav page={RoutePage.PIPELINE_DETAILS} {...defaultProps} />);
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.PIPELINE_DETAILS} {...defaultProps} />,
+    );
     expect(tree).toMatchSnapshot();
   });
 
   it('renders experiments as active page', () => {
-    tree = shallow(<SideNav page={RoutePage.EXPERIMENTS} {...defaultProps} />);
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.EXPERIMENTS} {...defaultProps} />,
+    );
     expect(tree).toMatchSnapshot();
   });
 
   it('renders experiments as active when on ExperimentDetails page', () => {
-    tree = shallow(<SideNav page={RoutePage.EXPERIMENT_DETAILS} {...defaultProps} />);
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.EXPERIMENT_DETAILS} {...defaultProps} />,
+    );
     expect(tree).toMatchSnapshot();
   });
 
   it('renders experiments as active page when on NewExperiment page', () => {
-    tree = shallow(<SideNav page={RoutePage.NEW_EXPERIMENT} {...defaultProps} />);
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.NEW_EXPERIMENT} {...defaultProps} />,
+    );
     expect(tree).toMatchSnapshot();
   });
 
   it('renders experiments as active page when on Compare page', () => {
-    tree = shallow(<SideNav page={RoutePage.COMPARE} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.COMPARE} {...defaultProps} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('renders experiments as active page when on AllRuns page', () => {
-    tree = shallow(<SideNav page={RoutePage.RUNS} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.RUNS} {...defaultProps} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('renders experiments as active page when on RunDetails page', () => {
-    tree = shallow(<SideNav page={RoutePage.RUN_DETAILS} {...defaultProps} />);
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.RUN_DETAILS} {...defaultProps} />,
+    );
     expect(tree).toMatchSnapshot();
   });
 
   it('renders experiments as active page when on RecurringRunDetails page', () => {
-    tree = shallow(<SideNav page={RoutePage.RECURRING_RUN_DETAILS} {...defaultProps} />);
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.RECURRING_RUN_DETAILS} {...defaultProps} />,
+    );
     expect(tree).toMatchSnapshot();
   });
 
   it('renders experiments as active page when on NewRun page', () => {
-    tree = shallow(<SideNav page={RoutePage.NEW_RUN} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.NEW_RUN} {...defaultProps} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('renders recurring runs as active page', () => {
-    tree = shallow(<SideNav page={RoutePage.RECURRING_RUNS} {...defaultProps} />);
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.RECURRING_RUNS} {...defaultProps} />,
+    );
     expect(tree).toMatchInlineSnapshot(`
       <div
         className="root flexColumn noShrink"
@@ -156,7 +170,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Pipeline List"
+            title="common:pipelineList"
           >
             <Link
               className="unstyled"
@@ -176,7 +190,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Pipelines
+                  common:pipelines
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -191,7 +205,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Experiment List"
+            title="common:experimentList"
           >
             <Link
               className="unstyled"
@@ -211,7 +225,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Experiments
+                  common:experiments
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -226,7 +240,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Runs List"
+            title="common:runsList"
           >
             <Link
               className="unstyled"
@@ -244,7 +258,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Runs
+                  common:runs
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -259,7 +273,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Recurring Runs List"
+            title="common:RecurringRunsList"
           >
             <Link
               className="unstyled"
@@ -277,7 +291,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Recurring Runs
+                  common:RecurringRuns
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -292,7 +306,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Artifacts List"
+            title="common:artifactsList"
           >
             <Link
               className="unstyled"
@@ -310,7 +324,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Artifacts
+                  common:artifacts
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -325,7 +339,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Executions List"
+            title="common:executionsList"
           >
             <Link
               className="unstyled"
@@ -343,7 +357,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Executions
+                  common:executions
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -355,13 +369,13 @@ describe('SideNav', () => {
           <ExternalUri
             collapsed={false}
             icon={[Function]}
-            title="Documentation"
+            title="common:documentation"
             to="https://www.kubeflow.org/docs/pipelines/"
           />
           <ExternalUri
             collapsed={false}
             icon={[Function]}
-            title="Github Repo"
+            title="common:githubRepo"
             to="https://github.com/kubeflow/pipelines"
           />
           <hr
@@ -380,7 +394,7 @@ describe('SideNav', () => {
           <WithStyles(Tooltip)
             enterDelay={300}
             placement="top-start"
-            title="Report an Issue"
+            title="common:reportIssue"
           >
             <div
               className="envMetadata"
@@ -391,7 +405,7 @@ describe('SideNav', () => {
                 rel="noopener"
                 target="_blank"
               >
-                Report an Issue
+                common:reportIssue
               </a>
             </div>
           </WithStyles(Tooltip)>
@@ -401,7 +415,9 @@ describe('SideNav', () => {
   });
 
   it('renders jobs as active page when on JobDetails page', () => {
-    tree = shallow(<SideNav page={RoutePage.RECURRING_RUN_DETAILS} {...defaultProps} />);
+    tree = shallow(
+      <SideNav t={(key: any) => key} page={RoutePage.RECURRING_RUN_DETAILS} {...defaultProps} />,
+    );
     expect(tree).toMatchInlineSnapshot(`
       <div
         className="root flexColumn noShrink"
@@ -423,7 +439,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Pipeline List"
+            title="common:pipelineList"
           >
             <Link
               className="unstyled"
@@ -443,7 +459,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Pipelines
+                  common:pipelines
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -458,7 +474,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Experiment List"
+            title="common:experimentList"
           >
             <Link
               className="unstyled"
@@ -478,7 +494,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Experiments
+                  common:experiments
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -493,7 +509,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Runs List"
+            title="common:runsList"
           >
             <Link
               className="unstyled"
@@ -511,7 +527,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Runs
+                  common:runs
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -526,7 +542,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Recurring Runs List"
+            title="common:RecurringRunsList"
           >
             <Link
               className="unstyled"
@@ -544,7 +560,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Recurring Runs
+                  common:RecurringRuns
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -559,7 +575,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Artifacts List"
+            title="common:artifactsList"
           >
             <Link
               className="unstyled"
@@ -577,7 +593,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Artifacts
+                  common:artifacts
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -592,7 +608,7 @@ describe('SideNav', () => {
             disableTouchListener={true}
             enterDelay={300}
             placement="right-start"
-            title="Executions List"
+            title="common:executionsList"
           >
             <Link
               className="unstyled"
@@ -610,7 +626,7 @@ describe('SideNav', () => {
                   <span
                     className="label"
                   >
-                    Executions
+                  common:executions
                   </span>
                 </div>
               </WithStyles(Button)>
@@ -622,13 +638,13 @@ describe('SideNav', () => {
           <ExternalUri
             collapsed={false}
             icon={[Function]}
-            title="Documentation"
+            title="common:documentation"
             to="https://www.kubeflow.org/docs/pipelines/"
           />
           <ExternalUri
             collapsed={false}
             icon={[Function]}
-            title="Github Repo"
+            title="common:githubRepo"
             to="https://github.com/kubeflow/pipelines"
           />
           <hr
@@ -647,7 +663,7 @@ describe('SideNav', () => {
           <WithStyles(Tooltip)
             enterDelay={300}
             placement="top-start"
-            title="Report an Issue"
+            title="common:reportIssue"
           >
             <div
               className="envMetadata"
@@ -658,7 +674,7 @@ describe('SideNav', () => {
                 rel="noopener"
                 target="_blank"
               >
-                Report an Issue
+                common:reportIssue
               </a>
             </div>
           </WithStyles(Tooltip)>
@@ -668,7 +684,7 @@ describe('SideNav', () => {
   });
 
   it('show jupyterhub link if accessible', () => {
-    tree = shallow(<SideNav page={RoutePage.COMPARE} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.COMPARE} {...defaultProps} />);
     tree.setState({ jupyterHubAvailable: true });
     expect(tree).toMatchSnapshot();
   });
@@ -678,7 +694,7 @@ describe('SideNav', () => {
     localStorageHasKeySpy.mockImplementationOnce(() => true);
 
     (window as any).innerWidth = wideWidth;
-    tree = shallow(<SideNav page={RoutePage.COMPARE} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.COMPARE} {...defaultProps} />);
     expect(isCollapsed(tree)).toBe(true);
   });
 
@@ -686,7 +702,7 @@ describe('SideNav', () => {
     localStorageIsCollapsedSpy.mockImplementationOnce(() => false);
     localStorageHasKeySpy.mockImplementationOnce(() => true);
 
-    tree = shallow(<SideNav page={RoutePage.COMPARE} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.COMPARE} {...defaultProps} />);
     expect(isCollapsed(tree)).toBe(false);
   });
 
@@ -695,7 +711,7 @@ describe('SideNav', () => {
     localStorageHasKeySpy.mockImplementationOnce(() => false);
 
     (window as any).innerWidth = narrowWidth;
-    tree = shallow(<SideNav page={RoutePage.COMPARE} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.COMPARE} {...defaultProps} />);
     expect(isCollapsed(tree)).toBe(true);
   });
 
@@ -704,7 +720,7 @@ describe('SideNav', () => {
     localStorageHasKeySpy.mockImplementationOnce(() => false);
 
     (window as any).innerWidth = wideWidth;
-    tree = shallow(<SideNav page={RoutePage.COMPARE} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.COMPARE} {...defaultProps} />);
     expect(isCollapsed(tree)).toBe(false);
   });
 
@@ -713,7 +729,7 @@ describe('SideNav', () => {
     localStorageHasKeySpy.mockImplementationOnce(() => false);
 
     (window as any).innerWidth = wideWidth;
-    tree = shallow(<SideNav page={RoutePage.COMPARE} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.COMPARE} {...defaultProps} />);
     expect(isCollapsed(tree)).toBe(false);
 
     (window as any).innerWidth = narrowWidth;
@@ -727,7 +743,7 @@ describe('SideNav', () => {
     localStorageHasKeySpy.mockImplementationOnce(() => false);
 
     (window as any).innerWidth = narrowWidth;
-    tree = shallow(<SideNav page={RoutePage.COMPARE} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.COMPARE} {...defaultProps} />);
     expect(isCollapsed(tree)).toBe(true);
 
     (window as any).innerWidth = wideWidth;
@@ -742,7 +758,7 @@ describe('SideNav', () => {
     const spy = jest.spyOn(LocalStorage, 'saveNavbarCollapsed');
 
     (window as any).innerWidth = narrowWidth;
-    tree = shallow(<SideNav page={RoutePage.COMPARE} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.COMPARE} {...defaultProps} />);
     expect(isCollapsed(tree)).toBe(true);
 
     tree.find('WithStyles(IconButton)').simulate('click');
@@ -754,7 +770,7 @@ describe('SideNav', () => {
     localStorageHasKeySpy.mockImplementationOnce(() => true);
 
     (window as any).innerWidth = wideWidth;
-    tree = shallow(<SideNav page={RoutePage.COMPARE} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.COMPARE} {...defaultProps} />);
     expect(isCollapsed(tree)).toBe(false);
 
     (window as any).innerWidth = narrowWidth;
@@ -774,7 +790,7 @@ describe('SideNav', () => {
     };
     buildInfoSpy.mockImplementationOnce(() => buildInfo);
 
-    tree = shallow(<SideNav page={RoutePage.PIPELINES} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.PIPELINES} {...defaultProps} />);
     await TestUtils.flushPromises();
     expect(tree).toMatchSnapshot();
 
@@ -824,9 +840,9 @@ describe('SideNav', () => {
           <div class="infoVisible">
       +     <div
       +       class="envMetadata"
-      +       title="Cluster name: some-cluster-name, Project ID: some-project-id"
+      +       title="common:clusterName: some-cluster-name, common:projectId: some-project-id"
       +     >
-      +       <span>Cluster name: </span
+      +       <span>common:clusterName: </span
       +       ><a
       +         href="https://console.cloud.google.com/kubernetes/list?project=some-project-id&amp;filter=name:some-cluster-name"
       +         class="link unstyled"
@@ -835,14 +851,13 @@ describe('SideNav', () => {
       +         >some-cluster-name</a
       +       >
       +     </div>
-            <div class="envMetadata" title="Report an Issue">
+            <div class="envMetadata" title="common:reportIssue">
               <a
                 href="https://github.com/kubeflow/pipelines/issues/new/choose"
                 class="link unstyled"
                 rel="noopener"
     `);
   });
-
   it('displays the frontend tag name if the api server hash is not returned', async () => {
     const buildInfo = {
       apiServerReady: true,
@@ -853,7 +868,7 @@ describe('SideNav', () => {
     };
     buildInfoSpy.mockImplementationOnce(() => buildInfo);
 
-    tree = shallow(<SideNav page={RoutePage.PIPELINES} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.PIPELINES} {...defaultProps} />);
     await TestUtils.flushPromises();
 
     expect(tree.state('displayBuildInfo')).toEqual(
@@ -873,7 +888,7 @@ describe('SideNav', () => {
     };
     buildInfoSpy.mockImplementationOnce(() => buildInfo);
 
-    tree = shallow(<SideNav page={RoutePage.PIPELINES} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.PIPELINES} {...defaultProps} />);
     await TestUtils.flushPromises();
 
     expect(tree.state('displayBuildInfo')).toEqual(
@@ -893,7 +908,7 @@ describe('SideNav', () => {
     };
     buildInfoSpy.mockImplementationOnce(() => buildInfo);
 
-    tree = shallow(<SideNav page={RoutePage.PIPELINES} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.PIPELINES} {...defaultProps} />);
     await TestUtils.flushPromises();
 
     expect(tree.state('displayBuildInfo')).toEqual(
@@ -913,7 +928,7 @@ describe('SideNav', () => {
     };
     buildInfoSpy.mockImplementationOnce(() => buildInfo);
 
-    tree = shallow(<SideNav page={RoutePage.PIPELINES} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.PIPELINES} {...defaultProps} />);
     await TestUtils.flushPromises();
 
     expect(tree.state('displayBuildInfo')).toEqual(
@@ -932,7 +947,7 @@ describe('SideNav', () => {
     };
     buildInfoSpy.mockImplementationOnce(() => buildInfo);
 
-    tree = shallow(<SideNav page={RoutePage.PIPELINES} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.PIPELINES} {...defaultProps} />);
     await TestUtils.flushPromises();
 
     expect(tree.state('displayBuildInfo')).toEqual(
@@ -945,7 +960,7 @@ describe('SideNav', () => {
   it('logs an error if the call getBuildInfo fails', async () => {
     TestUtils.makeErrorResponseOnce(buildInfoSpy, 'Uh oh!');
 
-    tree = shallow(<SideNav page={RoutePage.PIPELINES} {...defaultProps} />);
+    tree = shallow(<SideNav t={(key: any) => key} page={RoutePage.PIPELINES} {...defaultProps} />);
     await TestUtils.flushPromises();
 
     expect(tree.state('displayBuildInfo')).toBeUndefined();

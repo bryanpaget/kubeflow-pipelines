@@ -23,6 +23,16 @@ import { ApiJob, ApiResourceType } from '../apis/job';
 import { Apis, JobSortKeys, ListRequest } from '../lib/Apis';
 import { ReactWrapper, ShallowWrapper, shallow } from 'enzyme';
 import { range } from 'lodash';
+import { TFunction } from 'i18next';
+
+let mockedValue = '';
+jest.mock('react-i18next', () => ({
+  // this mock makes sure any components using the translate HoC receive the t function as a prop
+  withTranslation: () => (Component: { defaultProps: any }) => {
+    Component.defaultProps = { ...Component.defaultProps, t: () => mockedValue };
+    return Component;
+  },
+}));
 
 class RecurringRunListTest extends RecurringRunList {
   public _loadRecurringRuns(request: ListRequest): Promise<string> {
@@ -32,7 +42,7 @@ class RecurringRunListTest extends RecurringRunList {
 
 describe('RecurringRunList', () => {
   let tree: ShallowWrapper | ReactWrapper;
-
+  let identiT: TFunction = (key: string) => key;
   const onErrorSpy = jest.fn();
   const listJobsSpy = jest.spyOn(Apis.jobServiceApi, 'listJobs');
   const getJobSpy = jest.spyOn(Apis.jobServiceApi, 'getJob');
@@ -48,6 +58,7 @@ describe('RecurringRunList', () => {
       match: '' as any,
       onError: onErrorSpy,
       refreshCount: 1,
+      t: identiT,
     };
   }
 
@@ -114,36 +125,37 @@ describe('RecurringRunList', () => {
               Object {
                 "customRenderer": [Function],
                 "flex": 1.5,
-                "label": "Recurring Run Name",
+                "label": "RecurringRunName",
                 "sortKey": "name",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Status",
+                "label": "status",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Trigger",
+                "label": "theTrigger",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Experiment",
+                "label": "experiment",
               },
               Object {
                 "flex": 1,
-                "label": "Created at",
+                "label": "createdAt",
                 "sortKey": "created_at",
               },
             ]
           }
-          emptyMessage="No available recurring runs found."
-          filterLabel="Filter recurring runs"
+          emptyMessage="noAvailableRecurringRuns."
+          filterLabel="filterRecurringRuns"
           initialSortColumn="created_at"
           reload={[Function]}
           rows={Array []}
+          t={[Function]}
         />
       </div>
     `);
@@ -171,33 +183,33 @@ describe('RecurringRunList', () => {
               Object {
                 "customRenderer": [Function],
                 "flex": 1.5,
-                "label": "Recurring Run Name",
+                "label": "RecurringRunName",
                 "sortKey": "name",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Status",
+                "label": "status",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Trigger",
+                "label": "theTrigger",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Experiment",
+                "label": "experiment",
               },
               Object {
                 "flex": 1,
-                "label": "Created at",
+                "label": "createdAt",
                 "sortKey": "created_at",
               },
             ]
           }
-          emptyMessage="No available recurring runs found."
-          filterLabel="Filter recurring runs"
+          emptyMessage="noAvailableRecurringRuns."
+          filterLabel="filterRecurringRuns"
           initialSortColumn="created_at"
           reload={[Function]}
           rows={
@@ -215,6 +227,7 @@ describe('RecurringRunList', () => {
               },
             ]
           }
+          t={[Function]}
         />
       </div>
     `);
@@ -252,33 +265,33 @@ describe('RecurringRunList', () => {
               Object {
                 "customRenderer": [Function],
                 "flex": 1.5,
-                "label": "Recurring Run Name",
+                "label": "RecurringRunName",
                 "sortKey": "name",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Status",
+                "label": "status",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Trigger",
+                "label": "theTrigger",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Experiment",
+                "label": "experiment",
               },
               Object {
                 "flex": 1,
-                "label": "Created at",
+                "label": "createdAt",
                 "sortKey": "created_at",
               },
             ]
           }
-          emptyMessage="No available recurring runs found."
-          filterLabel="Filter recurring runs"
+          emptyMessage="noAvailableRecurringRuns."
+          filterLabel="filterRecurringRuns"
           initialSortColumn="created_at"
           reload={[Function]}
           rows={
@@ -340,6 +353,7 @@ describe('RecurringRunList', () => {
               },
             ]
           }
+          t={[Function]}
         />
       </div>
     `);
@@ -422,33 +436,33 @@ describe('RecurringRunList', () => {
               Object {
                 "customRenderer": [Function],
                 "flex": 1.5,
-                "label": "Recurring Run Name",
+                "label": "RecurringRunName",
                 "sortKey": "name",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Status",
+                "label": "status",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Trigger",
+                "label": "theTrigger",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Experiment",
+                "label": "experiment",
               },
               Object {
                 "flex": 1,
-                "label": "Created at",
+                "label": "createdAt",
                 "sortKey": "created_at",
               },
             ]
           }
-          emptyMessage="No available recurring runs found."
-          filterLabel="Filter recurring runs"
+          emptyMessage="noAvailableRecurringRuns."
+          filterLabel="filterRecurringRuns"
           initialSortColumn="created_at"
           reload={[Function]}
           rows={
@@ -466,6 +480,7 @@ describe('RecurringRunList', () => {
               },
             ]
           }
+          t={[Function]}
         />
       </div>
     `);
@@ -487,33 +502,33 @@ describe('RecurringRunList', () => {
               Object {
                 "customRenderer": [Function],
                 "flex": 1.5,
-                "label": "Recurring Run Name",
+                "label": "RecurringRunName",
                 "sortKey": "name",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Status",
+                "label": "status",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Trigger",
+                "label": "theTrigger",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Experiment",
+                "label": "experiment",
               },
               Object {
                 "flex": 1,
-                "label": "Created at",
+                "label": "createdAt",
                 "sortKey": "created_at",
               },
             ]
           }
-          emptyMessage="No available recurring runs found."
-          filterLabel="Filter recurring runs"
+          emptyMessage="noAvailableRecurringRuns."
+          filterLabel="filterRecurringRuns"
           initialSortColumn="created_at"
           reload={[Function]}
           rows={
@@ -535,6 +550,7 @@ describe('RecurringRunList', () => {
               },
             ]
           }
+          t={[Function]}
         />
       </div>
     `);
@@ -556,33 +572,33 @@ describe('RecurringRunList', () => {
               Object {
                 "customRenderer": [Function],
                 "flex": 1.5,
-                "label": "Recurring Run Name",
+                "label": "RecurringRunName",
                 "sortKey": "name",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Status",
+                "label": "status",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Trigger",
+                "label": "theTrigger",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Experiment",
+                "label": "experiment",
               },
               Object {
                 "flex": 1,
-                "label": "Created at",
+                "label": "createdAt",
                 "sortKey": "created_at",
               },
             ]
           }
-          emptyMessage="No available recurring runs found."
-          filterLabel="Filter recurring runs"
+          emptyMessage="noAvailableRecurringRuns."
+          filterLabel="filterRecurringRuns"
           initialSortColumn="created_at"
           reload={[Function]}
           rows={
@@ -604,6 +620,7 @@ describe('RecurringRunList', () => {
               },
             ]
           }
+          t={[Function]}
         />
       </div>
     `);
@@ -630,33 +647,33 @@ describe('RecurringRunList', () => {
               Object {
                 "customRenderer": [Function],
                 "flex": 1.5,
-                "label": "Recurring Run Name",
+                "label": "RecurringRunName",
                 "sortKey": "name",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Status",
+                "label": "status",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Trigger",
+                "label": "theTrigger",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Experiment",
+                "label": "experiment",
               },
               Object {
                 "flex": 1,
-                "label": "Created at",
+                "label": "createdAt",
                 "sortKey": "created_at",
               },
             ]
           }
-          emptyMessage="No available recurring runs found."
-          filterLabel="Filter recurring runs"
+          emptyMessage="noAvailableRecurringRuns."
+          filterLabel="filterRecurringRuns"
           initialSortColumn="created_at"
           reload={[Function]}
           rows={
@@ -677,6 +694,7 @@ describe('RecurringRunList', () => {
               },
             ]
           }
+          t={[Function]}
         />
       </div>
     `);
@@ -704,28 +722,28 @@ describe('RecurringRunList', () => {
               Object {
                 "customRenderer": [Function],
                 "flex": 1.5,
-                "label": "Recurring Run Name",
+                "label": "RecurringRunName",
                 "sortKey": "name",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Status",
+                "label": "status",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Trigger",
+                "label": "theTrigger",
               },
               Object {
                 "flex": 1,
-                "label": "Created at",
+                "label": "createdAt",
                 "sortKey": "created_at",
               },
             ]
           }
-          emptyMessage="No available recurring runs found."
-          filterLabel="Filter recurring runs"
+          emptyMessage="noAvailableRecurringRuns."
+          filterLabel="filterRecurringRuns"
           initialSortColumn="created_at"
           reload={[Function]}
           rows={
@@ -742,6 +760,7 @@ describe('RecurringRunList', () => {
               },
             ]
           }
+          t={[Function]}
         />
       </div>
     `);

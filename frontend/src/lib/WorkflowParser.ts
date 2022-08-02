@@ -33,6 +33,7 @@ import { isS3Endpoint } from './AwsHelper';
 import { Execution } from 'src/third_party/mlmd/generated/ml_metadata/proto/metadata_store_pb';
 import { isV2Pipeline } from './v2/WorkflowUtils';
 import { ExecutionHelpers } from 'src/mlmd/MlmdUtils';
+import { TFunction } from 'i18next';
 
 export enum StorageService {
   GCS = 'gcs',
@@ -51,6 +52,7 @@ export interface StoragePath {
 
 export default class WorkflowParser {
   public static createRuntimeGraph(
+    t: TFunction,
     workflow: Workflow,
     executions: Execution[] | undefined,
   ): dagre.graphlib.Graph {
@@ -106,6 +108,7 @@ export default class WorkflowParser {
       g.setNode(node.id, {
         height: Constants.NODE_HEIGHT,
         icon: statusToIcon(
+          t,
           parseNodePhase(node),
           node.startedAt,
           node.finishedAt,

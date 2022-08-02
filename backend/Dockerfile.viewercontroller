@@ -27,7 +27,10 @@ RUN go-licenses csv /bin/controller > /tmp/licenses.csv && \
     diff /tmp/licenses.csv backend/third_party_licenses/viewer.csv && \
     go-licenses save /tmp/licenses.csv --save_path /tmp/NOTICES
 
-FROM alpine
+FROM alpine:3.14.1
+WORKDIR /src
+COPY --from=builder /src/github.com/kubeflow/pipelines/vendor vendor
+
 WORKDIR /bin
 
 COPY --from=builder /bin/controller /bin/controller

@@ -67,6 +67,10 @@
     "url": "https://github.com/kubeflow/pipelines.git"
   },
   "devDependencies": {
+    "@types/jest": "^28.1.6",
     "standard-version": "^8.0.0"
+  },
+  "dependencies": {
+    "react-redux": "^7.2.2"
   }
 }

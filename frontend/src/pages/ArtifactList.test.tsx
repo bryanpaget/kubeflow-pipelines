@@ -112,6 +112,6 @@ describe('ArtifactList', () => {
     );
     await TestUtils.flushPromises();
 
-    screen.getByText('No artifacts found.');
+    screen.getByText('noArtifactsFound');
   });
 });

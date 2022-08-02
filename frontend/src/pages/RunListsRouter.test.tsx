@@ -25,11 +25,12 @@ import { Apis } from 'src/lib/Apis';
 import * as Utils from '../lib/Utils';
 import { BrowserRouter } from 'react-router-dom';
 import { PredicateOp } from 'src/apis/filter';
+import { TFunction } from 'i18next';
 
 describe('RunListsRouter', () => {
   let historyPushSpy: any;
   let runStorageState = ApiRunStorageState.AVAILABLE;
-
+  let identiT: TFunction = (key: string) => key;
   const onSelectionChangeMock = jest.fn();
   const listRunsSpy = jest.spyOn(Apis.runServiceApi, 'listRuns');
   const getRunSpy = jest.spyOn(Apis.runServiceApi, 'getRun');
@@ -74,6 +75,7 @@ describe('RunListsRouter', () => {
       disableSelection: false,
       hideMetricMetadata: false,
       onError: consoleErrorSpy,
+      t: identiT,
     };
     return runListsRouterProps;
   }

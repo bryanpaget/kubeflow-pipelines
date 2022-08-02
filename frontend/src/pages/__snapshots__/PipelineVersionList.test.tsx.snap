@@ -11,6 +11,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
   match=""
   onError={[MockFunction]}
   pipelineId="pipeline"
+  t={[Function]}
 >
   <div>
     <CustomTable
@@ -29,12 +30,12 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
           },
           Object {
             "flex": 1,
-            "label": "Uploaded on",
+            "label": "",
             "sortKey": "created_at",
           },
         ]
       }
-      emptyMessage="No pipeline versions found."
+      emptyMessage=""
       initialSortColumn="created_at"
       reload={[Function]}
       rows={
@@ -57,6 +58,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
           },
         ]
       }
+      t={[Function]}
     >
       <div
         className="pageOverflowHidden"
@@ -93,7 +95,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
             className="filterBox"
             height={48}
             id="tableFilterBox"
-            label="Filter"
+            label=""
             maxWidth="100%"
             onChange={[Function]}
             value=""
@@ -129,7 +131,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
               }
               className="filterBox"
               id="tableFilterBox"
-              label="Filter"
+              label=""
               onChange={[Function]}
               required={false}
               select={false}
@@ -194,142 +196,6 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                       }
                     }
                   >
-                    <WithStyles(WithFormControlContext(InputLabel))
-                      classes={
-                        Object {
-                          "root": "noMargin",
-                        }
-                      }
-                      htmlFor="tableFilterBox"
-                    >
-                      <WithFormControlContext(InputLabel)
-                        classes={
-                          Object {
-                            "animated": "MuiInputLabel-animated-13",
-                            "disabled": "MuiInputLabel-disabled-7",
-                            "error": "MuiInputLabel-error-8",
-                            "filled": "MuiInputLabel-filled-14",
-                            "focused": "MuiInputLabel-focused-6",
-                            "formControl": "MuiInputLabel-formControl-10",
-                            "marginDense": "MuiInputLabel-marginDense-11",
-                            "outlined": "MuiInputLabel-outlined-15",
-                            "required": "MuiInputLabel-required-9",
-                            "root": "MuiInputLabel-root-5 noMargin",
-                            "shrink": "MuiInputLabel-shrink-12",
-                          }
-                        }
-                        htmlFor="tableFilterBox"
-                      >
-                        <InputLabel
-                          classes={
-                            Object {
-                              "animated": "MuiInputLabel-animated-13",
-                              "disabled": "MuiInputLabel-disabled-7",
-                              "error": "MuiInputLabel-error-8",
-                              "filled": "MuiInputLabel-filled-14",
-                              "focused": "MuiInputLabel-focused-6",
-                              "formControl": "MuiInputLabel-formControl-10",
-                              "marginDense": "MuiInputLabel-marginDense-11",
-                              "outlined": "MuiInputLabel-outlined-15",
-                              "required": "MuiInputLabel-required-9",
-                              "root": "MuiInputLabel-root-5 noMargin",
-                              "shrink": "MuiInputLabel-shrink-12",
-                            }
-                          }
-                          disableAnimation={false}
-                          htmlFor="tableFilterBox"
-                          muiFormControl={
-                            Object {
-                              "adornedStart": true,
-                              "disabled": false,
-                              "error": false,
-                              "filled": false,
-                              "focused": false,
-                              "margin": "none",
-                              "onBlur": [Function],
-                              "onEmpty": [Function],
-                              "onFilled": [Function],
-                              "onFocus": [Function],
-                              "required": false,
-                              "variant": "outlined",
-                            }
-                          }
-                        >
-                          <WithStyles(WithFormControlContext(FormLabel))
-                            className="MuiInputLabel-root-5 noMargin MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12 MuiInputLabel-outlined-15"
-                            classes={
-                              Object {
-                                "disabled": "MuiInputLabel-disabled-7",
-                                "error": "MuiInputLabel-error-8",
-                                "focused": "MuiInputLabel-focused-6",
-                                "required": "MuiInputLabel-required-9",
-                              }
-                            }
-                            data-shrink={true}
-                            htmlFor="tableFilterBox"
-                          >
-                            <WithFormControlContext(FormLabel)
-                              className="MuiInputLabel-root-5 noMargin MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12 MuiInputLabel-outlined-15"
-                              classes={
-                                Object {
-                                  "asterisk": "MuiFormLabel-asterisk-22",
-                                  "disabled": "MuiFormLabel-disabled-18 MuiInputLabel-disabled-7",
-                                  "error": "MuiFormLabel-error-19 MuiInputLabel-error-8",
-                                  "filled": "MuiFormLabel-filled-20",
-                                  "focused": "MuiFormLabel-focused-17 MuiInputLabel-focused-6",
-                                  "required": "MuiFormLabel-required-21 MuiInputLabel-required-9",
-                                  "root": "MuiFormLabel-root-16",
-                                }
-                              }
-                              data-shrink={true}
-                              htmlFor="tableFilterBox"
-                            >
-                              <FormLabel
-                                className="MuiInputLabel-root-5 noMargin MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12 MuiInputLabel-outlined-15"
-                                classes={
-                                  Object {
-                                    "asterisk": "MuiFormLabel-asterisk-22",
-                                    "disabled": "MuiFormLabel-disabled-18 MuiInputLabel-disabled-7",
-                                    "error": "MuiFormLabel-error-19 MuiInputLabel-error-8",
-                                    "filled": "MuiFormLabel-filled-20",
-                                    "focused": "MuiFormLabel-focused-17 MuiInputLabel-focused-6",
-                                    "required": "MuiFormLabel-required-21 MuiInputLabel-required-9",
-                                    "root": "MuiFormLabel-root-16",
-                                  }
-                                }
-                                component="label"
-                                data-shrink={true}
-                                htmlFor="tableFilterBox"
-                                muiFormControl={
-                                  Object {
-                                    "adornedStart": true,
-                                    "disabled": false,
-                                    "error": false,
-                                    "filled": false,
-                                    "focused": false,
-                                    "margin": "none",
-                                    "onBlur": [Function],
-                                    "onEmpty": [Function],
-                                    "onFilled": [Function],
-                                    "onFocus": [Function],
-                                    "required": false,
-                                    "variant": "outlined",
-                                  }
-                                }
-                              >
-                                <label
-                                  className="MuiFormLabel-root-16 MuiInputLabel-root-5 noMargin MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12 MuiInputLabel-outlined-15"
-                                  data-shrink={true}
-                                  htmlFor="tableFilterBox"
-                                >
-                                  Filter
-                                </label>
-                              </FormLabel>
-                            </WithFormControlContext(FormLabel)>
-                          </WithStyles(WithFormControlContext(FormLabel))>
-                        </InputLabel>
-                      </WithFormControlContext(InputLabel)>
-                    </WithStyles(WithFormControlContext(InputLabel))>
                     <WithStyles(OutlinedInput)
                       classes={
                         Object {
@@ -359,19 +225,19 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                       <OutlinedInput
                         classes={
                           Object {
-                            "adornedEnd": "MuiOutlinedInput-adornedEnd-27",
-                            "adornedStart": "MuiOutlinedInput-adornedStart-26",
-                            "disabled": "MuiOutlinedInput-disabled-25",
-                            "error": "MuiOutlinedInput-error-28",
-                            "focused": "MuiOutlinedInput-focused-24",
-                            "input": "MuiOutlinedInput-input-31",
-                            "inputAdornedEnd": "MuiOutlinedInput-inputAdornedEnd-35",
-                            "inputAdornedStart": "MuiOutlinedInput-inputAdornedStart-34",
-                            "inputMarginDense": "MuiOutlinedInput-inputMarginDense-32",
-                            "inputMultiline": "MuiOutlinedInput-inputMultiline-33",
-                            "multiline": "MuiOutlinedInput-multiline-29",
-                            "notchedOutline": "MuiOutlinedInput-notchedOutline-30 filterBorderRadius",
-                            "root": "MuiOutlinedInput-root-23 noLeftPadding",
+                            "adornedEnd": "MuiOutlinedInput-adornedEnd-9",
+                            "adornedStart": "MuiOutlinedInput-adornedStart-8",
+                            "disabled": "MuiOutlinedInput-disabled-7",
+                            "error": "MuiOutlinedInput-error-10",
+                            "focused": "MuiOutlinedInput-focused-6",
+                            "input": "MuiOutlinedInput-input-13",
+                            "inputAdornedEnd": "MuiOutlinedInput-inputAdornedEnd-17",
+                            "inputAdornedStart": "MuiOutlinedInput-inputAdornedStart-16",
+                            "inputMarginDense": "MuiOutlinedInput-inputMarginDense-14",
+                            "inputMultiline": "MuiOutlinedInput-inputMultiline-15",
+                            "multiline": "MuiOutlinedInput-multiline-11",
+                            "notchedOutline": "MuiOutlinedInput-notchedOutline-12 filterBorderRadius",
+                            "root": "MuiOutlinedInput-root-5 noLeftPadding",
                           }
                         }
                         id="tableFilterBox"
@@ -396,19 +262,19 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                         <WithStyles(WithFormControlContext(InputBase))
                           classes={
                             Object {
-                              "adornedEnd": "MuiOutlinedInput-adornedEnd-27",
-                              "adornedStart": "MuiOutlinedInput-adornedStart-26",
-                              "disabled": "MuiOutlinedInput-disabled-25",
-                              "error": "MuiOutlinedInput-error-28",
-                              "focused": "MuiOutlinedInput-focused-24",
-                              "input": "MuiOutlinedInput-input-31",
-                              "inputAdornedEnd": "MuiOutlinedInput-inputAdornedEnd-35",
-                              "inputAdornedStart": "MuiOutlinedInput-inputAdornedStart-34",
-                              "inputMarginDense": "MuiOutlinedInput-inputMarginDense-32",
-                              "inputMultiline": "MuiOutlinedInput-inputMultiline-33",
-                              "multiline": "MuiOutlinedInput-multiline-29",
+                              "adornedEnd": "MuiOutlinedInput-adornedEnd-9",
+                              "adornedStart": "MuiOutlinedInput-adornedStart-8",
+                              "disabled": "MuiOutlinedInput-disabled-7",
+                              "error": "MuiOutlinedInput-error-10",
+                              "focused": "MuiOutlinedInput-focused-6",
+                              "input": "MuiOutlinedInput-input-13",
+                              "inputAdornedEnd": "MuiOutlinedInput-inputAdornedEnd-17",
+                              "inputAdornedStart": "MuiOutlinedInput-inputAdornedStart-16",
+                              "inputMarginDense": "MuiOutlinedInput-inputMarginDense-14",
+                              "inputMultiline": "MuiOutlinedInput-inputMultiline-15",
+                              "multiline": "MuiOutlinedInput-multiline-11",
                               "notchedOutline": null,
-                              "root": "MuiOutlinedInput-root-23 noLeftPadding",
+                              "root": "MuiOutlinedInput-root-5 noLeftPadding",
                             }
                           }
                           fullWidth={false}
@@ -437,23 +303,23 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                           <WithFormControlContext(InputBase)
                             classes={
                               Object {
-                                "adornedEnd": "MuiInputBase-adornedEnd-41 MuiOutlinedInput-adornedEnd-27",
-                                "adornedStart": "MuiInputBase-adornedStart-40 MuiOutlinedInput-adornedStart-26",
-                                "disabled": "MuiInputBase-disabled-39 MuiOutlinedInput-disabled-25",
-                                "error": "MuiInputBase-error-42 MuiOutlinedInput-error-28",
-                                "focused": "MuiInputBase-focused-38 MuiOutlinedInput-focused-24",
-                                "formControl": "MuiInputBase-formControl-37",
-                                "fullWidth": "MuiInputBase-fullWidth-45",
-                                "input": "MuiInputBase-input-46 MuiOutlinedInput-input-31",
-                                "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-52 MuiOutlinedInput-inputAdornedEnd-35",
-                                "inputAdornedStart": "MuiInputBase-inputAdornedStart-51 MuiOutlinedInput-inputAdornedStart-34",
-                                "inputMarginDense": "MuiInputBase-inputMarginDense-47 MuiOutlinedInput-inputMarginDense-32",
-                                "inputMultiline": "MuiInputBase-inputMultiline-48 MuiOutlinedInput-inputMultiline-33",
-                                "inputType": "MuiInputBase-inputType-49",
-                                "inputTypeSearch": "MuiInputBase-inputTypeSearch-50",
-                                "marginDense": "MuiInputBase-marginDense-43",
-                                "multiline": "MuiInputBase-multiline-44 MuiOutlinedInput-multiline-29",
-                                "root": "MuiInputBase-root-36 MuiOutlinedInput-root-23 noLeftPadding",
+                                "adornedEnd": "MuiInputBase-adornedEnd-23 MuiOutlinedInput-adornedEnd-9",
+                                "adornedStart": "MuiInputBase-adornedStart-22 MuiOutlinedInput-adornedStart-8",
+                                "disabled": "MuiInputBase-disabled-21 MuiOutlinedInput-disabled-7",
+                                "error": "MuiInputBase-error-24 MuiOutlinedInput-error-10",
+                                "focused": "MuiInputBase-focused-20 MuiOutlinedInput-focused-6",
+                                "formControl": "MuiInputBase-formControl-19",
+                                "fullWidth": "MuiInputBase-fullWidth-27",
+                                "input": "MuiInputBase-input-28 MuiOutlinedInput-input-13",
+                                "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-34 MuiOutlinedInput-inputAdornedEnd-17",
+                                "inputAdornedStart": "MuiInputBase-inputAdornedStart-33 MuiOutlinedInput-inputAdornedStart-16",
+                                "inputMarginDense": "MuiInputBase-inputMarginDense-29 MuiOutlinedInput-inputMarginDense-14",
+                                "inputMultiline": "MuiInputBase-inputMultiline-30 MuiOutlinedInput-inputMultiline-15",
+                                "inputType": "MuiInputBase-inputType-31",
+                                "inputTypeSearch": "MuiInputBase-inputTypeSearch-32",
+                                "marginDense": "MuiInputBase-marginDense-25",
+                                "multiline": "MuiInputBase-multiline-26 MuiOutlinedInput-multiline-11",
+                                "root": "MuiInputBase-root-18 MuiOutlinedInput-root-5 noLeftPadding",
                               }
                             }
                             fullWidth={false}
@@ -482,23 +348,23 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                             <InputBase
                               classes={
                                 Object {
-                                  "adornedEnd": "MuiInputBase-adornedEnd-41 MuiOutlinedInput-adornedEnd-27",
-                                  "adornedStart": "MuiInputBase-adornedStart-40 MuiOutlinedInput-adornedStart-26",
-                                  "disabled": "MuiInputBase-disabled-39 MuiOutlinedInput-disabled-25",
-                                  "error": "MuiInputBase-error-42 MuiOutlinedInput-error-28",
-                                  "focused": "MuiInputBase-focused-38 MuiOutlinedInput-focused-24",
-                                  "formControl": "MuiInputBase-formControl-37",
-                                  "fullWidth": "MuiInputBase-fullWidth-45",
-                                  "input": "MuiInputBase-input-46 MuiOutlinedInput-input-31",
-                                  "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-52 MuiOutlinedInput-inputAdornedEnd-35",
-                                  "inputAdornedStart": "MuiInputBase-inputAdornedStart-51 MuiOutlinedInput-inputAdornedStart-34",
-                                  "inputMarginDense": "MuiInputBase-inputMarginDense-47 MuiOutlinedInput-inputMarginDense-32",
-                                  "inputMultiline": "MuiInputBase-inputMultiline-48 MuiOutlinedInput-inputMultiline-33",
-                                  "inputType": "MuiInputBase-inputType-49",
-                                  "inputTypeSearch": "MuiInputBase-inputTypeSearch-50",
-                                  "marginDense": "MuiInputBase-marginDense-43",
-                                  "multiline": "MuiInputBase-multiline-44 MuiOutlinedInput-multiline-29",
-                                  "root": "MuiInputBase-root-36 MuiOutlinedInput-root-23 noLeftPadding",
+                                  "adornedEnd": "MuiInputBase-adornedEnd-23 MuiOutlinedInput-adornedEnd-9",
+                                  "adornedStart": "MuiInputBase-adornedStart-22 MuiOutlinedInput-adornedStart-8",
+                                  "disabled": "MuiInputBase-disabled-21 MuiOutlinedInput-disabled-7",
+                                  "error": "MuiInputBase-error-24 MuiOutlinedInput-error-10",
+                                  "focused": "MuiInputBase-focused-20 MuiOutlinedInput-focused-6",
+                                  "formControl": "MuiInputBase-formControl-19",
+                                  "fullWidth": "MuiInputBase-fullWidth-27",
+                                  "input": "MuiInputBase-input-28 MuiOutlinedInput-input-13",
+                                  "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-34 MuiOutlinedInput-inputAdornedEnd-17",
+                                  "inputAdornedStart": "MuiInputBase-inputAdornedStart-33 MuiOutlinedInput-inputAdornedStart-16",
+                                  "inputMarginDense": "MuiInputBase-inputMarginDense-29 MuiOutlinedInput-inputMarginDense-14",
+                                  "inputMultiline": "MuiInputBase-inputMultiline-30 MuiOutlinedInput-inputMultiline-15",
+                                  "inputType": "MuiInputBase-inputType-31",
+                                  "inputTypeSearch": "MuiInputBase-inputTypeSearch-32",
+                                  "marginDense": "MuiInputBase-marginDense-25",
+                                  "multiline": "MuiInputBase-multiline-26 MuiOutlinedInput-multiline-11",
+                                  "root": "MuiInputBase-root-18 MuiOutlinedInput-root-5 noLeftPadding",
                                 }
                               }
                               fullWidth={false}
@@ -541,20 +407,20 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                               value=""
                             >
                               <div
-                                className="MuiInputBase-root-36 MuiOutlinedInput-root-23 noLeftPadding MuiInputBase-formControl-37 MuiInputBase-adornedStart-40 MuiOutlinedInput-adornedStart-26"
+                                className="MuiInputBase-root-18 MuiOutlinedInput-root-5 noLeftPadding MuiInputBase-formControl-19 MuiInputBase-adornedStart-22 MuiOutlinedInput-adornedStart-8"
                                 onClick={[Function]}
                               >
                                 <WithStyles(NotchedOutline)
-                                  className="MuiOutlinedInput-notchedOutline-30 filterBorderRadius"
+                                  className="MuiOutlinedInput-notchedOutline-12 filterBorderRadius"
                                   labelWidth={0}
                                   notched={true}
                                 >
                                   <NotchedOutline
-                                    className="MuiOutlinedInput-notchedOutline-30 filterBorderRadius"
+                                    className="MuiOutlinedInput-notchedOutline-12 filterBorderRadius"
                                     classes={
                                       Object {
-                                        "legend": "MuiPrivateNotchedOutline-legend-54",
-                                        "root": "MuiPrivateNotchedOutline-root-53",
+                                        "legend": "MuiPrivateNotchedOutline-legend-36",
+                                        "root": "MuiPrivateNotchedOutline-root-35",
                                       }
                                     }
                                     labelWidth={0}
@@ -924,7 +790,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                                   >
                                     <fieldset
                                       aria-hidden={true}
-                                      className="MuiPrivateNotchedOutline-root-53 MuiOutlinedInput-notchedOutline-30 filterBorderRadius"
+                                      className="MuiPrivateNotchedOutline-root-35 MuiOutlinedInput-notchedOutline-12 filterBorderRadius"
                                       style={
                                         Object {
                                           "paddingLeft": 8,
@@ -932,7 +798,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                                       }
                                     >
                                       <legend
-                                        className="MuiPrivateNotchedOutline-legend-54"
+                                        className="MuiPrivateNotchedOutline-legend-36"
                                         style={
                                           Object {
                                             "width": 0,
@@ -1079,7 +945,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                                 </WithStyles(WithFormControlContext(InputAdornment))>
                                 <input
                                   aria-invalid={false}
-                                  className="MuiInputBase-input-46 MuiOutlinedInput-input-31 MuiInputBase-inputAdornedStart-51 MuiOutlinedInput-inputAdornedStart-34"
+                                  className="MuiInputBase-input-28 MuiOutlinedInput-input-13 MuiInputBase-inputAdornedStart-33 MuiOutlinedInput-inputAdornedStart-16"
                                   disabled={false}
                                   id="tableFilterBox"
                                   onBlur={[Function]}
@@ -1368,11 +1234,11 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                 "width": "20%",
               }
             }
-            title="Version name"
+            title=""
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Sort"
+              title=""
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -1759,7 +1625,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                     },
                   }
                 }
-                title="Sort"
+                title=""
               >
                 <RootRef
                   rootRef={[Function]}
@@ -1776,7 +1642,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Sort"
+                    title=""
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -1801,7 +1667,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Sort"
+                      title=""
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -1815,7 +1681,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Sort"
+                        title=""
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -1840,7 +1706,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Sort"
+                          title=""
                           type="button"
                         >
                           <span
@@ -1861,9 +1727,8 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Sort"
+                            title=""
                           >
-                            Version name
                             <pure(ArrowDownward)
                               className="MuiTableSortLabel-icon-98 MuiTableSortLabel-iconDirectionDesc-99"
                             >
@@ -1920,9 +1785,9 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                       class="MuiButtonBase-root-85 MuiTableSortLabel-root-96 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Sort"
+                      title=""
                     >
-                      Version name
+                      
                       <svg
                         aria-hidden="true"
                         class="MuiSvgIcon-root-60 MuiTableSortLabel-icon-98 MuiTableSortLabel-iconDirectionDesc-99"
@@ -3403,7 +3268,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                     },
                     Object {
                       "flex": 1,
-                      "label": "Uploaded on",
+                      "label": "",
                       "sortKey": "created_at",
                     },
                   ]
@@ -4631,7 +4496,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
                     },
                     Object {
                       "flex": 1,
-                      "label": "Uploaded on",
+                      "label": "",
                       "sortKey": "created_at",
                     },
                   ]
@@ -5588,9 +5453,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by cre
         >
           <span
             className=""
-          >
-            Rows per page:
-          </span>
+          />
           <TextField
             InputProps={
               Object {
@@ -6999,6 +6862,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
   match=""
   onError={[MockFunction]}
   pipelineId="pipeline"
+  t={[Function]}
 >
   <div>
     <CustomTable
@@ -7017,12 +6881,12 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
           },
           Object {
             "flex": 1,
-            "label": "Uploaded on",
+            "label": "",
             "sortKey": "created_at",
           },
         ]
       }
-      emptyMessage="No pipeline versions found."
+      emptyMessage=""
       initialSortColumn="created_at"
       reload={[Function]}
       rows={
@@ -7053,6 +6917,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
           },
         ]
       }
+      t={[Function]}
     >
       <div
         className="pageOverflowHidden"
@@ -7089,7 +6954,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
             className="filterBox"
             height={48}
             id="tableFilterBox"
-            label="Filter"
+            label=""
             maxWidth="100%"
             onChange={[Function]}
             value=""
@@ -7125,7 +6990,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
               }
               className="filterBox"
               id="tableFilterBox"
-              label="Filter"
+              label=""
               onChange={[Function]}
               required={false}
               select={false}
@@ -9535,11 +9400,11 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
                 "width": "20%",
               }
             }
-            title="Uploaded on"
+            title=""
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Sort"
+              title=""
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -9926,7 +9791,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
                     },
                   }
                 }
-                title="Sort"
+                title=""
               >
                 <RootRef
                   rootRef={[Function]}
@@ -9943,7 +9808,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Sort"
+                    title=""
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -9968,7 +9833,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Sort"
+                      title=""
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -9982,7 +9847,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Sort"
+                        title=""
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -10007,7 +9872,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Sort"
+                          title=""
                           type="button"
                         >
                           <span
@@ -10028,9 +9893,8 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Sort"
+                            title=""
                           >
-                            Uploaded on
                             <pure(ArrowDownward)
                               className="MuiTableSortLabel-icon-239 MuiTableSortLabel-iconDirectionDesc-240"
                             >
@@ -10087,9 +9951,9 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
                       class="MuiButtonBase-root-226 MuiTableSortLabel-root-237 MuiTableSortLabel-active-238 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Sort"
+                      title=""
                     >
-                      Uploaded on
+                      
                       <svg
                         aria-hidden="true"
                         class="MuiSvgIcon-root-201 MuiTableSortLabel-icon-239 MuiTableSortLabel-iconDirectionDesc-240"
@@ -10399,7 +10263,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
                     },
                     Object {
                       "flex": 1,
-                      "label": "Uploaded on",
+                      "label": "",
                       "sortKey": "created_at",
                     },
                   ]
@@ -11627,7 +11491,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
                     },
                     Object {
                       "flex": 1,
-                      "label": "Uploaded on",
+                      "label": "",
                       "sortKey": "created_at",
                     },
                   ]
@@ -12855,7 +12719,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
                     },
                     Object {
                       "flex": 1,
-                      "label": "Uploaded on",
+                      "label": "",
                       "sortKey": "created_at",
                     },
                   ]
@@ -13812,9 +13676,7 @@ exports[`PipelineVersionList calls Apis to list pipeline versions, sorted by pip
         >
           <span
             className=""
-          >
-            Rows per page:
-          </span>
+          />
           <TextField
             InputProps={
               Object {
@@ -15272,12 +15134,12 @@ exports[`PipelineVersionList renders a list of one pipeline version with descrip
         },
         Object {
           "flex": 1,
-          "label": "Uploaded on",
+          "label": "",
           "sortKey": "created_at",
         },
       ]
     }
-    emptyMessage="No pipeline versions found."
+    emptyMessage=""
     initialSortColumn="created_at"
     reload={[Function]}
     rows={
@@ -15292,6 +15154,7 @@ exports[`PipelineVersionList renders a list of one pipeline version with descrip
         },
       ]
     }
+    t={[Function]}
   />
 </div>
 `;
@@ -15314,12 +15177,12 @@ exports[`PipelineVersionList renders a list of one pipeline version with error 1
         },
         Object {
           "flex": 1,
-          "label": "Uploaded on",
+          "label": "",
           "sortKey": "created_at",
         },
       ]
     }
-    emptyMessage="No pipeline versions found."
+    emptyMessage=""
     initialSortColumn="created_at"
     reload={[Function]}
     rows={
@@ -15334,6 +15197,7 @@ exports[`PipelineVersionList renders a list of one pipeline version with error 1
         },
       ]
     }
+    t={[Function]}
   />
 </div>
 `;
@@ -15356,15 +15220,16 @@ exports[`PipelineVersionList renders a list of one pipeline version without crea
         },
         Object {
           "flex": 1,
-          "label": "Uploaded on",
+          "label": "",
           "sortKey": "created_at",
         },
       ]
     }
-    emptyMessage="No pipeline versions found."
+    emptyMessage=""
     initialSortColumn="created_at"
     reload={[Function]}
     rows={Array []}
+    t={[Function]}
   />
 </div>
 `;
@@ -15387,15 +15252,16 @@ exports[`PipelineVersionList renders an empty list with empty state message 1`] 
         },
         Object {
           "flex": 1,
-          "label": "Uploaded on",
+          "label": "",
           "sortKey": "created_at",
         },
       ]
     }
-    emptyMessage="No pipeline versions found."
+    emptyMessage=""
     initialSortColumn="created_at"
     reload={[Function]}
     rows={Array []}
+    t={[Function]}
   />
 </div>
 `;

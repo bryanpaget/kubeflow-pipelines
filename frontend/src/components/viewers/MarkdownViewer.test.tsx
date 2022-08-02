@@ -19,8 +19,14 @@ import { mount } from 'enzyme';
 import * as React from 'react';
 import MarkdownViewer, { MarkdownViewerConfig } from './MarkdownViewer';
 import { PlotType } from './Viewer';
+import { TFunction } from 'i18next';
+import { componentMap } from './ViewerContainer';
+
+let mockValue = '';
+jest.mock('i18next', () => ({ t: () => mockValue }));
 
 describe('MarkdownViewer', () => {
+  let t: TFunction = (key: string) => key;
   it('does not break on empty data', () => {
     const tree = mount(<MarkdownViewer configs={[]} />).getDOMNode();
     expect(tree).toMatchSnapshot();
@@ -52,7 +58,23 @@ describe('MarkdownViewer', () => {
   });
 
   it('returns a user friendly display name', () => {
-    expect(MarkdownViewer.prototype.getDisplayName()).toBe('Markdown');
+    mockValue = 'common:markdown';
+    expect((componentMap[PlotType.MARKDOWN].displayNameKey = 'common:markdown'));
+  });
+
+  it('capped at maximum markdown size', () => {
+    const config: MarkdownViewerConfig = {
+      markdownContent: 'X'.repeat(11),
+      type: PlotType.MARKDOWN,
+    };
+
+    const maximumMarkdownSize = 10;
+    const { getByText, queryByText } = render(
+      <MarkdownViewer configs={[config]} maxLength={maximumMarkdownSize} />,
+    );
+    getByText('This markdown is too large to render completely.');
+    getByText('X'.repeat(maximumMarkdownSize));
+    expect(queryByText('X'.repeat(11))).toBeNull();
   });
 
   it('capped at maximum markdown size', () => {

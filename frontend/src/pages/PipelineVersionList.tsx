@@ -24,6 +24,8 @@ import { Apis, ListRequest, PipelineVersionSortKeys } from '../lib/Apis';
 import { errorToMessage, formatDateString } from '../lib/Utils';
 import { RoutePage, RouteParams } from '../components/Router';
 import { commonCss } from '../Css';
+import { TFunction } from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 export interface PipelineVersionListProps extends RouteComponentProps {
   pipelineId?: string;
@@ -34,6 +36,7 @@ export interface PipelineVersionListProps extends RouteComponentProps {
   onError: (message: string, error: Error) => void;
   onSelectionChange?: (selectedIds: string[]) => void;
   selectedIds?: string[];
+  t: TFunction;
 }
 
 interface PipelineVersionListState {
@@ -95,17 +98,18 @@ class PipelineVersionList extends React.PureComponent<
   };
 
   public render(): JSX.Element {
+    const { t } = this.props;
     const columns: Column[] = [
       {
         customRenderer: this._nameCustomRenderer,
-        flex: 1,
-        label: 'Version name',
+        flex: 2,
+        label: t('common:versionName'),
         sortKey: PipelineVersionSortKeys.NAME,
       },
       { label: 'Description', flex: 3, customRenderer: descriptionCustomRenderer },
-      { label: 'Uploaded on', flex: 1, sortKey: PipelineVersionSortKeys.CREATED_AT },
+      { label: t('common:uploadedOn'), flex: 1, sortKey: PipelineVersionSortKeys.CREATED_AT },
     ];
-
+    // TODO: add translation for "Description"
     const rows: Row[] = this.state.pipelineVersions.map(r => {
       const row = {
         id: r.id!,
@@ -128,7 +132,8 @@ class PipelineVersionList extends React.PureComponent<
           disableSorting={this.props.disableSorting}
           disableSelection={this.props.disableSelection}
           noFilterBox={this.props.noFilterBox}
-          emptyMessage='No pipeline versions found.'
+          emptyMessage={t('noPipelineVerFound')}
+          t={t}
         />
       </div>
     );
@@ -136,6 +141,7 @@ class PipelineVersionList extends React.PureComponent<
 
   protected async _loadPipelineVersions(request: ListRequest): Promise<string> {
     let response: ApiListPipelineVersionsResponse | null = null;
+    const { t } = this.props;
 
     if (this.props.pipelineId) {
       try {
@@ -148,7 +154,7 @@ class PipelineVersionList extends React.PureComponent<
         );
       } catch (err) {
         const error = new Error(await errorToMessage(err));
-        this.props.onError('Error: failed to fetch runs.', error);
+        this.props.onError(t('pipelines:errorFetchRuns'), error);
         // No point in continuing if we couldn't retrieve any runs.
         return '';
       }
@@ -161,4 +167,4 @@ class PipelineVersionList extends React.PureComponent<
   }
 }
 
-export default PipelineVersionList;
+export default withTranslation(['pipelines', 'common'])(PipelineVersionList);

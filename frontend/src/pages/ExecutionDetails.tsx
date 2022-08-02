@@ -26,8 +26,7 @@ import {
   ExecutionType,
   GetEventsByExecutionIDsRequest,
   GetEventsByExecutionIDsResponse,
-  GetExecutionsByIDRequest,
-  GetExecutionTypesByIDRequest,
+  GetExecutionsByIDRequest
 } from 'src/third_party/mlmd';
 import { classes, stylesheet } from 'typestyle';
 import { ResourceInfo, ResourceType } from '../components/ResourceInfo';
@@ -36,6 +35,11 @@ import { ToolbarProps } from '../components/Toolbar';
 import { color, commonCss, padding } from '../Css';
 import { logger, serviceErrorToString } from '../lib/Utils';
 import { Page, PageErrorHandler } from './Page';
+import { GetExecutionTypesByIDRequest } from '@kubeflow/frontend/src/mlmd/generated/ml_metadata/proto/metadata_store_service_pb';
+import { TFunction } from 'i18next';
+import { withTranslation } from 'react-i18next';
+
+type ArtifactIdList = number[];
 
 interface ExecutionDetailsState {
   execution?: Execution;
@@ -44,7 +48,7 @@ interface ExecutionDetailsState {
   artifactTypeMap?: Map<number, ArtifactType>;
 }
 
-export default class ExecutionDetails extends Page<{}, ExecutionDetailsState> {
+class ExecutionDetails extends Page<{ t: TFunction }, ExecutionDetailsState> {
   public state: ExecutionDetailsState = {};
 
   private get id(): number {
@@ -52,6 +56,7 @@ export default class ExecutionDetails extends Page<{}, ExecutionDetailsState> {
   }
 
   public render(): JSX.Element {
+    const { t } = this.props;
     return (
       <div className={classes(commonCss.page, padding(20, 'lr'))}>
         <ExecutionDetailsContent
@@ -63,16 +68,19 @@ export default class ExecutionDetails extends Page<{}, ExecutionDetailsState> {
               pageTitle: title,
             })
           }
+          t={t}
         />
       </div>
     );
   }
 
   public getInitialToolbarState(): ToolbarProps {
+    const { t } = this.props;
     return {
       actions: {},
-      breadcrumbs: [{ displayName: 'Executions', href: RoutePage.EXECUTIONS }],
-      pageTitle: `Execution #${this.id}`,
+      breadcrumbs: [{ displayName: t('common:executions'), href: RoutePage.EXECUTIONS }],
+      pageTitle: `${this.id} ${t('common:details')}`,
+      t,
     };
   }
 
@@ -85,6 +93,7 @@ interface ExecutionDetailsContentProps {
   id: number;
   onError: PageErrorHandler;
   onTitleUpdate: (title: string) => void;
+  t: TFunction;
 }
 export class ExecutionDetailsContent extends Component<
   ExecutionDetailsContentProps,
@@ -101,6 +110,7 @@ export class ExecutionDetailsContent extends Component<
   }
 
   public render(): JSX.Element {
+    const { t } = this.props;
     if (!this.state.execution || !this.state.events) {
       return <CircularProgress />;
     }
@@ -115,23 +125,23 @@ export class ExecutionDetailsContent extends Component<
           />
         }
         <SectionIO
-          title={'Declared Inputs'}
-          events={this.state.events[Event.Type.DECLARED_INPUT]}
+          title={t('declaredInputs')}
+          artifactIds={this.state.events[Event.Type.DECLARED_INPUT]}
           artifactTypeMap={this.state.artifactTypeMap}
         />
         <SectionIO
-          title={'Inputs'}
-          events={this.state.events[Event.Type.INPUT]}
+          title={t('inputs')}
+          artifactIds={this.state.events[Event.Type.INPUT]}
           artifactTypeMap={this.state.artifactTypeMap}
         />
         <SectionIO
-          title={'Declared Outputs'}
-          events={this.state.events[Event.Type.DECLARED_OUTPUT]}
+          title={t('declaredOutputs')}
+          artifactIds={this.state.events[Event.Type.DECLARED_OUTPUT]}
           artifactTypeMap={this.state.artifactTypeMap}
         />
         <SectionIO
-          title={'Outputs'}
-          events={this.state.events[Event.Type.OUTPUT]}
+          title={t('outputs')}
+          artifactIds={this.state.events[Event.Type.OUTPUT]}
           artifactTypeMap={this.state.artifactTypeMap}
         />
       </div>
@@ -139,10 +149,12 @@ export class ExecutionDetailsContent extends Component<
   }
 
   public getInitialToolbarState(): ToolbarProps {
+    const { t } = this.props;
     return {
       actions: {},
-      breadcrumbs: [{ displayName: 'Executions', href: RoutePage.EXECUTIONS }],
-      pageTitle: `Execution #${this.props.id} details`,
+      breadcrumbs: [{ displayName: t('common:executions'), href: RoutePage.EXECUTIONS }],
+      pageTitle: `${t('executionNum')}${this.props.id} ${t('common:details')}`,
+      t,
     };
   }
 
@@ -152,6 +164,7 @@ export class ExecutionDetailsContent extends Component<
 
   private load = async (): Promise<void> => {
     const metadataStoreServiceClient = Api.getInstance().metadataStoreService;
+    const { t } = this.props;
 
     // this runs parallelly because it's not a critical resource
     getArtifactTypes(metadataStoreServiceClient)
@@ -161,12 +174,12 @@ export class ExecutionDetailsContent extends Component<
         });
       })
       .catch(err => {
-        this.props.onError('Failed to fetch artifact types', err, 'warning', this.refresh);
+        this.props.onError(t('fetchArtifactTypesFailed'), err, 'warning', this.refresh);
       });
 
     const numberId = this.props.id;
     if (isNaN(numberId) || numberId < 0) {
-      const error = new Error(`Invalid execution id: ${this.props.id}`);
+      const error = new Error(`${t('invalidExecutionId')}: ${this.props.id}`);
       this.props.onError(error.message, error, 'error', this.refresh);
       return;
     }
@@ -184,7 +197,7 @@ export class ExecutionDetailsContent extends Component<
 
       if (!executionResponse.getExecutionsList().length) {
         this.props.onError(
-          `No execution identified by id: ${this.props.id}`,
+          `${t('noExecutionsFoundById')}: ${this.props.id}`,
           undefined,
           'error',
           this.refresh,
@@ -194,7 +207,7 @@ export class ExecutionDetailsContent extends Component<
 
       if (executionResponse.getExecutionsList().length > 1) {
         this.props.onError(
-          `Found multiple executions with ID: ${this.props.id}`,
+          `${t('multiExecutionsFoundById')}: ${this.props.id}`,
           undefined,
           'error',
           this.refresh,
@@ -212,7 +225,7 @@ export class ExecutionDetailsContent extends Component<
       let executionType: ExecutionType | undefined;
       if (!types || types.length === 0) {
         this.props.onError(
-          `Cannot find execution type with id: ${execution.getTypeId()}`,
+          `${t('noExecutionTypeFoundById')}: ${execution.getTypeId()}`,
           undefined,
           'error',
           this.refresh,
@@ -220,7 +233,7 @@ export class ExecutionDetailsContent extends Component<
         return;
       } else if (types.length > 1) {
         this.props.onError(
-          `More than one execution type found with id: ${execution.getTypeId()}`,
+          `${t('multiExecutionTypeFoundById')}: ${execution.getTypeId()}`,
           undefined,
           'error',
           this.refresh,
@@ -406,3 +419,5 @@ const css = stylesheet({
     },
   },
 });
+
+export default withTranslation(['executions', 'common'])(ExecutionDetails);

@@ -29,8 +29,10 @@ import { color } from '../Css';
 import { logger, formatDateString } from '../lib/Utils';
 import { NodePhase, checkIfTerminated } from '../lib/StatusUtils';
 import { Execution } from 'src/third_party/mlmd/generated/ml_metadata/proto/metadata_store_pb';
+import { TFunction } from 'i18next';
 
 export function statusToIcon(
+  t: TFunction,
   status?: NodePhase,
   startDate?: Date | string,
   endDate?: Date | string,
@@ -41,55 +43,55 @@ export function statusToIcon(
   // tslint:disable-next-line:variable-name
   let IconComponent: any = UnknownIcon;
   let iconColor = color.inactive;
-  let title = 'Unknown status';
+  let title = t('common:unknownStatus');
   switch (status) {
     case NodePhase.ERROR:
       IconComponent = ErrorIcon;
       iconColor = color.errorText;
-      title = 'Error while running this resource';
+      title = t('common:errorRunResource');
       break;
     case NodePhase.FAILED:
       IconComponent = ErrorIcon;
       iconColor = color.errorText;
-      title = 'Resource failed to execute';
+      title = t('common:executeResourceFailed');
       break;
     case NodePhase.PENDING:
       IconComponent = PendingIcon;
       iconColor = color.weak;
-      title = 'Pending execution';
+      title = t('common:executePending');
       break;
     case NodePhase.RUNNING:
       IconComponent = RunningIcon;
       iconColor = color.blue;
-      title = 'Running';
+      title = t('common:running');
       break;
     case NodePhase.TERMINATING:
       IconComponent = RunningIcon;
       iconColor = color.blue;
-      title = 'Run is terminating';
+      title = t('common:runTerminating');
       break;
     case NodePhase.SKIPPED:
       IconComponent = SkippedIcon;
-      title = 'Execution has been skipped for this resource';
+      title = t('common:executionSkipped');
       break;
     case NodePhase.SUCCEEDED:
       IconComponent = SuccessIcon;
       iconColor = color.success;
-      title = 'Executed successfully';
+      title = t('common:executionSuccess');
       break;
     case NodePhase.CACHED: // This is not argo native, only applies to node.
       IconComponent = CachedIcon;
       iconColor = color.success;
-      title = 'Execution was skipped and outputs were taken from cache';
+      title = t('common:executionSkippedCache');
       break;
     case NodePhase.TERMINATED:
       IconComponent = TerminatedIcon;
       iconColor = color.terminated;
-      title = 'Run was manually terminated';
+      title = t('common:runManuallyTerminated');
       break;
     case NodePhase.OMITTED:
       IconComponent = BlockIcon;
-      title = 'Run was omitted because the previous step failed.';
+      title = t('ommitedStatus');
       break;
     case NodePhase.UNKNOWN:
       break;
@@ -107,8 +109,16 @@ export function statusToIcon(
         <div>
           <div>{title}</div>
           {/* These dates may actually be strings, not a Dates due to a bug in swagger's handling of dates */}
-          {startDate && <div>Start: {formatDateString(startDate)}</div>}
-          {endDate && <div>End: {formatDateString(endDate)}</div>}
+          {startDate && (
+            <div>
+              {t('common:start')}: {formatDateString(startDate)}
+            </div>
+          )}
+          {endDate && (
+            <div>
+              {t('common:end')}: {formatDateString(endDate)}
+            </div>
+          )}
         </div>
       }
     >

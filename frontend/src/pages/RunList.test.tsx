@@ -17,7 +17,7 @@
 import * as React from 'react';
 import * as Utils from '../lib/Utils';
 import RunList, { RunListProps } from './RunList';
-import TestUtils from '../TestUtils';
+import TestUtils, { defaultToolbarProps } from '../TestUtils';
 import produce from 'immer';
 import { ApiFilter, PredicateOp } from '../apis/filter';
 import {
@@ -34,6 +34,14 @@ import { NodePhase } from '../lib/StatusUtils';
 import { ReactWrapper, ShallowWrapper, shallow } from 'enzyme';
 import { range } from 'lodash';
 import MetricUtils from '../lib/MetricUtils';
+import { TFunction } from 'i18next';
+
+jest.mock('react-i18next', () => ({
+  withTranslation: () => (Component: { defaultProps: any }) => {
+    Component.defaultProps = { ...Component.defaultProps, t: ((key: string) => key) as any };
+    return Component;
+  },
+}));
 
 class RunListTest extends RunList {
   public _loadRuns(request: ListRequest): Promise<string> {
@@ -43,7 +51,7 @@ class RunListTest extends RunList {
 
 describe('RunList', () => {
   let tree: ShallowWrapper | ReactWrapper;
-
+  let identiT: TFunction = (key: string) => key;
   const onErrorSpy = jest.fn();
   const listRunsSpy = jest.spyOn(Apis.runServiceApi, 'listRuns');
   const getRunSpy = jest.spyOn(Apis.runServiceApi, 'getRun');
@@ -53,12 +61,14 @@ describe('RunList', () => {
   // test enviroments
   const formatDateStringSpy = jest.spyOn(Utils, 'formatDateString');
 
-  function generateProps(): RunListProps {
+  function generateProps(search?: string): any {
     return {
       history: {} as any,
       location: { search: '' } as any,
       match: '' as any,
       onError: onErrorSpy,
+      toolbarProps: defaultToolbarProps(),
+      t: identiT,
     };
   }
 
@@ -279,7 +289,7 @@ describe('RunList', () => {
     tree = shallow(<RunList {...props} />);
     await (tree.instance() as RunListTest)._loadRuns({});
     expect(props.onError).toHaveBeenLastCalledWith(
-      'Error: failed to fetch runs.',
+      'pipelines:errorFetchRuns',
       new Error('bad stuff happened'),
     );
   });
@@ -466,42 +476,42 @@ describe('RunList', () => {
               Object {
                 "customRenderer": [Function],
                 "flex": 1.5,
-                "label": "Run name",
+                "label": "experiments:runName",
                 "sortKey": "name",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Status",
+                "label": "common:status",
               },
               Object {
                 "flex": 0.5,
-                "label": "Duration",
+                "label": "common:duration",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Experiment",
+                "label": "common:experiment",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 1,
-                "label": "Pipeline Version",
+                "label": "common:pipelineVersion",
               },
               Object {
                 "customRenderer": [Function],
                 "flex": 0.5,
-                "label": "Recurring Run",
+                "label": "common:RecurringRuns",
               },
               Object {
                 "flex": 1,
-                "label": "Start time",
+                "label": "common:startTime",
                 "sortKey": "created_at",
               },
             ]
           }
-          emptyMessage="No available runs found."
-          filterLabel="Filter runs"
+          emptyMessage="common:nocommon:available common:runFound."
+          filterLabel="experiments:filterRuns"
           initialSortColumn="created_at"
           reload={[Function]}
           rows={
@@ -524,6 +534,7 @@ describe('RunList', () => {
               },
             ]
           }
+          t={[Function]}
         />
       </div>
     `);

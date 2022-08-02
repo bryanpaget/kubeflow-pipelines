@@ -41,6 +41,9 @@ import { logger } from '../lib/Utils';
 import { Page } from './Page';
 import PipelineDetailsV1 from './PipelineDetailsV1';
 import PipelineDetailsV2 from './PipelineDetailsV2';
+import ReduceGraphSwitch from '../components/ReduceGraphSwitch';
+import { TFunction } from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 interface PipelineDetailsState {
   graph: dagre.graphlib.Graph | null;
@@ -54,7 +57,54 @@ interface PipelineDetailsState {
   versions: ApiPipelineVersion[];
 }
 
-class PipelineDetails extends Page<{}, PipelineDetailsState> {
+const summaryCardWidth = 500;
+
+export const css = stylesheet({
+  containerCss: {
+    $nest: {
+      '& .CodeMirror': {
+        height: '100%',
+        width: '80%',
+      },
+
+      '& .CodeMirror-gutters': {
+        backgroundColor: '#f7f7f7',
+      },
+    },
+    background: '#f7f7f7',
+    height: '100%',
+  },
+  footer: {
+    background: color.graphBg,
+    display: 'flex',
+    padding: '0 0 20px 20px',
+  },
+  footerInfoOffset: {
+    marginLeft: summaryCardWidth + 40,
+  },
+  infoSpan: {
+    color: color.lowContrast,
+    fontFamily: fonts.secondary,
+    fontSize: fontsize.small,
+    letterSpacing: '0.21px',
+    lineHeight: '24px',
+    paddingLeft: 6,
+  },
+  summaryCard: {
+    bottom: 20,
+    left: 20,
+    padding: 10,
+    position: 'absolute',
+    width: summaryCardWidth,
+    zIndex: zIndex.PIPELINE_SUMMARY_CARD,
+  },
+  summaryKey: {
+    color: color.strong,
+    marginTop: 10,
+  },
+});
+
+class PipelineDetails extends Page<{ t: TFunction }, PipelineDetailsState> {
   constructor(props: any) {
     super(props);
 
@@ -69,6 +119,7 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
   }
 
   public getInitialToolbarState(): ToolbarProps {
+    const { t } = this.props;
     const buttons = new Buttons(this.props, this.refresh.bind(this));
     const fromRunId = new URLParser(this.props).get(QUERY_PARAMS.fromRunId);
     const pipelineIdFromParams = this.props.match.params[RouteParams.pipelineId];
@@ -82,7 +133,7 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
           return pipelineVersionIdFromParams ? pipelineVersionIdFromParams : '';
         },
       )
-      .newPipelineVersion('Upload version', () =>
+      .newPipelineVersion(t('uploadVersion'), () =>
         pipelineIdFromParams ? pipelineIdFromParams : '',
       );
 
@@ -95,7 +146,8 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
             href: RoutePage.RUN_DETAILS.replace(':' + RouteParams.runId, fromRunId),
           },
         ],
-        pageTitle: 'Pipeline details',
+        pageTitle: t('pipelineDetails'),
+        t,
       };
     } else {
       // Add buttons for creating experiment and deleting pipeline version
@@ -115,8 +167,9 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
         );
       return {
         actions: buttons.getToolbarActionMap(),
-        breadcrumbs: [{ displayName: 'Pipelines', href: RoutePage.PIPELINES }],
+        breadcrumbs: [{ displayName: t('common:pipelines'), href: RoutePage.PIPELINES }],
         pageTitle: this.props.match.params[RouteParams.pipelineId],
+        t,
       };
     }
   }
@@ -131,6 +184,7 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
       graphV2,
       reducedGraph,
     } = this.state;
+    const { t } = this.props;
 
     const showV2Pipeline =
       isFeatureEnabled(FeatureKey.V2) && graphV2 && graphV2.length > 0 && !graph;
@@ -173,6 +227,7 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
     let pageTitle = '';
     let selectedVersion: ApiPipelineVersion | undefined;
     let versions: ApiPipelineVersion[] = [];
+    const { t } = this.props;
 
     // If fromRunId is specified, load the run and get the pipeline template from it
     if (fromRunId) {
@@ -186,7 +241,7 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
             templateString = JsYaml.safeDump(pipelineSpec);
           } catch (err) {
             await this.showPageError(
-              `Failed to parse pipeline spec from run with ID: ${runDetails.run!.id}.`,
+              `${t('parsePipelineSpecFailed')}: ${runDetails.run!.id}.`,
               err,
             );
             logger.error(
@@ -195,10 +250,7 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
             );
           }
         } catch (err) {
-          await this.showPageError(
-            `Failed to parse pipeline spec from run with ID: ${runDetails.run!.id}.`,
-            err,
-          );
+          await this.showPageError(`${t('parsePipelineSpecFailed')}: ${runDetails.run!.id}.`, err);
           logger.error(
             `Failed to parse pipeline spec JSON from run with ID: ${runDetails.run!.id}.`,
             err,
@@ -214,7 +266,7 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
         // Build the breadcrumbs, by adding experiment and run names
         if (experiment) {
           breadcrumbs.push(
-            { displayName: 'Experiments', href: RoutePage.EXPERIMENTS },
+            { displayName: t('common:experiments'), href: RoutePage.EXPERIMENTS },
             {
               displayName: experiment.name!,
               href: RoutePage.EXPERIMENT_DETAILS.replace(
@@ -224,15 +276,15 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
             },
           );
         } else {
-          breadcrumbs.push({ displayName: 'All runs', href: RoutePage.RUNS });
+          breadcrumbs.push({ displayName: t('allRuns'), href: RoutePage.RUNS });
         }
         breadcrumbs.push({
           displayName: runDetails.run!.name!,
           href: RoutePage.RUN_DETAILS.replace(':' + RouteParams.runId, fromRunId),
         });
-        pageTitle = 'Pipeline details';
+        pageTitle = t('pipelineDetails');
       } catch (err) {
-        await this.showPageError('Cannot retrieve run details.', err);
+        await this.showPageError(t('cannotRetrieveRunDetails'), err);
         logger.error('Cannot retrieve run details.', err);
         return;
       }
@@ -243,7 +295,7 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
       try {
         pipeline = await Apis.pipelineServiceApi.getPipeline(pipelineId);
       } catch (err) {
-        await this.showPageError('Cannot retrieve pipeline details.', err);
+        await this.showPageError(t('cannotRetrievePipelineDetails'), err);
         logger.error('Cannot retrieve pipeline details.', err);
         return;
       }
@@ -256,7 +308,7 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
           version = await Apis.pipelineServiceApi.getPipelineVersion(versionId);
         }
       } catch (err) {
-        await this.showPageError('Cannot retrieve pipeline version.', err);
+        await this.showPageError(t('cannotRetrievePipelineVersion'), err);
         logger.error('Cannot retrieve pipeline version.', err);
         return;
       }
@@ -286,14 +338,14 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
               )
             ).versions || [];
         } catch (err) {
-          await this.showPageError('Cannot retrieve pipeline versions.', err);
+          await this.showPageError(t('cannotRetrievePipelineVersions'), err);
           logger.error('Cannot retrieve pipeline versions.', err);
           return;
         }
         templateString = await this._getTemplateString(pipelineId, versionId);
       }
 
-      breadcrumbs = [{ displayName: 'Pipelines', href: RoutePage.PIPELINES }];
+      breadcrumbs = [{ displayName: t('common:pipelines'), href: RoutePage.PIPELINES }];
     }
 
     this.props.updateToolbar({ breadcrumbs, actions: toolbarActions, pageTitle });
@@ -373,6 +425,7 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
   }
 
   private async _getTemplateString(pipelineId: string, versionId: string): Promise<string> {
+    const { t } = this.props;
     try {
       let templateResponse: ApiGetTemplateResponse;
       if (versionId) {
@@ -382,19 +435,20 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
       }
       return templateResponse.template || '';
     } catch (err) {
-      await this.showPageError('Cannot retrieve pipeline template.', err);
+      await this.showPageError(t('cannotRetrievePipelineTemplate'), err);
       logger.error('Cannot retrieve pipeline details.', err);
     }
     return '';
   }
 
   private async _createGraph(templateString: string): Promise<dagre.graphlib.Graph | null> {
+    const { t } = this.props;
     if (templateString) {
       try {
         const template = JsYaml.safeLoad(templateString);
         return StaticGraphParser.createGraph(template!);
       } catch (err) {
-        await this.showPageError('Error: failed to generate Pipeline graph.', err);
+        await this.showPageError(t('errorGenerateGraph'), err);
       }
     }
     return null;
@@ -411,4 +465,4 @@ class PipelineDetails extends Page<{}, PipelineDetailsState> {
   }
 }
 
-export default PipelineDetails;
+export default withTranslation(['pipelines', 'common'])(PipelineDetails);

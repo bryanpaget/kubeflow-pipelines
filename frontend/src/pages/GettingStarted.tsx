@@ -26,6 +26,7 @@ import { commonCss, padding } from '../Css';
 import { Apis } from '../lib/Apis';
 import Buttons from '../lib/Buttons';
 import { Page } from './Page';
+import { withTranslation } from 'react-i18next';
 
 const DEMO_PIPELINES: string[] = SAMPLE_CONFIG;
 const DEMO_PIPELINES_ID_MAP = {
@@ -106,17 +107,20 @@ const OPTIONS = {
   overrides: { a: { component: AutoLink } },
 };
 
-export class GettingStarted extends Page<{}, { links: string[] }> {
+class GettingStarted extends Page<{}, { links: string[] }> {
   public state = {
     links: ['', '', '', '', ''].map(getPipelineLink),
   };
 
   public getInitialToolbarState(): ToolbarProps {
+    const { t } = this.props;
     const buttons = new Buttons(this.props, this.refresh.bind(this));
+
     return {
       actions: buttons.getToolbarActionMap(),
       breadcrumbs: [],
-      pageTitle: 'Getting Started',
+      pageTitle: t('home:gettingStarted'),
+      t,
     };
   }
 
@@ -144,6 +148,49 @@ export class GettingStarted extends Page<{}, { links: string[] }> {
   }
 
   public render(): JSX.Element {
+    const { t } = this.props;
+    const DEMO_PIPELINES_ID_MAP = {
+      control: 3,
+      data: 2,
+      tfx: 1,
+      xgboost: 0,
+    };
+
+    const PAGE_CONTENT_MD = ({
+      control,
+      data,
+      tfx,
+      xgboost,
+    }: {
+      control: string;
+      data: string;
+      tfx: string;
+      xgboost: string;
+    }) => t('home:text');
+    cssRaw(`
+    .kfp-start-page li {
+      font-size: 14px;
+      margin-block-start: 0.83em;
+      margin-block-end: 0.83em;
+      margin-left: 2em;
+    }
+    .kfp-start-page p {
+      font-size: 14px;
+      margin-block-start: 0.83em;
+      margin-block-end: 0.83em;
+    }
+    .kfp-start-page h2 {
+      font-size: 18px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+    }
+    .kfp-start-page h3 {
+      font-size: 16px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+    }
+    `);
+
     return (
       <div className={classes(commonCss.page, padding(20, 'lr'), 'kfp-start-page')}>
         <Markdown options={OPTIONS}>
@@ -179,3 +226,4 @@ function createAndEncodeFilter(filterString: string): string {
   };
   return encodeURIComponent(JSON.stringify(filter));
 }
+export default withTranslation(['home', 'common'])(GettingStarted);

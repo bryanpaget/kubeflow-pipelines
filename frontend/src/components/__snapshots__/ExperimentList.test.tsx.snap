@@ -8,18 +8,18 @@ exports[`ExperimentList loads multiple experiments 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 1,
-          "label": "Experiment name",
+          "label": "experiments:experimentName",
           "sortKey": "name",
         },
         Object {
           "flex": 2,
-          "label": "Description",
+          "label": "experiments:description",
         },
       ]
     }
     disableSelection={true}
-    emptyMessage="No experiments found. Click \\"Create experiment\\" to start."
-    filterLabel="Filter experiments"
+    emptyMessage="experiments:noExperimentsFound"
+    filterLabel="experiments:filterExperiments"
     getExpandComponent={[Function]}
     initialSortColumn="created_at"
     reload={[Function]}
@@ -72,6 +72,7 @@ exports[`ExperimentList loads multiple experiments 1`] = `
         },
       ]
     }
+    t={[Function]}
     toggleExpansion={[Function]}
   />
 </div>
@@ -85,18 +86,18 @@ exports[`ExperimentList loads one experiment 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 1,
-          "label": "Experiment name",
+          "label": "experiments:experimentName",
           "sortKey": "name",
         },
         Object {
           "flex": 2,
-          "label": "Description",
+          "label": "experiments:description",
         },
       ]
     }
     disableSelection={true}
-    emptyMessage="No experiments found. Click \\"Create experiment\\" to start."
-    filterLabel="Filter experiments"
+    emptyMessage="experiments:noExperimentsFound"
+    filterLabel="experiments:filterExperiments"
     getExpandComponent={[Function]}
     initialSortColumn="created_at"
     reload={[Function]}
@@ -113,6 +114,7 @@ exports[`ExperimentList loads one experiment 1`] = `
         },
       ]
     }
+    t={[Function]}
     toggleExpansion={[Function]}
   />
 </div>
@@ -128,6 +130,20 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
   }
   match=""
   onError={[MockFunction]}
+  t={[Function]}
+  toolbarProps={
+    Object {
+      "actions": Object {},
+      "breadcrumbs": Array [
+        Object {
+          "displayName": "",
+          "href": "",
+        },
+      ],
+      "pageTitle": "",
+      "t": [Function],
+    }
+  }
 >
   <div>
     <CustomTable
@@ -136,22 +152,23 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
           Object {
             "customRenderer": [Function],
             "flex": 1,
-            "label": "Experiment name",
+            "label": "experiments:experimentName",
             "sortKey": "name",
           },
           Object {
             "flex": 2,
-            "label": "Description",
+            "label": "experiments:description",
           },
         ]
       }
       disableSelection={true}
-      emptyMessage="No experiments found. Click \\"Create experiment\\" to start."
-      filterLabel="Filter experiments"
+      emptyMessage="experiments:noExperimentsFound"
+      filterLabel="experiments:filterExperiments"
       getExpandComponent={[Function]}
       initialSortColumn="created_at"
       reload={[Function]}
       rows={Array []}
+      t={[Function]}
       toggleExpansion={[Function]}
     >
       <div
@@ -189,7 +206,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
             className="filterBox"
             height={48}
             id="tableFilterBox"
-            label="Filter experiments"
+            label="experiments:filterExperiments"
             maxWidth="100%"
             onChange={[Function]}
             value=""
@@ -225,7 +242,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
               }
               className="filterBox"
               id="tableFilterBox"
-              label="Filter experiments"
+              label="experiments:filterExperiments"
               onChange={[Function]}
               required={false}
               select={false}
@@ -418,7 +435,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                                   data-shrink={true}
                                   htmlFor="tableFilterBox"
                                 >
-                                  Filter experiments
+                                  experiments:filterExperiments
                                 </label>
                               </FormLabel>
                             </WithFormControlContext(FormLabel)>
@@ -1226,11 +1243,11 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                 "width": "33.33333333333333%",
               }
             }
-            title="Experiment name"
+            title="experiments:experimentName"
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Sort"
+              title="common:sort"
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -1617,7 +1634,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                     },
                   }
                 }
-                title="Sort"
+                title="common:sort"
               >
                 <RootRef
                   rootRef={[Function]}
@@ -1634,7 +1651,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Sort"
+                    title="common:sort"
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -1659,7 +1676,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Sort"
+                      title="common:sort"
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -1673,7 +1690,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Sort"
+                        title="common:sort"
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -1698,7 +1715,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Sort"
+                          title="common:sort"
                           type="button"
                         >
                           <span
@@ -1719,9 +1736,9 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Sort"
+                            title="common:sort"
                           >
-                            Experiment name
+                            experiments:experimentName
                             <pure(ArrowDownward)
                               className="MuiTableSortLabel-icon-79 MuiTableSortLabel-iconDirectionDesc-80"
                             >
@@ -1778,9 +1795,9 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                       class="MuiButtonBase-root-82 MuiTableSortLabel-root-77 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Sort"
+                      title="common:sort"
                     >
-                      Experiment name
+                      experiments:experimentName
                       <svg
                         aria-hidden="true"
                         class="MuiSvgIcon-root-60 MuiTableSortLabel-icon-79 MuiTableSortLabel-iconDirectionDesc-80"
@@ -1812,11 +1829,11 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                 "width": "66.66666666666666%",
               }
             }
-            title="Description"
+            title="experiments:description"
           >
             <WithStyles(Tooltip)
               enterDelay={300}
-              title="Cannot sort by this column"
+              title="common:sortImpossible"
             >
               <Tooltip
                 TransitionComponent={[Function]}
@@ -2203,7 +2220,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                     },
                   }
                 }
-                title="Cannot sort by this column"
+                title="common:sortImpossible"
               >
                 <RootRef
                   rootRef={[Function]}
@@ -2219,7 +2236,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                     onMouseOver={[Function]}
                     onTouchEnd={[Function]}
                     onTouchStart={[Function]}
-                    title="Cannot sort by this column"
+                    title="common:sortImpossible"
                   >
                     <TableSortLabel
                       IconComponent={[Function]}
@@ -2244,7 +2261,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                       onMouseOver={[Function]}
                       onTouchEnd={[Function]}
                       onTouchStart={[Function]}
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
                       <WithStyles(ButtonBase)
                         aria-describedby={null}
@@ -2258,7 +2275,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                         onMouseOver={[Function]}
                         onTouchEnd={[Function]}
                         onTouchStart={[Function]}
-                        title="Cannot sort by this column"
+                        title="common:sortImpossible"
                       >
                         <ButtonBase
                           aria-describedby={null}
@@ -2283,7 +2300,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                           onTouchEnd={[Function]}
                           onTouchStart={[Function]}
                           tabIndex="0"
-                          title="Cannot sort by this column"
+                          title="common:sortImpossible"
                           type="button"
                         >
                           <span
@@ -2304,9 +2321,9 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                             onTouchStart={[Function]}
                             role="button"
                             tabIndex="0"
-                            title="Cannot sort by this column"
+                            title="common:sortImpossible"
                           >
-                            Description
+                            experiments:description
                             <pure(ArrowDownward)
                               className="MuiTableSortLabel-icon-79 MuiTableSortLabel-iconDirectionDesc-80"
                             >
@@ -2363,9 +2380,9 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
                       class="MuiButtonBase-root-82 MuiTableSortLabel-root-77 ellipsis"
                       role="button"
                       tabindex="0"
-                      title="Cannot sort by this column"
+                      title="common:sortImpossible"
                     >
-                      Description
+                      experiments:description
                       <svg
                         aria-hidden="true"
                         class="MuiSvgIcon-root-60 MuiTableSortLabel-icon-79 MuiTableSortLabel-iconDirectionDesc-80"
@@ -2401,7 +2418,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
           <div
             className="emptyMessage"
           >
-            No experiments found. Click "Create experiment" to start.
+            experiments:noExperimentsFound
           </div>
         </div>
         <div
@@ -2410,7 +2427,7 @@ exports[`ExperimentList reloads the experiment when refresh is called 1`] = `
           <span
             className=""
           >
-            Rows per page:
+            common:rowsperpage
           </span>
           <TextField
             InputProps={
@@ -3817,22 +3834,23 @@ exports[`ExperimentList renders the empty experience 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 1,
-          "label": "Experiment name",
+          "label": "experiments:experimentName",
           "sortKey": "name",
         },
         Object {
           "flex": 2,
-          "label": "Description",
+          "label": "experiments:description",
         },
       ]
     }
     disableSelection={true}
-    emptyMessage="No experiments found. Click \\"Create experiment\\" to start."
-    filterLabel="Filter experiments"
+    emptyMessage="experiments:noExperimentsFound"
+    filterLabel="experiments:filterExperiments"
     getExpandComponent={[Function]}
     initialSortColumn="created_at"
     reload={[Function]}
     rows={Array []}
+    t={[Function]}
     toggleExpansion={[Function]}
   />
 </div>
@@ -3846,22 +3864,23 @@ exports[`ExperimentList renders the empty experience in ARCHIVED state 1`] = `
         Object {
           "customRenderer": [Function],
           "flex": 1,
-          "label": "Experiment name",
+          "label": "experiments:experimentName",
           "sortKey": "name",
         },
         Object {
           "flex": 2,
-          "label": "Description",
+          "label": "experiments:description",
         },
       ]
     }
     disableSelection={true}
-    emptyMessage="No experiments found. Click \\"Create experiment\\" to start."
-    filterLabel="Filter experiments"
+    emptyMessage="experiments:noExperimentsFound"
+    filterLabel="experiments:filterExperiments"
     getExpandComponent={[Function]}
     initialSortColumn="created_at"
     reload={[Function]}
     rows={Array []}
+    t={[Function]}
     toggleExpansion={[Function]}
   />
 </div>

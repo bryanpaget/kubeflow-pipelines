@@ -22,6 +22,7 @@ import { classes } from 'typestyle';
 import { commonCss, padding } from '../Css';
 import { NamespaceContext } from 'src/lib/KubeflowClient';
 import RecurringRunList from './RecurringRunList';
+import { withTranslation } from 'react-i18next'
 
 interface AllRecurringRunsListState {
   selectedIds: string[];
@@ -39,6 +40,7 @@ export class AllRecurringRunsList extends Page<{ namespace?: string }, AllRecurr
   }
 
   public getInitialToolbarState(): ToolbarProps {
+    const { t } = this.props;
     const buttons = new Buttons(this.props, this.refresh.bind(this));
     return {
       actions: buttons
@@ -46,7 +48,8 @@ export class AllRecurringRunsList extends Page<{ namespace?: string }, AllRecurr
         .refresh(this.refresh.bind(this))
         .getToolbarActionMap(),
       breadcrumbs: [],
-      pageTitle: 'Recurring Runs',
+      pageTitle: t('RecurringRuns'),
+      t,
     };
   }
 
@@ -87,4 +90,4 @@ const EnhancedAllRecurringRunsList = (props: PageProps) => {
   return <AllRecurringRunsList key={namespace} {...props} namespace={namespace} />;
 };
 
-export default EnhancedAllRecurringRunsList;
+export default withTranslation(['common'])(EnhancedAllRecurringRunsList);
